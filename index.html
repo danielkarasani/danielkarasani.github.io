@@ -541,13 +541,29 @@
             cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
         });
 
-        function animateCursor() {
+                function animateCursor() {
             let distX = mouseX - outlineX; let distY = mouseY - outlineY;
             outlineX += distX * 0.15; outlineY += distY * 0.15;
             cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
-            requestAnimationFrame(animateCursor);
+            
+            // Only continue the animation loop if we are not on a mobile breakpoint
+            if (window.innerWidth > 990) {
+                requestAnimationFrame(animateCursor);
+            }
         }
-        animateCursor();
+        
+        // Start the loop only if on desktop
+        if (window.innerWidth > 990) {
+            animateCursor();
+        }
+
+        // Restart loop if window is resized back to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 990 && cursorOutline.style.left === "") {
+                animateCursor();
+            }
+        });
+
 
         const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
         hoverTargets.forEach(target => {
