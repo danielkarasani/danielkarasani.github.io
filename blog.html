@@ -86,6 +86,13 @@
                 
                 const markdownText = await response.text();
                 reader.innerHTML = marked.parse(markdownText);
+
+                // --- NEW: RE-APPLY CURSOR HOVER EFFECT TO DYNAMIC LINKS ---
+                const newLinks = reader.querySelectorAll('a');
+                newLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+                    link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+                });
             } catch (error) {
                 console.error(error);
                 reader.innerHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
