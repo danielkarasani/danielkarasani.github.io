@@ -14,7 +14,7 @@
 }
 
 /* --- DARK THEME OVERRIDES --- */
-body.dark-theme {
+body.dark-theme, html.dark-theme body{
     --bg-main: #1a1512;       
     --bg-hero: #241e1a;       
     --text-dark: #fcfaf8;     
