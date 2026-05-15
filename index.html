@@ -548,7 +548,9 @@
         function type() {
             const currentWord = words[wordIndex];
             if (isDeleting) { charIndex--; } else { charIndex++; }
-            typeTarget.textContent = currentWord.substring(0, charIndex);
+            typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
+
+
             
             let typeSpeed = isDeleting ? 50 : 100;
             
