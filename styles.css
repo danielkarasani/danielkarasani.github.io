@@ -137,11 +137,88 @@ nav { position: fixed; top: 0; width: 100%; background: var(--nav-bg); backdrop-
 .project-link svg { transition: transform 0.3s; }
 .project-link:hover svg { transform: translateX(5px); }
 
-/* --- STRATEGIC LOGO INTEGRATION --- */
-.header-with-logo { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; }
-.header-with-logo h3 { margin-bottom: 0 !important; }
-.entity-logo { width: 50px; height: 50px; border-radius: 50%; object-fit: contain; background-color: #ffffff; border: 1px solid #eaeaea; padding: 6px; filter: grayscale(100%); transition: var(--transition); }
-.hover-target:hover .entity-logo { filter: grayscale(0%); transform: scale(1.1); border-color: var(--accent); box-shadow: 0 8px 20px rgba(200, 155, 114, 0.25); }
+/* --- STRATEGIC LOGO INTEGRATION (UPGRADED) --- */
+.header-with-logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 18px; 
+    margin-bottom: 12px; 
+}
+
+/* The Dual-Logo Group */
+.logo-group {
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.entity-logo { 
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    object-fit: contain; 
+    background-color: #ffffff; 
+    border: 2px solid #eaeaea; 
+    padding: 6px; 
+    filter: grayscale(100%); 
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    position: relative;
+}
+
+/* Overlapping effect for the second logo */
+.logo-group .entity-logo:nth-child(2) {
+    margin-left: -20px; 
+    border-color: var(--bg-hero); /* Matches background to create a cutout effect */
+    z-index: 1;
+}
+
+.logo-group .entity-logo:nth-child(1) {
+    z-index: 2;
+}
+
+/* Hover Physics for Logos: Colorize, scale, and slide apart */
+.hover-target:hover .entity-logo { 
+    filter: grayscale(0%); 
+    transform: scale(1.1); 
+    border-color: var(--accent); 
+    box-shadow: 0 8px 20px rgba(200, 155, 114, 0.25); 
+}
+
+.hover-target:hover .logo-group .entity-logo:nth-child(2) {
+    margin-left: 10px; /* Slides the second logo out from behind the first */
+}
+
+/* The Premium Shiny Title */
+.premium-title {
+    margin-bottom: 0 !important;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(to right, var(--text-dark), var(--text-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition);
+}
+
+body.dark-theme .premium-title {
+    background: linear-gradient(to right, var(--white), var(--white));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* The Animated Metallic Shine on Hover */
+.hover-target:hover .premium-title {
+    background: linear-gradient(135deg, var(--accent) 0%, #f3d7ba 50%, var(--accent) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: metallicShine 2.5s linear infinite;
+    transform: translateX(6px);
+}
+
+@keyframes metallicShine {
+    to { background-position: 200% center; }
+}
 
 /* Timeline */
 .timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 40px; }
