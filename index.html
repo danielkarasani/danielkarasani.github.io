@@ -186,17 +186,23 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* Mobile Adjustments */
-        @media (max-width: 990px) {
-            .hero-content { flex-direction: column-reverse; text-align: center; margin-top: 40px; }
-            h1 { font-size: 3.2rem; }
-            
-            /* Locks height to prevent jumping */
-            .typing-container {
-                display: block;
-                min-height: 2.4em; 
-            }
+@media (max-width: 990px) {
+    .hero-content { flex-direction: column-reverse; text-align: center; margin-top: 40px; }
+    h1 { font-size: 3.2rem; }
+    
+    /* Locks height to prevent jumping */
+    .typing-container {
+        display: block;
+        min-height: 2.4em; 
+    }
+    
+    /* NEW: Allows dynamic text to wrap, stopping the screen from stretching and bouncing */
+    .typing-text {
+        white-space: pre-wrap;
+    }
 
-            .nav-links { display: none; }
+    .nav-links { display: none; }
+    /* ... rest of the mobile css ... */
             .hero-image { animation: none; }
             .hero-image img { max-width: 350px; }
             .edu-grid { grid-template-columns: 1fr; }
