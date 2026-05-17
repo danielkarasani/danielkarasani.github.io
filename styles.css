@@ -364,3 +364,16 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
     will-change: transform, box-shadow;
 }
 
+/* --- TYPEWRITER ANTI-BOUNCE FIX --- */
+.typing-container {
+    display: inline-block;
+    min-height: 1.5em; /* Reserves space for 1 line on Desktop */
+    vertical-align: top;
+}
+
+@media (max-width: 768px) {
+    .typing-container {
+        display: block;
+        min-height: 3em; /* Reserves space for up to 3 lines on Mobile */
+    }
+}
