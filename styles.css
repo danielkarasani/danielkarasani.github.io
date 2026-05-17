@@ -396,7 +396,7 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
 /* --- TYPEWRITER ANTI-BOUNCE FIX --- */
 .typing-container {
     display: inline-block;
-    min-height: 1.5em; /* Reserves space for 1 line on Desktop */
+    min-height: 2.2em; /* Reserves space for 2 lines on Desktop (stops the bounce) */
     vertical-align: top;
 }
 
