@@ -7,6 +7,10 @@
     <meta name="description" content="Portfolio von Daniel Karasani. Student für Industrie- und Maschineningenieurwesen mit Spezialisierung auf Prozessoptimierung und Digitalisierung.">
     <meta name="author" content="Daniel Karasani">
     <link rel="canonical" href="https://danielkarasani.github.io/index-de.html" />
+    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/" />
+    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/index-de.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/index-it.html" />
+    <link rel="alternate" hreflang="x-default" href="https://danielkarasani.github.io/" />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
     <script>
@@ -20,6 +24,25 @@
     <link rel="stylesheet" href="styles.css">
     
     <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
+    <noscript>
+        <style>
+            /* 1. Kill the preloader immediately */
+            #preloader { display: none !important; }
+
+            /* 2. Force all hidden reveal elements to be visible */
+            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+
+            /* 3. Hide the stuck custom cursor elements */
+            .cursor-dot, .cursor-outline { display: none !important; }
+
+            /* 4. Ensure standard mouse cursors work normally */
+            * { cursor: auto !important; }
+            a, button, input, textarea { cursor: pointer !important; }
+            
+            /* 5. Stop the background CAD grid from animating to save CPU */
+            .hero::before { animation: none !important; }
+        </style>
+    </noscript>
 </head>
 <body class="">
     <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
@@ -63,7 +86,7 @@
             <div class="hero-text reveal">
                 <span class="tagline">Student für Industrie- & Maschineningenieurwesen @ unibz</span>
                 <h1>Systeme entwickeln.<br>
-                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text"></span></span>
+                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text">Realität optimieren.</span></span>
                 </h1>
                 
                 <p class="quote">"Fortschritt beginnt im Kopf und zeigt sich in der Leistung."</p>
@@ -74,15 +97,15 @@
                     
                     <div style="display: flex; flex-direction: column; gap: 8px;">
                         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a href="Daniel_Karasani_CV.pdf" target="_blank" class="btn btn-outline hover-target">Lebenslauf (PDF)</a>
-                            <a href="YOUR_CLOUD_LINK_HERE" target="_blank" class="btn btn-outline hover-target">In Cloud Ansehen</a>
+                            <a href="Daniel_Karasani_CV.pdf" target="_blank" class="btn btn-outline hover-target" onclick="gtag('event', 'download', {'event_category': 'CV', 'event_label': 'PDF Download'});">Lebenslauf (PDF)</a>
+                            <a href="#" target="_blank" class="btn btn-outline hover-target">In Cloud Ansehen</a>
                         </div>
                         <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; padding-left: 5px; letter-spacing: 0.5px;">Zuletzt aktualisiert: Mai 2026</span>
                     </div>
                 </div>
             </div>
             <div class="hero-image reveal">
-                <img src="images/daniel-karasani-industrial-engineer.jpg" alt="Daniel Karasani" class="hover-target">
+                <img src="images/daniel-karasani-industrial-engineer.jpg" alt="Daniel Karasani" class="hover-target" width="440" height="440">
             </div>
         </div>
     </section>
@@ -148,12 +171,12 @@
                     <div class="timeline-date">Jul 2021 – Jul 2025 (4 Jahre 1 Monat)</div>
                     <div class="timeline-content hover-target">
                         
-                        <div class="header-with-logo">
+                        <a href="https://www.drschaer.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                             <div class="logo-group">
-                                <img src="images/logo-schaer.png" alt="Dr. Schär Logo" class="entity-logo">
+                                <img src="images/logo-schaer.png" alt="Dr. Schär Logo" class="entity-logo" loading="lazy" width="55" height="55">
                             </div>
                             <h3 class="premium-title">Dr. Schär</h3>
-                        </div>
+                        </a>
                         
                         <div style="margin-top: 10px;">
                             <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;">Global Production Engineer</h4>
@@ -190,7 +213,7 @@
                         
                         <div class="header-with-logo">
                             <div class="logo-group">
-                                <img src="images/logo-idal.png" alt="IDAL BAU Logo" class="entity-logo">
+                                <img src="images/logo-idal.png" alt="IDAL BAU Logo" class="entity-logo" loading="lazy" width="55" height="55">
                             </div>
                             <h3 class="premium-title">IDAL BAU of Karasani Fatos</h3>
                         </div>
@@ -210,22 +233,22 @@
                         <h3>Technische Praktika</h3>
                         
                         <div class="sub-role" style="margin-top: 10px; border-top: none; padding-top: 0;">
-                            <div class="header-with-logo">
+                            <a href="https://www.zoeschg.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
-                                    <img src="images/logo-zoeschg.png" alt="Zoeschg GmbH Logo" class="entity-logo">
+                                    <img src="images/logo-zoeschg.png" alt="Zoeschg GmbH Logo" class="entity-logo" loading="lazy" width="55" height="55">
                                 </div>
-                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem;">Elektriker | Zoeschg GmbH</h4>
-                            </div>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Elektriker | Zoeschg GmbH</h4>
+                            </a>
                             <span class="date-muted">Jul 2020 - Aug 2020 | Meran, Italien</span>
                         </div>
 
                         <div class="sub-role">
-                            <div class="header-with-logo">
+                            <a href="https://www.frigothermferrari.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
-                                    <img src="images/logo-frigotherm.png" alt="Frigotherm Ferrari Logo" class="entity-logo">
+                                    <img src="images/logo-frigotherm.png" alt="Frigotherm Ferrari Logo" class="entity-logo" loading="lazy" width="55" height="55">
                                 </div>
-                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem;">Kältetechniker | Frigotherm Ferrari</h4>
-                            </div>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Kältetechniker | Frigotherm Ferrari</h4>
+                            </a>
                             <span class="date-muted">Jul 2019 - Aug 2019 | Lana, Italien</span>
                         </div>
                     </div>
@@ -241,13 +264,13 @@
             
             <div class="edu-card tilt-card hover-target">
                 <div class="tilt-inner">
-                    <div class="header-with-logo">
+                    <a href="https://www.unibz.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                         <div class="logo-group">
-                            <img src="images/logo-unibz.png" alt="unibz General Logo" class="entity-logo">
-                            <img src="images/logo-unibz-engineering.png" alt="unibz Engineering Dept Logo" class="entity-logo">
+                            <img src="images/logo-unibz.png" alt="unibz General Logo" class="entity-logo" loading="lazy" width="55" height="55">
+                            <img src="images/logo-unibz-engineering.png" alt="unibz Engineering Dept Logo" class="entity-logo" loading="lazy" width="55" height="55">
                         </div>
                         <h3 class="premium-title">Freie Universität Bozen</h3>
-                    </div>
+                    </a>
                     <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sept 2021 - Juli 2026</span>
                     <p><strong>Bachelor of Science (B.Sc.)</strong> in Industrie- und Maschineningenieurwesen.</p>
                     <p>Duales Studium mit Schwerpunkt in der <strong>Automatisierungstechnik</strong>.</p>
@@ -256,12 +279,12 @@
 
             <div class="edu-card tilt-card hover-target">
                 <div class="tilt-inner">
-                    <div class="header-with-logo">
+                    <a href="https://www.tfo-meran.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                         <div class="logo-group">
-                            <img src="images/logo-tfo.png" alt="TFO Merano Logo" class="entity-logo">
+                            <img src="images/logo-tfo.png" alt="TFO Merano Logo" class="entity-logo" loading="lazy" width="55" height="55">
                         </div>
                         <h3 class="premium-title">TFO "Oskar von Miller" Meran</h3>
-                    </div>
+                    </a>
                     <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">2016 - 2021</span>
                     <p><strong>Abitur / Matura</strong></p>
                     <p>Technologische Fachoberschule. Fachrichtung Elektronik und Elektrotechnik.</p>
@@ -338,7 +361,7 @@
     </section>
 
     <footer>
-        <div class="social-links">
+        <div class="social-links" style="flex-wrap: wrap;">
             <a href="https://www.linkedin.com/in/daniel-karasani" class="hover-target" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 LinkedIn
@@ -347,15 +370,29 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 GitHub
             </a>
+            <a href="mailto:daniel.karasani@gmail.com" class="hover-target">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Email
+            </a>
+            <a href="https://wa.me/393245808570" class="hover-target" target="_blank" rel="noopener noreferrer" onmouseover="this.style.color='#25D366'" onmouseout="this.style.color=''">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.04-.967-.281-.099-.488-.15-.693.148-.205.297-.771.967-.945 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.693-1.67-.948-2.285-.25-.598-.505-.517-.694-.527-.174-.009-.373-.009-.571-.009s-.521.074-.794.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.703.248-1.302.173-1.422-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.029 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                WhatsApp
+            </a>
         </div>
         <div class="footer-details">
-            <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Meran (BZ) | +39 3245808570</p>
+            <p style="margin-bottom: 30px; font-size: 1.05rem; color: #fcfaf8; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span style="display: inline-block; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80;"></span>
+                Verfügbar für Projekte in Meran, Südtirol und darüber hinaus.
+            </p>
+            <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Meran (BZ) | +39 3245808570 | daniel.karasani@gmail.com</p>
             <p>&copy; 2026 Daniel Karasani. Designed & Engineered for Performance.</p>
         </div>
     </footer>
 
     <script>
-        window.addEventListener('load', () => { setTimeout(() => { document.body.classList.add('loaded'); }, 2000); });
+        window.addEventListener('load', () => { document.body.classList.add('loaded'); });
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -364,7 +401,7 @@
                 if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
             }
         }
-        window.addEventListener("scroll", reveal); reveal();
+        window.addEventListener("scroll", reveal, { passive: true }); reveal();
 
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Daniel Karasani</title>
-    <meta name="description" content="Explore Daniel Karasani's engineering blog - The Logic Log, documenting systems, hardware, and strategic insights.">
+    <title>Caso di Studio Air Analyzer | Daniel Karasani</title>
+    <meta name="description" content="Analisi dettagliata di Air Analyzer - una stazione per il monitoraggio della qualità dell'aria interna sviluppata da zero sia hardware che software.">
     <meta name="author" content="Daniel Karasani">
-    <link rel="canonical" href="https://danielkarasani.github.io/blog.html" />
-    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/blog.html" />
-    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/blog-de.html" />
-    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/blog-it.html" />
-    
+    <link rel="canonical" href="https://danielkarasani.github.io/air-analyzer-it.html" />
+    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/air-analyzer.html" />
+    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/air-analyzer-de.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/air-analyzer-it.html" />
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -40,7 +40,7 @@
     </script>
 
     <div id="preloader">
-        <div class="loader-text">INITIALIZING ENGINEERING SYSTEM...</div>
+        <div class="loader-text">INIZIALIZZAZIONE DEL SISTEMA...</div>
         <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
 
@@ -49,19 +49,17 @@
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo hover-target">Daniel<span>.</span></a>
+            <a href="index-it.html" class="logo hover-target">Daniel<span>.</span></a>
             <ul class="nav-links">
-                <li><a href="index.html#projects" class="hover-target">Projects</a></li>
-                <li><a href="about.html" class="hover-target">About</a></li>
-                <li><a href="blog.html" class="hover-target" style="color: var(--accent);">Blog</a></li>
+                <li><a href="index-it.html#projects" class="hover-target">← Torna al Portfolio</a></li>
             </ul>
             
             <div class="lang-switcher">
-                <a href="blog.html" class="active hover-target">EN</a> 
+                <a href="air-analyzer.html" class="hover-target">EN</a> 
                 <span class="divider">|</span>
-                <a href="blog-de.html" class="hover-target">DE</a> 
+                <a href="air-analyzer-de.html" class="hover-target">DE</a> 
                 <span class="divider">|</span>
-                <a href="blog-it.html" class="hover-target">IT</a>
+                <a href="air-analyzer-it.html" class="active hover-target">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
@@ -72,31 +70,61 @@
 
     <section class="hero case-study-hero">
         <div class="container reveal">
-            <span class="tagline">Engineering Insights & Research</span>
-            <h1>The Logic Log</h1>
-            <p class="quote">Documenting the intersection of systems, hardware, and strategy.</p>
+            <span class="tagline">Progetto di Esame di Stato (Matura) TFO Merano</span>
+            <h1>Air Analyzer: Monitoraggio di Precisione della Qualità dell'Aria Interna</h1>
+            <p class="quote">"Jetzt wird's angezeigt!" (Ora viene visualizzato!)</p>
         </div>
     </section>
 
-    <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
-        <div class="blog-grid">
-            
-            <div class="blog-card hover-target" onclick="openPost('my-first-post.md')">
-                <span class="blog-date">May 15, 2026</span>
-                <h3>The Business Case for AR in Maintenance</h3>
-                <p>Exploring how integrating Augmented Reality with AI and Condition Monitoring reduces operational downtime in food manufacturing.</p>
-                <span class="project-link">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
-            </div>
+    <section class="case-study-body reveal" style="background: var(--white); border-radius: 16px; margin-top: -40px; position: relative; z-index: 10; box-shadow: 0 20px 50px rgba(0,0,0,0.05);">
+        
+        <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">
+            La genesi dell'Air Analyzer è stata ispirata dai lockdown globali causati dal COVID-19, un periodo che ha bruscamente interrotto la nostra connessione con la natura ed evidenziato l'importanza critica della qualità dell'aria negli ambienti interni. Troppo spesso persistono abitudini dannose per il clima semplicemente perché la scarsa qualità dell'aria rimane invisibile. Progettando un dispositivo in grado di visualizzare in modo trasparente i parametri essenziali dell'aria, l'invisibile diventa tangibile e gestibile.
+        </p>
 
+        <h3>Architettura di Sistema e Design Hardware</h3>
+        <p>Per garantire il posizionamento ottimale dei componenti e la modularità, l'architettura hardware è stata suddivisa in due circuiti stampati (PCB) distinti e con sbroglio personalizzato, collegati tramite un cavo a nastro:</p>
+        <ul>
+            <li><strong>La Scheda Principale (Main Board):</strong> funge da unità di elaborazione centrale, ospitando il microcontrollore, i regolatori di tensione (LM1117 da 5V e 3V3) e la gamma principale di sensori.</li>
+            <li><strong>La Scheda HMI (HMI Board):</strong> ospita il display TFT SPI da 2,8 pollici, gli interruttori tattili, il potenziometro per il controllo della retroilluminazione, un cicalino piezoelettrico da 90dB per gli allarmi di soglia e i LED di stato.</li>
+        </ul>
+
+        <h3>Ingegnerizzazione Hardware e Assemblaggio</h3>
+        <div class="project-gallery">
+            <img src="images/air-analyzer-pcb.jpg" alt="Design del PCB sbrogliato su misura in EAGLE" class="gallery-img hover-target">
+            <img src="images/air-analyzer-assembly.jpg" alt="Assemblaggio hardware interno e cablaggio dei sensori" class="gallery-img hover-target">
+            <img src="images/air-analyzer-final.jpg" alt="Dispositivo Air Analyzer finale in fase di visualizzazione dati" class="gallery-img hover-target">
         </div>
+
+        <h3>Array di Sensori di Livello Industriale</h3>
+        <ul>
+            <li><strong>Sensirion SPS30:</strong> sensore ottico certificato MCERTS che utilizza lo scattering laser per misurazioni altamente precise di PM2.5 (polveri sottili).</li>
+            <li><strong>Sensirion SGP30:</strong> un sensore di gas multi-pixel CMOSens® per il monitoraggio di TVOC (composti organici volatili) ed eCO2.</li>
+            <li><strong>Freescale/NXP MPL3115A2:</strong> sensore piezoresistivo di pressione assoluta con calcolo dell'altitudine integrato e interfaccia I2C.</li>
+            <li><strong>Grove Luminance Sensor:</strong> misura l'intensità della luce ambientale, accoppiato con un amplificatore operazionale Rail-to-Rail (AD8615) appositamente calcolato per scalare l'uscita da 2,3V al livello logico richiesto di 5V.</li>
+        </ul>
+
+        <h3>Software Embedded e Integrazione dei Protocolli</h3>
+        <p>Il sistema è guidato da un microcontrollore Freescale NXP MC9S08AW32. Invece di affidarsi ad astrazioni di alto livello come il C, il software finale è stato scritto interamente in Assembler per massimizzare il controllo e l'efficienza.</p>
+        <ul>
+            <li><strong>Codice Sorgente Modulare:</strong> il software utilizza una struttura altamente modulare per separare le routine di inizializzazione, l'interrogazione dei sensori, il rendering del TFT e la logica dei pulsanti.</li>
+            <li><strong>Comunicazione Multi-Protocollo:</strong> il microcontrollore orchestra simultaneamente le comunicazioni I2C, UART e SPI.</li>
+            <li><strong>Risoluzione dei Problemi e Colli di Bottiglia:</strong> una delle principali sfide tecniche ha riguardato il debug della sequenza di inizializzazione del TFT. Analizzando il segnale di clock SPI tramite un oscilloscopio, si è scoperto che il baud rate superava i limiti del componente, tagliando il segnale da 5V a 3V. La regolazione della scala del clock interno ha risolto il problema di tempistica.</li>
+        </ul>
+
+        <h3>Fattibilità Commerciale e Gestione del Progetto</h3>
+        <p>Questo progetto è stato eseguito secondo rigorosi schemi di gestione del progetto, utilizzando diagrammi di Gantt e Pacchetti di Lavoro (WP) definiti per tracciare i progressi.</p>
+        <ul>
+            <li><strong>BOM (Distinta dei Materiali):</strong> il costo netto dei componenti per un singolo prototipo ammonta a circa €258,27.</li>
+            <li><strong>Tracciamento delle Ore di Lavoro:</strong> il ciclo di sviluppo ha richiesto esattamente 192 ore di lavoro documentate.</li>
+            <li><strong>Proiezioni di Scala:</strong> il costo totale di R&S per l'unità #1 è stato calcolato in €3.854,77. Tuttavia, le simulazioni di scala hanno dimostrato che una produzione di 1.000 unità ridurrebbe drasticamente il costo unitario.</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="Air_Analyzer_von_Daniel_Karasani_Projektdokum.pdf" target="_blank" class="btn hover-target">Scarica la Documentazione Tecnica Completa (PDF)</a>
+        </div>
+
     </section>
-
-    <div id="blog-modal" class="blog-modal">
-        <div class="modal-content hover-target">
-            <button class="close-modal hover-target" onclick="closePost()">&times;</button>
-            <div id="md-reader">Loading...</div>
-        </div>
-    </div>
 
     <footer>
         <div class="social-links" style="flex-wrap: wrap;">
@@ -122,49 +150,15 @@
         <div class="footer-details">
             <p style="margin-bottom: 30px; font-size: 1.05rem; color: #fcfaf8; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 <span style="display: inline-block; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80;"></span>
-                Available for projects in Merano, South Tyrol and beyond.
+                Disponibile per progetti a Merano, Alto Adige e oltre.
             </p>
             <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Merano (BZ) | +39 3245808570 | daniel.karasani@gmail.com</p>
-            <p>&copy; 2026 Daniel Karasani. Designed & Engineered for Performance.</p>
+            <p>&copy; 2026 Daniel Karasani. Progettato e ingegnerizzato per massime prestazioni.</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         window.addEventListener('load', () => { document.body.classList.add('loaded'); });
-
-        async function openPost(filename) {
-            const modal = document.getElementById('blog-modal');
-            const reader = document.getElementById('md-reader');
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-            reader.innerHTML = '<i>Fetching data from repository...</i>';
-
-            try {
-                const response = await fetch(`posts/${filename}`);
-                if (!response.ok) throw new Error('Post not found on server.');
-                
-                const markdownText = await response.text();
-                reader.innerHTML = marked.parse(markdownText);
-
-                // --- NEW: RE-APPLY CURSOR HOVER EFFECT TO DYNAMIC LINKS ---
-                const newLinks = reader.querySelectorAll('a');
-                newLinks.forEach(link => {
-                    link.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-                    link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
-                });
-            } catch (error) {
-                console.error(error);
-                reader.innerHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
-            }
-        }
-
-        function closePost() {
-            document.getElementById('blog-modal').classList.remove('active');
-            document.body.style.overflow = 'auto'; 
-            setTimeout(() => { document.getElementById('md-reader').innerHTML = ''; }, 500);
-        }
 
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
