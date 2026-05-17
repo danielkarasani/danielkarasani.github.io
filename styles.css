@@ -158,7 +158,9 @@ a.header-with-logo {
     transition: var(--transition);
 }
 
-.entity-logo { 
+/* --- PREMIUM LOGO SIZING & SHAPES --- */
+
+/*.entity-logo { 
     width: 55px; 
     height: 55px; 
     border-radius: 50%; 
@@ -170,6 +172,33 @@ a.header-with-logo {
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     position: relative;
     will-change: filter, transform, border-color, box-shadow;
+}*/
+/* Base setting: Larger Circles (Dr. Schär, IDAL, Zoeschg) */
+.entity-logo {
+    width: 75px;       /* Increased from 55px */
+    height: 75px;      /* Increased from 55px */
+    border-radius: 50%; /* Perfect circle */
+    object-fit: contain;
+    background-color: var(--white); /* Keeps transparent logos readable in dark mode */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Adds slight depth */
+    transition: transform 0.3s ease;
+}
+
+/* Modifier: The Square (Unibz) */
+.entity-logo.logo-square {
+    border-radius: 12px; /* Slight rounding for a modern "App Icon" look */
+}
+
+/* Modifier: The Rectangle (Frigotherm) */
+.entity-logo.logo-rect {
+    width: 120px;        /* Made significantly wider */
+    height: 65px;        /* Slightly shorter to maintain rectangle ratio */
+    border-radius: 8px; 
+}
+
+/* Subtle hover effect for the logos */
+.header-with-logo:hover .entity-logo {
+    transform: scale(1.05);
 }
 
 /* Overlapping effect for the second logo */
@@ -376,4 +405,37 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
         display: block;
         min-height: 3em; /* Reserves space for up to 3 lines on Mobile */
     }
+}
+
+/* --- CMD+K PALETTE STYLES --- */
+#command-palette {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
+    display: flex; justify-content: center; align-items: flex-start;
+    padding-top: 15vh; z-index: 9999;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+#command-palette.palette-visible {
+    opacity: 1; pointer-events: auto;
+}
+.palette-content {
+    background: var(--white); width: 90%; max-width: 600px;
+    border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden; border: 1px solid var(--accent);
+}
+#palette-input {
+    width: 100%; padding: 20px; border: none !important; background: transparent !important;
+    color: var(--text-dark) !important; font-size: 1.2rem; outline: none;
+    border-bottom: 1px solid rgba(128,128,128,0.2) !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+#palette-results { list-style: none; margin: 0; padding: 0; }
+#palette-results li a {
+    display: block; padding: 15px 20px; text-decoration: none;
+    color: var(--text-dark); transition: background 0.2s;
+}
+#palette-results li a:hover {
+    background: var(--accent); color: var(--white);
 }

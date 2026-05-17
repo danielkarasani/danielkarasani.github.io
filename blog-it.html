@@ -131,7 +131,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+        if (document.readyState === 'complete') {
+            document.body.classList.add('loaded');
+        } else {
+            window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+        }
 
         async function openPost(filename) {
             const modal = document.getElementById('blog-modal');
