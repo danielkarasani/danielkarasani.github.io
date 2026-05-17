@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta property="og:title" content="Daniel Karasani | Industrial & Mechanical Engineering">
+    <meta property="og:description" content="Portfolio of Daniel Karasani. Specializing in Process Optimization, Automation, and Digitalization.">
+    <meta property="og:image" content="https://danielkarasani.github.io/images/daniel-karasani-industrial-engineer.webp">
+    <meta property="og:url" content="https://danielkarasani.github.io/">
+    <meta property="og:type" content="website">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Karasani | Industrial Mechanical Engineer</title>
@@ -43,6 +49,37 @@
             .hero::before { animation: none !important; }
         </style>
     </noscript>
+	
+	<script>
+        const savedLang = localStorage.getItem('lang');
+        // Only redirect if they aren't already on the right page
+        if (savedLang === 'de' && !window.location.href.includes('-de.html')) {
+            window.location.href = 'index-de.html';
+        } else if (savedLang === 'it' && !window.location.href.includes('-it.html')) {
+            window.location.href = 'index-it.html';
+        }
+    </script>
+	
+	<script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Person",
+      "name": "Daniel Karasani",
+      "jobTitle": "Industrial and Mechanical Engineer",
+      "url": "https://danielkarasani.github.io/",
+      "alumniOf": "Free University of Bolzano",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Merano",
+        "addressRegion": "South Tyrol",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/daniel-karasani",
+        "https://github.com/danielkarasani"
+      ]
+    }
+    </script>
 </head>
 <body class="">
     <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
@@ -68,11 +105,11 @@
             </ul>
             
             <div class="lang-switcher">
-                <a href="index.html" class="active hover-target">EN</a> 
+                <a href="index.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target">EN</a> 
                 <span class="divider">|</span>
-                <a href="index-de.html" class="hover-target">DE</a> 
+                <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target">DE</a> 
                 <span class="divider">|</span>
-                <a href="index-it.html" class="hover-target">IT</a>
+                <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
