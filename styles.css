@@ -439,3 +439,24 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
 #palette-results li a:hover {
     background: var(--accent); color: var(--white);
 }
+
+/* --- HERO CTA BUTTONS STYLING --- */
+.hero-buttons-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.hero-buttons-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-top: 12px;
+    width: 100%;
+}
