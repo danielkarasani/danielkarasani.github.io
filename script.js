@@ -324,6 +324,7 @@ window.openPost = async function(filename) {
     }
 };
 
+
 window.closePost = function() {
     const modal = document.getElementById('blog-modal');
     const reader = document.getElementById('md-reader');
@@ -334,3 +335,89 @@ window.closePost = function() {
         setTimeout(() => { reader.innerHTML = ''; }, 500);
     }
 };
+
+// ==========================================
+// 9. DYNAMIC MOBILE NAVIGATION
+// ==========================================
+function initMobileNav() {
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (!navContainer || !navLinks) return;
+
+    // 1. Create Hamburger Button
+    const hamburger = document.createElement('button');
+    hamburger.className = 'hamburger-menu hover-target';
+    hamburger.setAttribute('aria-label', 'Toggle Menu');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
+
+    // Add cursor hover listeners for custom cursor
+    hamburger.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+    });
+    hamburger.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+    });
+
+
+
+    // Append Hamburger to Navigation Container
+    navContainer.appendChild(hamburger);
+
+    // 3. Toggle Menu Function
+    function toggleMenu() {
+        const isActive = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    }
+
+    // 4. Close Menu Function
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    // Toggle on Hamburger Click
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close menu when clicking navigation links
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // Close menu when clicking outside of the active menu drawer
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close menu on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+}
+
+// Run mobile nav initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileNav);
+} else {
+    initMobileNav();
+}

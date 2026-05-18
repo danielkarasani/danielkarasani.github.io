@@ -376,9 +376,128 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
 @media (max-width: 990px) {
     .hero-content { flex-direction: column-reverse; text-align: center; margin-top: 40px; }
     h1 { font-size: 3.2rem; }
-    .nav-links { display: none; }
-    .lang-switcher { position: absolute; right: 60px; top: 25px; }
-    #theme-toggle { position: absolute; right: 20px; top: 23px; }
+    
+    /* Mobile Hamburger & Controls */
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        position: absolute;
+        right: 30px;
+        top: 24px;
+        z-index: 1005;
+        transition: var(--transition-fast);
+    }
+    
+    .hamburger-menu span {
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-dark);
+        border-radius: 2px;
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transform-origin: left center;
+    }
+    
+    body.dark-theme .hamburger-menu span {
+        background-color: var(--white);
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(2px, -2px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(2px, 2px);
+    }
+    
+    .lang-switcher { 
+        display: flex !important; 
+        position: absolute;
+        right: 115px;
+        top: 22px;
+        margin-left: 0 !important;
+        z-index: 1005;
+        gap: 8px;
+        font-size: 0.8rem;
+    }
+    
+    #theme-toggle { 
+        position: absolute; 
+        right: 80px; 
+        top: 21px; 
+        margin-left: 0 !important; 
+        z-index: 1005; 
+    }
+    
+    /* Slide-down full screen navigation overlay */
+    .nav-links { 
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--nav-bg);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+        z-index: 1000;
+        padding: 100px 30px 40px 30px;
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+    }
+    
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Dynamic Staggered Animations */
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-links.active li:nth-child(6) { transition-delay: 0.35s; }
+    
+    .nav-links a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        display: block;
+        padding: 10px 0;
+    }
+
     .hero-image { animation: none; }
     .hero-image img { max-width: 350px; }
     .edu-grid { grid-template-columns: 1fr; }
@@ -387,6 +506,10 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
     .about-visual { position: relative; top: 0; margin-bottom: 40px; }
     .about-narrative h2 { text-align: center; }
     .about-narrative h2::after { margin: 15px auto 40px auto; }
+}
+
+body.no-scroll {
+    overflow: hidden !important;
 }
 
 @media (max-width: 600px) {
