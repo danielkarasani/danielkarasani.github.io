@@ -193,3 +193,50 @@ if (themeToggleBtn) {
         localStorage.setItem('theme', theme);
     });
 }
+
+// ==========================================
+// 8. DYNAMIC BLOG MARKDOWN READER
+// ==========================================
+window.openPost = async function(filename) {
+    const modal = document.getElementById('blog-modal');
+    const reader = document.getElementById('md-reader');
+    
+    if (!modal || !reader) return;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; 
+    reader.innerHTML = '<i>Fetching data from repository...</i>';
+
+    try {
+        const response = await fetch(`posts/${filename}`);
+        if (!response.ok) throw new Error('Post not found on server.');
+        
+        const markdownText = await response.text();
+        if (typeof marked !== 'undefined') {
+            reader.innerHTML = marked.parse(markdownText);
+        } else {
+            reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText}</pre>`;
+        }
+
+        // --- NEW: RE-APPLY CURSOR HOVER EFFECT TO DYNAMIC LINKS ---
+        const newLinks = reader.querySelectorAll('a');
+        newLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+            link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+        });
+    } catch (error) {
+        console.    error(error);
+        reader.innerHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
+    }
+};
+
+window.closePost = function() {
+    const modal = document.getElementById('blog-modal');
+    const reader = document.getElementById('md-reader');
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto'; 
+    if (reader) {
+        setTimeout(() => { reader.innerHTML = ''; }, 500);
+    }
+};
