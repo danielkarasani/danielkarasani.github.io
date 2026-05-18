@@ -30,6 +30,9 @@
 	<script src="script.js" defer></script>
     
     <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
+	<script>
+        localStorage.setItem('lang', 'it');
+    </script>
     <noscript>
         <style>
             #preloader { display: none !important; }
@@ -91,7 +94,7 @@
                 <span class="divider">|</span>
                 <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target">DE</a> 
                 <span class="divider">|</span>
-                <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target">IT</a>
+                <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target active">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
@@ -105,7 +108,7 @@
             <div class="hero-text reveal">
                 <span class="tagline">Studente di Ingegneria Industriale e Meccanica @ unibz</span>
                 <h1>Ingegnerizzare sistemi.<br>
-                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text"></span></span>
+                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text">Ottimizzare la realtà.</span></span>
                 </h1>
                 
                 <p class="quote">"Il progresso inizia nella mente e si rivela nelle prestazioni."</p>

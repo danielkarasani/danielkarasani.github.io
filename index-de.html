@@ -30,6 +30,9 @@
 	<script src="script.js" defer></script>
     
     <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
+	<script>
+        localStorage.setItem('lang', 'de');
+    </script>
     <noscript>
         <style>
             /* 1. Kill the preloader immediately */
@@ -98,7 +101,7 @@
             <div class="lang-switcher">
                 <a href="index.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target">EN</a> 
                 <span class="divider">|</span>
-                <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target">DE</a> 
+                <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target active">DE</a> 
                 <span class="divider">|</span>
                 <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target">IT</a>
             </div>

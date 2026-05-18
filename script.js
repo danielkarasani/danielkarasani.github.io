@@ -124,10 +124,18 @@ if (palette && paletteInput) {
 // 3. HARDWARE ACCELERATED SCROLL REVEAL
 // ==========================================
 // Close when clicking outside the box
+const hidePreloader = () => {
+    if (!document.body.classList.contains('loaded')) {
+        document.body.classList.add('loaded');
+    }
+};
+
 if (document.readyState === 'complete') {
-    document.body.classList.add('loaded');
+    hidePreloader();
 } else {
-    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
+    window.addEventListener('load', hidePreloader);
+    // Failsafe timeout to prevent preloader lock if external assets hang
+    setTimeout(hidePreloader, 2000);
 }
 
 const revealOptions = {
@@ -156,30 +164,38 @@ const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
 
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.matchMedia("(pointer: coarse)").matches);
+
 if (cursorDot && cursorOutline) {
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX; mouseY = e.clientY;
-        cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
-    });
+    if (isTouchDevice || window.innerWidth <= 990) {
+        cursorDot.style.display = 'none';
+        cursorOutline.style.display = 'none';
+    } else {
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+        });
 
-    function animateCursor() {
-        if (!cursorOutline) return;
-        let distX = mouseX - outlineX; let distY = mouseY - outlineY;
-        outlineX += distX * 0.15; outlineY += distY * 0.15;
-        cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
-        if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
+        function animateCursor() {
+            if (!cursorOutline) return;
+            let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+            outlineX += distX * 0.15; outlineY += distY * 0.15;
+            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+            if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
+        }
+
+        animateCursor();
+
+        window.addEventListener('resize', () => { 
+            if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } 
+        });
+
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+            target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+        });
     }
-
-    if (window.innerWidth > 990) { animateCursor(); }
-    window.addEventListener('resize', () => { 
-        if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } 
-    });
-
-    const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
-    hoverTargets.forEach(target => {
-        target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-        target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
-    });
 }
 
 // ==========================================
