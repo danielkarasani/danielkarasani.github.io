@@ -21,6 +21,7 @@
     <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
     <link rel="stylesheet" href="styles.css"> 
+    <script src="script.js" defer></script>
     <script>
         if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
     </script>
@@ -125,18 +126,18 @@
         </ul>
 
         <div style="text-align: center; margin-top: 60px;">
-            <a href="https://e.pcloud.link/publink/show?code=XZRdJrZip1FWlOLtK87Iev3mcasHJQRvYPk" target="_blank" class="btn hover-target">Download Full Technical Documentation (PDF) <span style="font-size: 0.9em; font-weight: normal; opacity: 0.85;">(German only)</span></a>
+            <a href="https://e.pcloud.link/publink/show?code=XZRdJrZip1FWlOLtK87Iev3mcasHJQRvYPk" target="_blank" rel="noopener noreferrer" class="btn hover-target js-cloud-doc-link">Download Full Technical Documentation (PDF) <span style="margin-left: 6px; font-size: 0.9em; font-weight: normal; opacity: 0.85;">(German only)</span></a>
         </div>
 
     </section>
 
     <footer>
         <div class="social-links" style="flex-wrap: wrap;">
-            <a href="https://www.linkedin.com/in/daniel-karasani" class="hover-target" target="_blank">
+            <a href="https://www.linkedin.com/in/daniel-karasani" class="hover-target" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 LinkedIn
             </a>
-            <a href="https://github.com/danielkarasani" class="hover-target" target="_blank">
+            <a href="https://github.com/danielkarasani" class="hover-target" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 GitHub
             </a>
@@ -161,67 +162,6 @@
         </div>
     </footer>
 
-    <script>
-        if (document.readyState === 'complete') {
-            document.body.classList.add('loaded');
-        } else {
-            window.addEventListener('load', () => { document.body.classList.add('loaded'); });
-        }
-
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
-            }
-        }
-        window.addEventListener("scroll", reveal, { passive: true }); reveal();
-
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
-        });
-
-        function animateCursor() {
-            let distX = mouseX - outlineX; let distY = mouseY - outlineY;
-            outlineX += distX * 0.15; outlineY += distY * 0.15;
-            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
-            if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
-        }
-        
-        if (window.innerWidth > 990) { animateCursor(); }
-        window.addEventListener('resize', () => { if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } });
-
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-            target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
-        });
-
-        // --- DARK MODE TOGGLE LOGIC ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme === 'dark') {
-            themeToggle.textContent = '☀️';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            let theme = 'light';
-            if (document.body.classList.contains('dark-theme')) {
-                theme = 'dark';
-                themeToggle.textContent = '☀️';
-            } else {
-                themeToggle.textContent = '🌙';
-            }
-            localStorage.setItem('theme', theme);
-        });
-    </script>
+    <!-- Inline script block removed. Functions are handled by central script.js -->
 </body>
 </html>

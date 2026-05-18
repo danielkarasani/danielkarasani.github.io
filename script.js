@@ -1,4 +1,69 @@
 // ==========================================
+// 0. CENTRALIZED CONFIGURATION ("JS Brain")
+// ==========================================
+const APP_CONFIG = {
+    cloudCvLink: "https://e.pcloud.link/publink/show?code=XZpKJrZH5ORGlFrt08s2ydJNPalt48JPirV",
+    cloudDocLink: "https://e.pcloud.link/publink/show?code=XZRdJrZip1FWlOLtK87Iev3mcasHJQRvYPk",
+    localCvPath: "Daniel_Karasani_CV.pdf"
+};
+
+function initDynamicLinks() {
+    // Inject hrefs
+    document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
+        el.href = APP_CONFIG.cloudCvLink;
+    });
+    document.querySelectorAll(".js-cloud-doc-link").forEach(el => {
+        el.href = APP_CONFIG.cloudDocLink;
+    });
+    document.querySelectorAll(".js-local-cv-link").forEach(el => {
+        el.href = APP_CONFIG.localCvPath;
+    });
+
+    // Centralized Google Analytics Event Tracking
+    const pageLang = document.documentElement.lang || "en";
+    
+    document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
+        el.addEventListener("click", () => {
+            if (typeof gtag === "function") {
+                gtag("event", "click", {
+                    "event_category": "Outbound Link",
+                    "event_label": `Cloud CV View ${pageLang.toUpperCase()}`
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll(".js-local-cv-link").forEach(el => {
+        el.addEventListener("click", () => {
+            if (typeof gtag === "function") {
+                gtag("event", "click", {
+                    "event_category": "Download",
+                    "event_label": `Local CV Download ${pageLang.toUpperCase()}`
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll(".js-cloud-doc-link").forEach(el => {
+        el.addEventListener("click", () => {
+            if (typeof gtag === "function") {
+                gtag("event", "click", {
+                    "event_category": "Outbound Link",
+                    "event_label": `Air Analyzer Doc Download ${pageLang.toUpperCase()}`
+                });
+            }
+        });
+    });
+}
+
+// Run link initialization once DOM is parsed
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicLinks);
+} else {
+    initDynamicLinks();
+}
+
+// ==========================================
 // 1. DYNAMIC TAB TITLE (UX Retention)
 // ==========================================
 let originalTitle = document.title;
@@ -9,6 +74,7 @@ window.addEventListener("blur", () => {
 window.addEventListener("focus", () => {
     document.title = originalTitle;
 });
+
 
 // ==========================================
 // 2. CMD+K COMMAND PALETTE
@@ -203,9 +269,21 @@ window.openPost = async function(filename) {
     
     if (!modal || !reader) return;
     
+    const pageLang = document.documentElement.lang || "en";
+    let loadingText = '<i>Fetching data from repository...</i>';
+    let errorHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
+    
+    if (pageLang === 'de') {
+        loadingText = '<i>Lade Daten aus Repository...</i>';
+        errorHTML = '<h2 style="color: red;">Fehler 404</h2><p>Das angeforderte Dokument konnte nicht geladen werden. Stellen Sie sicher, dass die Markdown-Datei im Verzeichnis /posts existiert.</p>';
+    } else if (pageLang === 'it') {
+        loadingText = '<i>Caricamento in corso dal repository...</i>';
+        errorHTML = '<h2 style="color: red;">Errore 404</h2><p>Impossibile caricare il documento richiesto. Assicurati che il file markdown esista nella cartella /posts.</p>';
+    }
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; 
-    reader.innerHTML = '<i>Fetching data from repository...</i>';
+    reader.innerHTML = loadingText;
 
     try {
         const response = await fetch(`posts/${filename}`);
@@ -225,8 +303,8 @@ window.openPost = async function(filename) {
             link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
         });
     } catch (error) {
-        console.    error(error);
-        reader.innerHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
+        console.error(error);
+        reader.innerHTML = errorHTML;
     }
 };
 
