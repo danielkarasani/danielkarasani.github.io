@@ -7,6 +7,16 @@ const APP_CONFIG = {
     localCvPath: "Daniel_Karasani_CV.pdf"
 };
 
+// Reusable high-performance event debouncing utility
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
 function initDynamicLinks() {
     // Inject hrefs
     document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
@@ -250,8 +260,8 @@ function initCommandPalette() {
         }
     });
 
-    // 6. Instant Search Filtering
-    paletteInput.addEventListener('input', (e) => {
+    // 6. Instant Search Filtering (Debounced to prevent typing stutter)
+    paletteInput.addEventListener('input', debounce((e) => {
         const query = e.target.value.toLowerCase().trim();
         paletteItems.forEach(item => {
             const text = item.textContent.toLowerCase();
@@ -261,7 +271,7 @@ function initCommandPalette() {
                 item.style.display = 'none';
             }
         });
-    });
+    }, 100));
 }
 
 // Run palette initialization
@@ -826,7 +836,46 @@ function initBlogSorting() {
     }
 
     if (searchInput) {
-        searchInput.addEventListener('input', applySearch);
+        searchInput.addEventListener('input', debounce(applySearch, 150));
+    }
+}
+
+// ==========================================
+// 11. ZERO-LATENCY BLOG POST PREFETCHING
+// ==========================================
+function prefetchBlogPosts() {
+    // Scan all blog cards in the grid
+    const cards = document.querySelectorAll('.blog-card');
+    if (!cards.length) return;
+
+    const runPrefetch = () => {
+        cards.forEach(card => {
+            const onclickAttr = card.getAttribute('onclick');
+            if (onclickAttr) {
+                // Parse out the filename argument, e.g. openPost('my-first-post.md')
+                const match = onclickAttr.match(/openPost\(['"]([^'"]+)['"]\)/);
+                if (match && match[1]) {
+                    const filename = match[1];
+                    const prefetchUrl = `posts/${filename}`;
+                    
+                    // Inject prefetch link element to preload resources dynamically
+                    if (!document.querySelector(`link[href="${prefetchUrl}"]`)) {
+                        const link = document.createElement('link');
+                        link.rel = 'prefetch';
+                        link.href = prefetchUrl;
+                        link.as = 'fetch';
+                        document.head.appendChild(link);
+                    }
+                }
+            }
+        });
+    };
+
+    // Use browser idle scheduling for zero thread obstruction
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(runPrefetch);
+    } else {
+        setTimeout(runPrefetch, 2000);
     }
 }
 
@@ -836,6 +885,7 @@ if (document.readyState === 'loading') {
         initMobileNav();
         initContactForm();
         initBlogSorting();
+        prefetchBlogPosts();
         // Handle deep linked post
         const urlParams = new URLSearchParams(window.location.search);
         const postParam = urlParams.get('post');
@@ -847,6 +897,7 @@ if (document.readyState === 'loading') {
     initMobileNav();
     initContactForm();
     initBlogSorting();
+    prefetchBlogPosts();
     // Handle deep linked post
     const urlParams = new URLSearchParams(window.location.search);
     const postParam = urlParams.get('post');

@@ -425,7 +425,7 @@ body.dark-theme .premium-title {
 .blog-date { font-size: 0.9rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 .blog-card h3 { font-size: 1.4rem; margin-bottom: 15px; }
 .blog-card p { flex-grow: 1; font-size: 1rem; margin-bottom: 25px; }
-.blog-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--nav-bg); backdrop-filter: blur(10px); z-index: 10000; opacity: 0; visibility: hidden; overflow-y: auto; transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); transform: translateY(20px); }
+.blog-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--nav-bg); backdrop-filter: blur(10px); z-index: 10000; opacity: 0; visibility: hidden; overflow-y: auto; transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); transform: translateY(20px); will-change: opacity, transform, visibility; }
 .blog-modal.active { opacity: 1; visibility: visible; transform: translateY(0); }
 .modal-content { max-width: 800px; margin: 100px auto; background: var(--white); padding: 60px; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); position: relative; }
 .close-modal { position: absolute; top: 30px; right: 30px; background: none; border: none; font-size: 2rem; color: var(--text-dark); font-weight: 700; transition: var(--transition-fast); cursor: pointer;}
@@ -617,7 +617,7 @@ body.no-scroll {
     .contact-box { padding: 40px 20px;}
 }
 
-.project-card, .timeline-content, .edu-card {
+.project-card, .timeline-content, .edu-card, .blog-card {
     will-change: transform, box-shadow;
 }
 
