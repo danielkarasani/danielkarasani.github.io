@@ -462,6 +462,17 @@ window.openPost = async function(filename) {
     document.body.style.overflow = 'hidden'; 
     reader.innerHTML = loadingText;
 
+    // Update URL query parameter
+    try {
+        const url = new URL(window.location);
+        if (url.searchParams.get('post') !== filename) {
+            url.searchParams.set('post', filename);
+            window.history.pushState({}, '', url);
+        }
+    } catch (e) {
+        console.warn("Could not update state URL:", e);
+    }
+
     try {
         const response = await fetch(`posts/${filename}`);
         if (!response.ok) throw new Error('Post not found on server.');
@@ -488,6 +499,16 @@ window.closePost = function() {
     document.body.style.overflow = 'auto'; 
     if (reader) {
         setTimeout(() => { reader.innerHTML = ''; }, 500);
+    }
+    // Remove URL query parameter
+    try {
+        const url = new URL(window.location);
+        if (url.searchParams.has('post')) {
+            url.searchParams.delete('post');
+            window.history.pushState({}, '', url);
+        }
+    } catch (e) {
+        console.warn("Could not update state URL:", e);
     }
 };
 
@@ -700,11 +721,30 @@ function initContactForm() {
 // ==========================================
 function initBlogSorting() {
     const sortSelect = document.getElementById('blogSortSelect');
+    const searchInput = document.getElementById('blogSearchInput');
     const grid = document.querySelector('.blog-grid');
-    if (!sortSelect || !grid) return;
+    if (!grid) return;
 
     // Keep a copy of original card nodes in their initial manual order
     const originalCards = Array.from(grid.querySelectorAll('.blog-card'));
+
+    function applySearch() {
+        if (!searchInput) return;
+        const query = searchInput.value.toLowerCase().trim();
+        const cards = grid.querySelectorAll('.blog-card');
+        
+        cards.forEach(card => {
+            const dateText = (card.querySelector('.blog-date')?.textContent || '').toLowerCase();
+            const titleText = (card.querySelector('h3')?.textContent || '').toLowerCase();
+            const descText = (card.querySelector('p')?.textContent || '').toLowerCase();
+            
+            if (dateText.includes(query) || titleText.includes(query) || descText.includes(query)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 
     // Helper to parse date strings (e.g. "May 19, 2026", "19. Mai 2026", "19 Maggio 2026") into Date objects
     function parseDate(card) {
@@ -719,7 +759,7 @@ function initBlogSorting() {
             // German
             januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, august:7, september:8, oktober:9, november:10, dezember:11,
             // Italian
-            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
+            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, november:10, dicembre:11
         };
 
         const clean = dateStr.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
@@ -752,34 +792,42 @@ function initBlogSorting() {
         return new Date(year, month, day);
     }
 
-    sortSelect.addEventListener('change', () => {
-        const val = sortSelect.value;
-        const cards = Array.from(grid.querySelectorAll('.blog-card'));
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            const val = sortSelect.value;
+            const cards = Array.from(grid.querySelectorAll('.blog-card'));
 
-        if (val === 'default') {
-            grid.innerHTML = '';
-            originalCards.forEach(card => grid.appendChild(card));
-            return;
-        }
-
-        cards.sort((a, b) => {
-            if (val === 'newest' || val === 'oldest') {
-                const dateA = parseDate(a);
-                const dateB = parseDate(b);
-                return val === 'newest' ? dateB - dateA : dateA - dateB;
-            } else if (val === 'az' || val === 'za') {
-                const titleA = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
-                const titleB = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
-                if (titleA < titleB) return val === 'az' ? -1 : 1;
-                if (titleA > titleB) return val === 'az' ? 1 : -1;
-                return 0;
+            if (val === 'default') {
+                grid.innerHTML = '';
+                originalCards.forEach(card => grid.appendChild(card));
+                applySearch();
+                return;
             }
-            return 0;
-        });
 
-        grid.innerHTML = '';
-        cards.forEach(card => grid.appendChild(card));
-    });
+            cards.sort((a, b) => {
+                if (val === 'newest' || val === 'oldest') {
+                    const dateA = parseDate(a);
+                    const dateB = parseDate(b);
+                    return val === 'newest' ? dateB - dateA : dateA - dateB;
+                } else if (val === 'az' || val === 'za') {
+                    const titleA = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
+                    const titleB = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
+                    if (titleA < titleB) return val === 'az' ? -1 : 1;
+                    if (titleA > titleB) return val === 'az' ? 1 : -1;
+                    return 0;
+                }
+                return 0;
+            });
+
+            grid.innerHTML = '';
+            cards.forEach(card => grid.appendChild(card));
+            applySearch();
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', applySearch);
+    }
 }
 
 // Run initializations
@@ -788,9 +836,21 @@ if (document.readyState === 'loading') {
         initMobileNav();
         initContactForm();
         initBlogSorting();
+        // Handle deep linked post
+        const urlParams = new URLSearchParams(window.location.search);
+        const postParam = urlParams.get('post');
+        if (postParam) {
+            window.openPost(postParam);
+        }
     });
 } else {
     initMobileNav();
     initContactForm();
     initBlogSorting();
+    // Handle deep linked post
+    const urlParams = new URLSearchParams(window.location.search);
+    const postParam = urlParams.get('post');
+    if (postParam) {
+        window.openPost(postParam);
+    }
 }

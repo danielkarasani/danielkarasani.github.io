@@ -112,15 +112,21 @@
 
     <!-- Blog Grid Section -->
     <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
-        <div class="blog-controls">
-            <label for="blogSortSelect">Sort by:</label>
-            <select id="blogSortSelect" class="blog-sort-select hover-target">
-                <option value="default">Default (Manual)</option>
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="az">Alphabetical (A-Z)</option>
-                <option value="za">Alphabetical (Z-A)</option>
-            </select>
+        <div class="blog-controls-wrapper">
+            <div class="blog-search-box hover-target">
+                <input type="text" id="blogSearchInput" placeholder="Search articles...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="blog-sort-box">
+                <label for="blogSortSelect">Sort by:</label>
+                <select id="blogSortSelect" class="blog-sort-select hover-target">
+                    <option value="default">Default (Manual)</option>
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="az">Alphabetical (A-Z)</option>
+                    <option value="za">Alphabetical (Z-A)</option>
+                </select>
+            </div>
         </div>
         <div class="blog-grid"><div class="blog-card hover-target" onclick="openPost('welcome-to-browser-markdown-editor.md')"><span class="blog-date">May 19, 2026</span>
                 <h3>Welcome to Browser Markdown Editor!</h3>

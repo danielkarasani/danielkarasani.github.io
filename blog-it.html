@@ -113,15 +113,21 @@
     </section>
 
     <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
-        <div class="blog-controls">
-            <label for="blogSortSelect">Ordina per:</label>
-            <select id="blogSortSelect" class="blog-sort-select hover-target">
-                <option value="default">Predefinito (Manuale)</option>
-                <option value="newest">Più recenti</option>
-                <option value="oldest">Meno recenti</option>
-                <option value="az">Alfabetico (A-Z)</option>
-                <option value="za">Alfabetico (Z-A)</option>
-            </select>
+        <div class="blog-controls-wrapper">
+            <div class="blog-search-box hover-target">
+                <input type="text" id="blogSearchInput" placeholder="Cerca articoli...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="blog-sort-box">
+                <label for="blogSortSelect">Ordina per:</label>
+                <select id="blogSortSelect" class="blog-sort-select hover-target">
+                    <option value="default">Predefinito (Manuale)</option>
+                    <option value="newest">Più recenti</option>
+                    <option value="oldest">Meno recenti</option>
+                    <option value="az">Alfabetico (A-Z)</option>
+                    <option value="za">Alfabetico (Z-A)</option>
+                </select>
+            </div>
         </div>
         <div class="blog-grid">
 
