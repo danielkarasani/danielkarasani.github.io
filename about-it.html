@@ -14,6 +14,8 @@
     <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/about.html" />
     <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/about-de.html" />
     <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/about-it.html" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c89b72">
     
     <!-- Zero-Latency Language Switch Prefetching -->
     <link rel="prefetch" href="about.html">
@@ -135,14 +137,14 @@ body {
             </ul>
             
             <div class="lang-switcher">
-                <a href="about.html" class="hover-target">EN</a> 
+                <a href="about.html" class="hover-target" aria-label="Passa alla lingua inglese">EN</a> 
                 <span class="divider">|</span>
-                <a href="about-de.html" class="hover-target">DE</a> 
+                <a href="about-de.html" class="hover-target" aria-label="Passa alla lingua tedesca">DE</a> 
                 <span class="divider">|</span>
-                <a href="about-it.html" class="active hover-target">IT</a>
+                <a href="about-it.html" class="active hover-target" aria-label="Passa alla lingua italiana">IT</a>
             </div>
 
-            <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+            <button id="theme-toggle" class="hover-target" aria-label="Attiva/disattiva tema chiaro e scuro" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
                 🌙
             </button>
         </div>

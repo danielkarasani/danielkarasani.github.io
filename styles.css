@@ -683,10 +683,14 @@ body.no-scroll {
 #palette-results { list-style: none; margin: 0; padding: 0; }
 #palette-results li a {
     display: block; padding: 15px 20px; text-decoration: none;
-    color: var(--text-dark); transition: background 0.2s;
+    color: var(--text-dark); transition: background 0.2s, transform 0.2s, border-left 0.2s;
 }
-#palette-results li a:hover {
+#palette-results li a:hover, #palette-results li.selected a {
     background: var(--accent); color: var(--white);
+}
+#palette-results li.selected a {
+    transform: translateX(4px);
+    border-left: 4px solid var(--text-dark);
 }
 
 /* --- HERO CTA BUTTONS STYLING --- */

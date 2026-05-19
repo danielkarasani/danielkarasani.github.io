@@ -20,6 +20,8 @@
     <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/index-de.html" />
     <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/index-it.html" />
     <link rel="alternate" hreflang="x-default" href="https://danielkarasani.github.io/" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c89b72">
 
     <!-- LCP Hero Image Preload -->
     <link rel="preload" href="images/daniel-karasani-industrial-engineer.webp" as="image" type="image/webp">
@@ -185,14 +187,14 @@ body {
             </ul>
             
             <div class="lang-switcher">
-                <a href="index.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target">EN</a> 
+                <a href="index.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target" aria-label="Sprache auf Englisch umstellen">EN</a> 
                 <span class="divider">|</span>
-                <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target active">DE</a> 
+                <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target active" aria-label="Sprache auf Deutsch umstellen">DE</a> 
                 <span class="divider">|</span>
-                <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target">IT</a>
+                <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target" aria-label="Sprache auf Italienisch umstellen">IT</a>
             </div>
 
-            <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+            <button id="theme-toggle" class="hover-target" aria-label="Licht- und Dunkelmodus umschalten" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
                 🌙
             </button>
         </div>

@@ -16,6 +16,8 @@
     <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/blog.html" />
     <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/blog-de.html" />
     <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/blog-it.html" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c89b72">
     
     <!-- CDN Preconnecting -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -169,14 +171,14 @@ body {
             </ul>
 
             <div class="lang-switcher">
-                <a href="blog.html" class="hover-target">EN</a>
+                <a href="blog.html" class="hover-target" aria-label="Passa alla lingua inglese">EN</a>
                 <span class="divider">|</span>
-                <a href="blog-de.html" class="hover-target">DE</a>
+                <a href="blog-de.html" class="hover-target" aria-label="Passa alla lingua tedesca">DE</a>
                 <span class="divider">|</span>
-                <a href="blog-it.html" class="active hover-target">IT</a>
+                <a href="blog-it.html" class="active hover-target" aria-label="Passa alla lingua italiana">IT</a>
             </div>
 
-            <button id="theme-toggle" class="hover-target"
+            <button id="theme-toggle" class="hover-target" aria-label="Attiva/disattiva tema chiaro e scuro"
                 style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
                 🌙
             </button>

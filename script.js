@@ -176,6 +176,24 @@ function initCommandPalette() {
     // Cache list items once to prevent DOM queries on every keystroke
     const paletteItems = Array.from(palette.querySelectorAll('#palette-results li'));
 
+    let activeSearchIndex = -1;
+
+    function getVisibleItems() {
+        return paletteItems.filter(item => item.style.display !== 'none');
+    }
+
+    function updateSelection() {
+        const visibleItems = getVisibleItems();
+        visibleItems.forEach((item, index) => {
+            if (index === activeSearchIndex) {
+                item.classList.add('selected');
+                item.scrollIntoView({ block: 'nearest' });
+            } else {
+                item.classList.remove('selected');
+            }
+        });
+    }
+
     // Helper functions for unified open/close management
     function openPalette() {
         palette.classList.add('palette-visible');
@@ -193,13 +211,20 @@ function initCommandPalette() {
         }
         
         paletteInput.value = '';
-        paletteItems.forEach(item => item.style.display = 'block');
+        paletteItems.forEach(item => {
+            item.style.display = 'block';
+            item.classList.remove('selected');
+        });
+        activeSearchIndex = 0;
+        updateSelection();
         setTimeout(() => paletteInput.focus(), 50);
     }
     
     function closePalette() {
         palette.classList.remove('palette-visible');
         document.body.classList.remove('no-scroll');
+        paletteItems.forEach(item => item.classList.remove('selected'));
+        activeSearchIndex = -1;
     }
 
     // 2. Dynamically Inject Search Button in Header next to theme toggle
@@ -231,16 +256,43 @@ function initCommandPalette() {
 
     // 3. Register Global Keyboard Shortcuts (Cmd+K / Ctrl+K and Escape)
     document.addEventListener('keydown', (e) => {
+        const isVisible = palette.classList.contains('palette-visible');
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault(); 
-            if (palette.classList.contains('palette-visible')) {
+            if (isVisible) {
                 closePalette();
             } else {
                 openPalette();
             }
+            return;
         }
-        if (e.key === 'Escape' && palette.classList.contains('palette-visible')) {
+        if (e.key === 'Escape' && isVisible) {
             closePalette();
+            return;
+        }
+
+        if (isVisible) {
+            const visibleItems = getVisibleItems();
+            if (visibleItems.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeSearchIndex = (activeSearchIndex + 1) % visibleItems.length;
+                updateSelection();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeSearchIndex = (activeSearchIndex - 1 + visibleItems.length) % visibleItems.length;
+                updateSelection();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (activeSearchIndex >= 0 && activeSearchIndex < visibleItems.length) {
+                    const activeLink = visibleItems[activeSearchIndex].querySelector('a');
+                    if (activeLink) {
+                        activeLink.click();
+                        closePalette();
+                    }
+                }
+            }
         }
     });
 
@@ -270,7 +322,10 @@ function initCommandPalette() {
             } else {
                 item.style.display = 'none';
             }
+            item.classList.remove('selected');
         });
+        activeSearchIndex = 0;
+        updateSelection();
     }, 100));
 }
 
