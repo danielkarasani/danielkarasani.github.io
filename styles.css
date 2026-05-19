@@ -37,7 +37,7 @@ body.dark-theme .skill-category {
 /* Global Reset (Cursor Fallback Enabled) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
+body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
 a { color: var(--accent); text-decoration: none; transition: var(--transition-fast); }
 
 ::selection { background: var(--accent); color: var(--white); }
@@ -61,7 +61,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 .cursor-hover .cursor-outline { width: 80px; height: 80px; background-color: transparent; border: 2px solid var(--accent); }
 
 /* Typography */
-h1, h2, h3, h4 { font-weight: 700; color: var(--text-dark); }
+h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-dark); }
 h1 { font-size: 4.2rem; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 15px;}
 h2 { font-size: 3rem; margin-bottom: 20px; text-align: center; }
 h2::after { content: ''; display: block; width: 80px; height: 4px; background: var(--accent); margin: 15px auto 50px auto; border-radius: 2px; }

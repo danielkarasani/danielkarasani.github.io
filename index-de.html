@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <!-- Performance Preconnects for Core Web Vitals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 	<meta property="og:title" content="Daniel Karasani | Industrie- und Maschineningenieurwesen">
     <meta property="og:description" content="Portfolio von Daniel Karasani. Spezialisiert auf Prozessoptimierung, Automatisierung und Digitalisierung.">
     <meta property="og:image" content="https://danielkarasani.github.io/images/daniel-karasani-industrial-engineer.webp">
@@ -33,7 +37,82 @@
     </script>
     <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-    <link rel="stylesheet" href="styles.css">
+    
+    <style id="critical-path-css">
+:root {
+    --bg-main: #fcfaf8;       
+    --bg-hero: #ece6dd;       
+    --text-dark: #2c2420;     
+    --text-muted: #5a4f48;    
+    --accent: #c89b72;        
+    --accent-hover: #b3855c;  
+    --white: #ffffff;
+    --nav-bg: rgba(252, 250, 248, 0.7); 
+    --gradient-text: linear-gradient(135deg, var(--text-dark), var(--accent));
+}
+body.dark-theme, html.dark-theme body {
+    --bg-main: #1a1512;       
+    --bg-hero: #241e1a;       
+    --text-dark: #fcfaf8;     
+    --text-muted: #b5a89f;    
+    --accent: #d8b08d;        
+    --white: #241e1a;         
+    --nav-bg: rgba(26, 21, 18, 0.85); 
+}
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+}
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--text-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+.loader-text {
+    color: var(--white);
+    font-family: monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 20px;
+}
+.loader-bar {
+    width: 250px;
+    height: 2px;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.loader-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    animation: loadBar 2s ease forwards;
+}
+@keyframes loadBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+.loaded #preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+</style>
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
 	<script src="script.js" defer></script>
     
     <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
@@ -207,7 +286,7 @@
                         
                         <a href="https://www.drschaer.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                             <div class="logo-group">
-                                <img src="images/logo-schaer.webp" alt="Dr. Schär Logo" class="entity-logo" loading="lazy">
+                                <img src="images/logo-schaer.webp" alt="Dr. Schär Logo" class="entity-logo" loading="lazy" width="75" height="75">
                             </div>
                             <h3 class="premium-title">Dr. Schär</h3>
                         </a>
@@ -247,7 +326,7 @@
                         
                         <a href="https://idalbau.github.io/" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                             <div class="logo-group">
-                                <img src="images/logo-idal.webp" alt="IDAL BAU Logo" class="entity-logo logo-v-rect" loading="lazy">
+                                <img src="images/logo-idal.webp" alt="IDAL BAU Logo" class="entity-logo logo-v-rect" loading="lazy" width="65" height="110">
                             </div>
                             <h3 class="premium-title">IDAL BAU of Karasani Fatos</h3>
                         </a>
@@ -269,7 +348,7 @@
                         <div class="sub-role" style="margin-top: 10px; border-top: none; padding-top: 0;">
                             <a href="https://www.zoeschg.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
-                                    <img src="images/logo-zoeschg.webp" alt="Zoeschg GmbH Logo" class="entity-logo logo-rect" loading="lazy">
+                                    <img src="images/logo-zoeschg.webp" alt="Zoeschg GmbH Logo" class="entity-logo logo-rect" loading="lazy" width="120" height="65">
                                 </div>
                                 <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Elektriker | Zoeschg GmbH</h4>
                             </a>
@@ -279,7 +358,7 @@
                         <div class="sub-role">
                             <a href="https://www.frigothermferrari.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
-                                    <img src="images/logo-frigotherm.webp" alt="Frigotherm Ferrari Logo" class="entity-logo logo-rect" loading="lazy">
+                                    <img src="images/logo-frigotherm.webp" alt="Frigotherm Ferrari Logo" class="entity-logo logo-rect" loading="lazy" width="120" height="65">
                                 </div>
                                 <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Kältetechniker | Frigotherm Ferrari</h4>
                             </a>
@@ -300,8 +379,8 @@
                 <div class="tilt-inner">
                     <a href="https://www.unibz.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                         <div class="logo-group">
-                            <img src="images/logo-unibz.webp" alt="Unibz Logo" class="entity-logo logo-square" loading="lazy">
-                            <img src="images/logo-unibz-engineering.webp" alt="unibz Engineering Dept Logo" class="entity-logo" loading="lazy">
+                            <img src="images/logo-unibz.webp" alt="Unibz Logo" class="entity-logo logo-square" loading="lazy" width="75" height="75">
+                            <img src="images/logo-unibz-engineering.webp" alt="unibz Engineering Dept Logo" class="entity-logo" loading="lazy" width="75" height="75">
                         </div>
                         <h3 class="premium-title">Freie Universität Bozen</h3>
                     </a>
@@ -315,7 +394,7 @@
                 <div class="tilt-inner">
                     <a href="https://www.tfo-meran.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                         <div class="logo-group">
-                            <img src="images/logo-tfo.webp" alt="TFO Merano Logo" class="entity-logo logo-square" loading="lazy">
+                            <img src="images/logo-tfo.webp" alt="TFO Merano Logo" class="entity-logo logo-square" loading="lazy" width="75" height="75">
                         </div>
                         <h3 class="premium-title">TFO "Oskar von Miller" Meran</h3>
                     </a>
