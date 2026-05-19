@@ -564,6 +564,27 @@ body.no-scroll {
     background: var(--white); width: 90%; max-width: 600px;
     border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     overflow: hidden; border: 1px solid var(--accent);
+    position: relative;
+}
+#palette-close {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#palette-close:hover {
+    background-color: rgba(128, 128, 128, 0.15) !important;
+    transform: scale(1.1);
+}
+#palette-close:active {
+    transform: scale(0.95);
+}
+#search-toggle {
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+#search-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.15) !important;
+    transform: scale(1.1);
+}
+#search-toggle:active {
+    transform: scale(0.95);
 }
 #palette-input {
     width: 100%; padding: 20px; border: none !important; background: transparent !important;
