@@ -17,6 +17,13 @@
     <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/index-it.html" />
     <link rel="alternate" hreflang="x-default" href="https://danielkarasani.github.io/" />
 
+    <!-- LCP Hero Image Preload -->
+    <link rel="preload" href="images/daniel-karasani-industrial-engineer.webp" as="image" type="image/webp">
+
+    <!-- Zero-Latency Language Switch Prefetching -->
+    <link rel="prefetch" href="index.html">
+    <link rel="prefetch" href="index-it.html">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -132,7 +139,7 @@
                 </div>
             </div>
             <div class="hero-image reveal">
-                <img src="images/daniel-karasani-industrial-engineer.webp" alt="Daniel Karasani" class="hover-target" width="440" height="440">
+                <img src="images/daniel-karasani-industrial-engineer.webp" alt="Daniel Karasani" class="hover-target" width="440" height="440" fetchpriority="high" decoding="async">
             </div>
         </div>
     </section>

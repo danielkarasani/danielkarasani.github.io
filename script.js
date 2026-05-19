@@ -163,6 +163,9 @@ function initCommandPalette() {
     const paletteInput = document.getElementById('palette-input');
     if (!paletteInput) return;
 
+    // Cache list items once to prevent DOM queries on every keystroke
+    const paletteItems = Array.from(palette.querySelectorAll('#palette-results li'));
+
     // Helper functions for unified open/close management
     function openPalette() {
         palette.classList.add('palette-visible');
@@ -180,8 +183,7 @@ function initCommandPalette() {
         }
         
         paletteInput.value = '';
-        const items = document.querySelectorAll('#palette-results li');
-        items.forEach(item => item.style.display = 'block');
+        paletteItems.forEach(item => item.style.display = 'block');
         setTimeout(() => paletteInput.focus(), 50);
     }
     
@@ -203,14 +205,6 @@ function initCommandPalette() {
         
         // Crisp, high-contrast, perfectly-centered vector SVG instead of emoji
         searchBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; color: var(--text-dark);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`;
-        
-        // Add custom cursor hover listeners
-        searchBtn.addEventListener('mouseenter', () => {
-            document.body.classList.add('cursor-hover');
-        });
-        searchBtn.addEventListener('mouseleave', () => {
-            document.body.classList.remove('cursor-hover');
-        });
         
         // Toggle command palette on click
         searchBtn.addEventListener('click', (e) => {
@@ -240,24 +234,18 @@ function initCommandPalette() {
         }
     });
 
-    // 4. Close Palette Button click and cursor hovers
+    // 4. Close Palette Button click
     const closeBtn = document.getElementById('palette-close');
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             closePalette();
         });
-        closeBtn.addEventListener('mouseenter', () => {
-            document.body.classList.add('cursor-hover');
-        });
-        closeBtn.addEventListener('mouseleave', () => {
-            document.body.classList.remove('cursor-hover');
-        });
     }
 
-    // 5. Dismiss when clicking backdrop
+    // 5. Dismiss when clicking backdrop or selecting a search result link
     palette.addEventListener('click', (e) => {
-        if (e.target === palette) {
+        if (e.target === palette || e.target.closest('#palette-results a')) {
             closePalette();
         }
     });
@@ -265,28 +253,13 @@ function initCommandPalette() {
     // 6. Instant Search Filtering
     paletteInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase().trim();
-        const items = document.querySelectorAll('#palette-results li');
-        items.forEach(item => {
+        paletteItems.forEach(item => {
             const text = item.textContent.toLowerCase();
             if (text.includes(query)) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
             }
-        });
-    });
-
-    // Add click listeners to all links in results to close modal & custom cursor interactions
-    const paletteLinks = palette.querySelectorAll('a');
-    paletteLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            closePalette();
-        });
-        link.addEventListener('mouseenter', () => {
-            document.body.classList.add('cursor-hover');
-        });
-        link.addEventListener('mouseleave', () => {
-            document.body.classList.remove('cursor-hover');
         });
     });
 }
@@ -351,27 +324,30 @@ if (cursorDot && cursorOutline) {
     } else {
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
 
         function animateCursor() {
             if (!cursorOutline) return;
             let distX = mouseX - outlineX; let distY = mouseY - outlineY;
             outlineX += distX * 0.15; outlineY += distY * 0.15;
-            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
             if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
         }
 
         animateCursor();
 
         window.addEventListener('resize', () => { 
-            if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } 
+            if (window.innerWidth > 990 && cursorOutline.style.transform === "") { animateCursor(); } 
         });
 
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-            target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+        // High-performance document-level cursor delegation
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.hover-target, a, button, input, textarea')) {
+                document.body.classList.add('cursor-hover');
+            } else {
+                document.body.classList.remove('cursor-hover');
+            }
         });
     }
 }
@@ -415,8 +391,14 @@ if (typeTarget) { setTimeout(type, 2500); }
 // ==========================================
 const tiltCards = document.querySelectorAll('.tilt-card');
 tiltCards.forEach(card => {
+    let rect = null;
+    card.addEventListener('mouseenter', () => {
+        rect = card.getBoundingClientRect();
+    });
     card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
+        if (!rect) {
+            rect = card.getBoundingClientRect();
+        }
         const x = e.clientX - rect.left; const y = e.clientY - rect.top;
         const centerX = rect.width / 2; const centerY = rect.height / 2;
         const rotateX = ((y - centerY) / centerY) * -10; 
@@ -424,6 +406,7 @@ tiltCards.forEach(card => {
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     });
     card.addEventListener('mouseleave', () => {
+        rect = null;
         card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
 });
@@ -490,12 +473,6 @@ window.openPost = async function(filename) {
             reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText}</pre>`;
         }
 
-        // --- NEW: RE-APPLY CURSOR HOVER EFFECT TO DYNAMIC LINKS ---
-        const newLinks = reader.querySelectorAll('a');
-        newLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-            link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
-        });
     } catch (error) {
         console.error(error);
         reader.innerHTML = errorHTML;
@@ -533,16 +510,6 @@ function initMobileNav() {
         <span></span>
         <span></span>
     `;
-
-    // Add cursor hover listeners for custom cursor
-    hamburger.addEventListener('mouseenter', () => {
-        document.body.classList.add('cursor-hover');
-    });
-    hamburger.addEventListener('mouseleave', () => {
-        document.body.classList.remove('cursor-hover');
-    });
-
-
 
     // Append Hamburger to Navigation Container
     navContainer.appendChild(hamburger);
