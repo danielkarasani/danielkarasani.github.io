@@ -593,9 +593,148 @@ function initMobileNav() {
     });
 }
 
-// Run mobile nav initialization
+// ==========================================
+// 6. CONTACT FORM AJAX SUBMISSION & SUCCESS CARD
+// ==========================================
+const contactTranslations = {
+    en: {
+        sending: "Sending...",
+        successTitle: "Message Sent!",
+        successText: "Thank you for reaching out! Your message has been received successfully. I will review your inquiry and respond to you as soon as possible.",
+        resetBtn: "Send Another Message",
+        error: "Something went wrong. Please try again."
+    },
+    de: {
+        sending: "Wird gesendet...",
+        successTitle: "Nachricht Gesendet!",
+        successText: "Vielen Dank für Ihre Kontaktaufnahme! Ihre Nachricht wurde erfolgreich empfangen. Ich werde Ihre Anfrage prüfen und mich so schnell wie möglich bei Ihnen melden.",
+        resetBtn: "Weitere Nachricht senden",
+        error: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
+    },
+    it: {
+        sending: "Invio in corso...",
+        successTitle: "Messaggio Inviato!",
+        successText: "Grazie per avermi contattato! Il tuo messaggio è stato ricevuto con successo. Analizzerò la tua richiesta e ti risponderò il prima possibile.",
+        resetBtn: "Invia un altro messaggio",
+        error: "Qualcosa è andato storto. Riprova più tardi."
+    }
+};
+
+function initContactForm() {
+    const contactForm = document.querySelector('.contact-box form');
+    if (!contactForm) return;
+
+    const contactBox = document.querySelector('.contact-box');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
+
+    const originalBtnHTML = submitBtn.innerHTML;
+    const pageLang = document.documentElement.lang || "en";
+    const t = contactTranslations[pageLang] || contactTranslations.en;
+
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // 1. Prepare payload BEFORE disabling inputs so they are included in FormData
+        const formData = new FormData(contactForm);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        // 2. Enter sending/loading state
+        submitBtn.disabled = true;
+        contactForm.querySelectorAll('input, textarea').forEach(el => el.disabled = true);
+        submitBtn.innerHTML = `<span class="btn-spinner"></span>${t.sending}`;
+
+        // 3. Post to Web3Forms API
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let jsonRes = await response.json();
+            if (response.status === 200) {
+                // 4. Success Animation Transition
+                contactForm.classList.add('contact-fade-out');
+                
+                setTimeout(() => {
+                    contactForm.style.display = 'none';
+                    
+                    // Create beautiful success card
+                    const thankYouCard = document.createElement('div');
+                    thankYouCard.className = 'thank-you-card';
+                    thankYouCard.innerHTML = `
+                        <div class="success-animation">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        </div>
+                        <h3>${t.successTitle}</h3>
+                        <p>${t.successText}</p>
+                        <button class="btn hover-target" id="btn-reset-form" style="padding: 14px 28px; font-size: 1rem;">${t.resetBtn}</button>
+                    `;
+                    
+                    contactBox.appendChild(thankYouCard);
+
+                    // Add reset button listener
+                    const resetBtn = thankYouCard.querySelector('#btn-reset-form');
+                    if (resetBtn) {
+                        resetBtn.addEventListener('click', function () {
+                            // Fade out thank you card
+                            thankYouCard.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                            thankYouCard.style.opacity = '0';
+                            thankYouCard.style.transform = 'scale(0.95)';
+                            
+                            setTimeout(() => {
+                                thankYouCard.remove();
+                                
+                                // Reset form values and UI states
+                                contactForm.reset();
+                                contactForm.style.display = 'block';
+                                
+                                // Clean up states
+                                setTimeout(() => {
+                                    contactForm.classList.remove('contact-fade-out');
+                                    submitBtn.disabled = false;
+                                    contactForm.querySelectorAll('input, textarea').forEach(el => el.disabled = false);
+                                    submitBtn.innerHTML = originalBtnHTML;
+                                }, 50);
+                            }, 400);
+                        });
+                    }
+                }, 400);
+
+            } else {
+                // Handle API error state
+                alert(t.error);
+                resetSubmitButton();
+            }
+        })
+        .catch(error => {
+            console.error("Error submitting form:", error);
+            alert(t.error);
+            resetSubmitButton();
+        });
+    });
+
+    function resetSubmitButton() {
+        submitBtn.disabled = false;
+        contactForm.querySelectorAll('input, textarea').forEach(el => el.disabled = false);
+        submitBtn.innerHTML = originalBtnHTML;
+    }
+}
+
+// Run initializations
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMobileNav);
+    document.addEventListener('DOMContentLoaded', () => {
+        initMobileNav();
+        initContactForm();
+    });
 } else {
     initMobileNav();
+    initContactForm();
 }
