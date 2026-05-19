@@ -77,14 +77,124 @@ window.addEventListener("focus", () => {
 
 
 // ==========================================
-// 2. CMD+K COMMAND PALETTE
+// 2. CMD+K COMMAND PALETTE & SEARCH TOGGLE
 // ==========================================
-const palette = document.getElementById('command-palette');
-const paletteInput = document.getElementById('palette-input');
+function initCommandPalette() {
+    let palette = document.getElementById('command-palette');
+    
+    // Clear any static/pre-existing command palette to ensure unified dynamic links
+    if (palette) {
+        palette.remove();
+    }
+    
+    // 1. Dynamically Create & Inject Command Palette
+    palette = document.createElement('div');
+    palette.id = 'command-palette';
+    palette.className = 'palette-hidden';
+        
+        const pageLang = document.documentElement.lang || "en";
+        let placeholder = "Search... (e.g. 'Contact', 'CV', 'About')";
+        let itemsHTML = '';
+        
+        if (pageLang === 'de') {
+            placeholder = "Suche... (z.B. 'Kontakt', 'Lebenslauf', 'Über mich')";
+            itemsHTML = `
+                <li><a href="index-de.html">Startseite / Home</a></li>
+                <li><a href="about-de.html">Über mich</a></li>
+                <li><a href="blog-de.html">Blog</a></li>
+                <li><a href="air-analyzer-de.html">Projekt: Air Analyzer</a></li>
+                <li><a href="index-de.html#contact">Zum Kontaktformular springen</a></li>
+                <li><a href="Daniel_Karasani_CV.pdf" target="_blank" rel="noopener noreferrer" class="js-local-cv-link">Lebenslauf (CV) PDF herunterladen</a></li>
+                <li><a href="index.html">Sprache wechseln: Englisch (English)</a></li>
+                <li><a href="index-it.html">Sprache wechseln: Italienisch (Italiano)</a></li>
+            `;
+        } else if (pageLang === 'it') {
+            placeholder = "Cerca... (es. 'Contatti', 'CV', 'Chi Sono')";
+            itemsHTML = `
+                <li><a href="index-it.html">Home Page</a></li>
+                <li><a href="about-it.html">Chi sono</a></li>
+                <li><a href="blog-it.html">Blog</a></li>
+                <li><a href="air-analyzer-it.html">Progetto: Air Analyzer</a></li>
+                <li><a href="index-it.html#contact">Vai al modulo di contatto</a></li>
+                <li><a href="Daniel_Karasani_CV.pdf" target="_blank" rel="noopener noreferrer" class="js-local-cv-link">Scarica CV PDF</a></li>
+                <li><a href="index.html">Cambia lingua: Inglese (English)</a></li>
+                <li><a href="index-de.html">Cambia lingua: Tedesco (Deutsch)</a></li>
+            `;
+        } else {
+            itemsHTML = `
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="air-analyzer.html">Project: Air Analyzer</a></li>
+                <li><a href="index.html#contact">Jump to Contact Form</a></li>
+                <li><a href="Daniel_Karasani_CV.pdf" target="_blank" rel="noopener noreferrer" class="js-local-cv-link">Download CV PDF</a></li>
+                <li><a href="index-de.html">Switch Language: German (Deutsch)</a></li>
+                <li><a href="index-it.html">Switch Language: Italian (Italiano)</a></li>
+            `;
+        }
+        
+        palette.innerHTML = `
+            <div class="palette-content">
+                <input type="text" id="palette-input" placeholder="${placeholder}">
+                <ul id="palette-results">
+                    ${itemsHTML}
+                </ul>
+            </div>
+        `;
+        document.body.appendChild(palette);
+        
+        // Ensure the newly added CV link has dynamic link listeners applied
+        const dynamicCv = palette.querySelector('.js-local-cv-link');
+        if (dynamicCv && typeof APP_CONFIG !== 'undefined') {
+            dynamicCv.href = APP_CONFIG.localCvPath;
+            dynamicCv.addEventListener("click", () => {
+                if (typeof gtag === "function") {
+                    gtag("event", "click", {
+                        "event_category": "Download",
+                        "event_label": `Local CV Download ${pageLang.toUpperCase()}`
+                    });
+                }
+            });
+        }
+    
+    const paletteInput = document.getElementById('palette-input');
+    if (!paletteInput) return;
 
-if (palette && paletteInput) {
+    // 2. Dynamically Inject Search Button (🔍) in Header next to theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle && !document.getElementById('search-toggle')) {
+        const searchBtn = document.createElement('button');
+        searchBtn.id = 'search-toggle';
+        searchBtn.className = 'hover-target';
+        searchBtn.setAttribute('aria-label', 'Search');
+        searchBtn.style.cssText = 'background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;';
+        searchBtn.innerHTML = '🔍';
+        
+        // Add custom cursor hover listeners
+        searchBtn.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-hover');
+        });
+        searchBtn.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-hover');
+        });
+        
+        // Trigger command palette on tap/click
+        searchBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            palette.classList.toggle('palette-visible');
+            if (palette.classList.contains('palette-visible')) {
+                paletteInput.value = '';
+                const items = document.querySelectorAll('#palette-results li');
+                items.forEach(item => item.style.display = 'block');
+                paletteInput.focus();
+            }
+        });
+        
+        themeToggle.parentNode.insertBefore(searchBtn, themeToggle);
+    }
+
+    // 3. Register Global Keyboard Shortcuts (Cmd+K / Ctrl+K and Escape)
     document.addEventListener('keydown', (e) => {
-        // Listen for Cmd+K (Mac) or Ctrl+K (Windows)
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault(); 
             palette.classList.toggle('palette-visible');
@@ -95,17 +205,17 @@ if (palette && paletteInput) {
                 paletteInput.focus();
             }
         }
-        // Close on Escape key
         if (e.key === 'Escape' && palette.classList.contains('palette-visible')) {
             palette.classList.remove('palette-visible');
         }
     });
 
+    // 4. Dismiss when clicking backdrop
     palette.addEventListener('click', (e) => {
         if (e.target === palette) palette.classList.remove('palette-visible');
     });
 
-    // Instant Search Filter Logic
+    // 5. Instant Search Filtering
     paletteInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase().trim();
         const items = document.querySelectorAll('#palette-results li');
@@ -118,6 +228,24 @@ if (palette && paletteInput) {
             }
         });
     });
+
+    // Add cursor-hover class to dynamic palette links
+    const paletteLinks = palette.querySelectorAll('a');
+    paletteLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-hover');
+        });
+        link.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-hover');
+        });
+    });
+}
+
+// Run palette initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommandPalette);
+} else {
+    initCommandPalette();
 }
 
 // ==========================================
