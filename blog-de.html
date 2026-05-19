@@ -113,6 +113,16 @@
     </section>
 
     <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
+        <div class="blog-controls">
+            <label for="blogSortSelect">Sortieren nach:</label>
+            <select id="blogSortSelect" class="blog-sort-select hover-target">
+                <option value="default">Standard (Manuell)</option>
+                <option value="newest">Neueste zuerst</option>
+                <option value="oldest">Älteste zuerst</option>
+                <option value="az">Alphabetisch (A-Z)</option>
+                <option value="za">Alphabetisch (Z-A)</option>
+            </select>
+        </div>
         <div class="blog-grid">
 
             <div class="blog-card hover-target" onclick="openPost('my-first-post.md')">

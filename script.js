@@ -695,13 +695,102 @@ function initContactForm() {
     }
 }
 
+// ==========================================
+// 10. CLIENT-SIDE BLOG SORTING
+// ==========================================
+function initBlogSorting() {
+    const sortSelect = document.getElementById('blogSortSelect');
+    const grid = document.querySelector('.blog-grid');
+    if (!sortSelect || !grid) return;
+
+    // Keep a copy of original card nodes in their initial manual order
+    const originalCards = Array.from(grid.querySelectorAll('.blog-card'));
+
+    // Helper to parse date strings (e.g. "May 19, 2026", "19. Mai 2026", "19 Maggio 2026") into Date objects
+    function parseDate(card) {
+        const dateSpan = card.querySelector('.blog-date');
+        if (!dateSpan) return new Date(0);
+        const dateStr = dateSpan.textContent.trim();
+        
+        const months = {
+            // English
+            jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11,
+            january:0, february:1, march:2, april:3, june:5, july:6, august:7, september:8, october:9, november:10, december:11,
+            // German
+            januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, august:7, september:8, oktober:9, november:10, dezember:11,
+            // Italian
+            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
+        };
+
+        const clean = dateStr.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+        const parts = clean.split(/\s+/).filter(Boolean);
+
+        let day = 1;
+        let month = 0;
+        let year = 1970;
+
+        // Try to identify year (usually a 4-digit number at the end or middle)
+        const yearIndex = parts.findIndex(p => /^\d{4}$/.test(p));
+        if (yearIndex !== -1) {
+            year = parseInt(parts[yearIndex], 10);
+            parts.splice(yearIndex, 1);
+        }
+
+        // Try to identify month (a word matching one of the keys)
+        const monthWord = parts.find(p => months[p] !== undefined);
+        if (monthWord) {
+            month = months[monthWord];
+            parts.splice(parts.indexOf(monthWord), 1);
+        }
+
+        // Any remaining number is probably the day
+        const dayWord = parts.find(p => /^\d{1,2}$/.test(p));
+        if (dayWord) {
+            day = parseInt(dayWord, 10);
+        }
+
+        return new Date(year, month, day);
+    }
+
+    sortSelect.addEventListener('change', () => {
+        const val = sortSelect.value;
+        const cards = Array.from(grid.querySelectorAll('.blog-card'));
+
+        if (val === 'default') {
+            grid.innerHTML = '';
+            originalCards.forEach(card => grid.appendChild(card));
+            return;
+        }
+
+        cards.sort((a, b) => {
+            if (val === 'newest' || val === 'oldest') {
+                const dateA = parseDate(a);
+                const dateB = parseDate(b);
+                return val === 'newest' ? dateB - dateA : dateA - dateB;
+            } else if (val === 'az' || val === 'za') {
+                const titleA = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
+                const titleB = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
+                if (titleA < titleB) return val === 'az' ? -1 : 1;
+                if (titleA > titleB) return val === 'az' ? 1 : -1;
+                return 0;
+            }
+            return 0;
+        });
+
+        grid.innerHTML = '';
+        cards.forEach(card => grid.appendChild(card));
+    });
+}
+
 // Run initializations
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initMobileNav();
         initContactForm();
+        initBlogSorting();
     });
 } else {
     initMobileNav();
     initContactForm();
+    initBlogSorting();
 }
