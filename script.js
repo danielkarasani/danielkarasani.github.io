@@ -64,6 +64,16 @@ function initDynamicLinks() {
             }
         });
     });
+
+    // Global Language Switcher Listener for local storage sync
+    document.querySelectorAll(".lang-switcher a").forEach(link => {
+        link.addEventListener("click", (e) => {
+            const text = e.target.textContent.trim().toLowerCase();
+            if (text === 'en' || text === 'de' || text === 'it') {
+                localStorage.setItem('lang', text);
+            }
+        });
+    });
 }
 
 // Run link initialization once DOM is parsed
@@ -916,7 +926,7 @@ function initBlogSorting() {
             // German
             januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, august:7, september:8, oktober:9, november:10, dezember:11,
             // Italian
-            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, november:10, dicembre:11
+            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
         };
 
         const clean = dateStr.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');

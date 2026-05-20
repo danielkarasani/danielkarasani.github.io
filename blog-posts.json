@@ -16,7 +16,7 @@
       "de": "Ein neuer und intuitiver Markdown-Editor für den Browser.",
       "it": "Un editor markdown per browser intuitivo e veloce."
     },
-    "languages": ["en"]
+    "languages": ["en", "de", "it"]
   },
   {
     "id": "direct-publishing-integration-test.md",
@@ -35,7 +35,7 @@
       "de": "Dies ist ein Live-Test-Post, der die neu integrierte GitHub-Client-seitige direkte Veröffentlichungspipeline überprüft.",
       "it": "Questo è un post di prova dal vivo che verifica la nuova pipeline di pubblicazione diretta lato client di GitHub."
     },
-    "languages": ["en"]
+    "languages": ["en", "de", "it"]
   },
   {
     "id": "my-first-post.md",
