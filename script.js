@@ -343,6 +343,11 @@ if (document.readyState === 'loading') {
 const hidePreloader = () => {
     if (!document.body.classList.contains('loaded')) {
         document.body.classList.add('loaded');
+        try {
+            sessionStorage.setItem('preloader-completed', 'true');
+        } catch (e) {
+            console.warn("Could not save sessionStorage state:", e);
+        }
     }
 };
 
@@ -782,6 +787,83 @@ function initContactForm() {
 }
 
 // ==========================================
+// 9.5 DYNAMIC JSON-BASED BLOG FEED
+// ==========================================
+async function initDynamicBlogFeed() {
+    const grid = document.querySelector('.blog-grid');
+    if (!grid) return;
+
+    const lang = document.documentElement.lang || "en";
+
+    const readBtnTranslations = {
+        en: "Read Article",
+        de: "Artikel lesen",
+        it: "Leggi l'articolo"
+    };
+    const readText = readBtnTranslations[lang] || readBtnTranslations.en;
+
+    const loadingTranslations = {
+        en: "Loading engineering insights...",
+        de: "Lade Blog-Beiträge...",
+        it: "Caricamento articoli..."
+    };
+
+    const noscriptElement = grid.querySelector('noscript');
+    grid.innerHTML = `<div class="blog-loading-message" style="grid-column: 1/-1; text-align: center; padding: 40px; font-family: monospace; font-size: 1.1rem; color: var(--text-muted);">${loadingTranslations[lang] || loadingTranslations.en}</div>`;
+    if (noscriptElement) {
+        grid.appendChild(noscriptElement);
+    }
+
+    try {
+        const response = await fetch('blog-posts.json');
+        if (!response.ok) throw new Error('Failed to load blog posts metadata.');
+        const posts = await response.json();
+
+        const filteredPosts = posts.filter(post => post.languages && post.languages.includes(lang));
+
+        let cardsHTML = '';
+        filteredPosts.forEach(post => {
+            const dateStr = post.date[lang] || post.date.en;
+            const titleStr = post.title[lang] || post.title.en;
+            const descStr = post.description[lang] || post.description.en;
+            
+            cardsHTML += `
+                <a href="posts/${post.id}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')" target="_blank" rel="noopener noreferrer">
+                    <span class="blog-date">${dateStr}</span>
+                    <h3>${titleStr}</h3>
+                    <p>${descStr}</p>
+                    <span class="project-link">${readText} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg></span>
+                </a>
+            `;
+        });
+
+        grid.innerHTML = cardsHTML;
+        if (noscriptElement) {
+            grid.appendChild(noscriptElement);
+        }
+
+        initBlogSorting();
+        prefetchBlogPosts();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const postParam = urlParams.get('post');
+        if (postParam) {
+            window.openPost(postParam);
+        }
+
+    } catch (error) {
+        console.error("Error loading dynamic blog feed:", error);
+        grid.innerHTML = `<div class="blog-error-message" style="grid-column: 1/-1; text-align: center; padding: 40px; font-family: monospace; font-size: 1.1rem; color: #ff5555;">Could not load blog posts. Please refresh or try again later.</div>`;
+        if (noscriptElement) {
+            grid.appendChild(noscriptElement);
+        }
+    }
+}
+
+// ==========================================
 // 10. CLIENT-SIDE BLOG SORTING
 // ==========================================
 function initBlogSorting() {
@@ -935,30 +1017,21 @@ function prefetchBlogPosts() {
 }
 
 // Run initializations
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initMobileNav();
-        initContactForm();
-        initBlogSorting();
-        prefetchBlogPosts();
-        // Handle deep linked post
-        const urlParams = new URLSearchParams(window.location.search);
-        const postParam = urlParams.get('post');
-        if (postParam) {
-            window.openPost(postParam);
-        }
-    });
-} else {
+const runInitializations = () => {
     initMobileNav();
     initContactForm();
-    initBlogSorting();
-    prefetchBlogPosts();
-    // Handle deep linked post
-    const urlParams = new URLSearchParams(window.location.search);
-    const postParam = urlParams.get('post');
-    if (postParam) {
-        window.openPost(postParam);
+    
+    // Check if we are on a blog page
+    const isBlogPage = document.querySelector('.blog-grid') !== null;
+    if (isBlogPage) {
+        initDynamicBlogFeed();
     }
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInitializations);
+} else {
+    runInitializations();
 }
 
 // ==========================================

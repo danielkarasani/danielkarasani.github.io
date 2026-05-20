@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daniel-portfolio-cache-v2';
+const CACHE_NAME = 'daniel-portfolio-cache-v3';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
@@ -16,6 +16,7 @@ const PRECACHE_ASSETS = [
   './styles.css',
   './script.js',
   './manifest.json',
+  './blog-posts.json',
   './DanielKarasani-favcon.svg',
   './favicon.ico',
   './images/logo-schaer.webp',

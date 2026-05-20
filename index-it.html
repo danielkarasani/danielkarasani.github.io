@@ -118,7 +118,13 @@ body {
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
 	<script src="script.js" defer></script>
     
-    <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
+        if (sessionStorage.getItem('preloader-completed') === 'true') {
+            document.documentElement.classList.add('preloader-skipped');
+            document.write('<style>#preloader { display: none !important; }</style>');
+        }
+    </script>
 	<script>
         localStorage.setItem('lang', 'it');
     </script>

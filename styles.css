@@ -52,7 +52,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 .loader-bar { width: 250px; height: 2px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
 .loader-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--accent); animation: loadBar 2s ease forwards; }
 @keyframes loadBar { 0% { width: 0%; } 100% { width: 100%; } }
-.loaded #preloader { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader-skipped #preloader, .loaded #preloader { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
 
 /* --- CUSTOM CURSOR (ZOOM EFFECT) --- */
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate3d(0, 0, 0) translate(-50%, -50%); z-index: 10000; pointer-events: none; transition: width 0.2s, height 0.2s; will-change: transform; }
