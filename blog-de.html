@@ -112,35 +112,60 @@ body {
 }
 </style>
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     <script src="script.js" defer></script>
     <script>
         if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
     </script>
     <noscript>
         <style>
-            #preloader {
-                display: none !important;
-            }
+            #preloader { display: none !important; }
+            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, input, textarea { cursor: pointer !important; }
 
-            .reveal {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-
-            .cursor-dot,
-            .cursor-outline {
-                display: none !important;
-            }
-
-            * {
-                cursor: auto !important;
-            }
-
-            a,
-            button,
-            input,
-            textarea {
-                cursor: pointer !important;
+            /* Mobile Navigation Fallback when JS is disabled */
+            @media (max-width: 990px) {
+                .nav-links {
+                    position: static !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 15px !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    height: auto !important;
+                    padding: 10px 0 !important;
+                    background: transparent !important;
+                    backdrop-filter: none !important;
+                }
+                .nav-links li {
+                    width: auto !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .nav-links a {
+                    font-size: 1rem !important;
+                    padding: 5px 10px !important;
+                }
+                .nav-container {
+                    flex-direction: column !important;
+                    gap: 10px !important;
+                    padding: 10px 20px !important;
+                }
+                nav {
+                    position: static !important;
+                    padding: 10px 0 !important;
+                }
+                .hero {
+                    padding-top: 40px !important;
+                }
+                #theme-toggle {
+                    display: none !important;
+                }
             }
         </style>
     </noscript>
@@ -212,7 +237,7 @@ body {
         </div>
         <div class="blog-grid">
 
-            <div class="blog-card hover-target" onclick="openPost('my-first-post.md')">
+            <a href="posts/my-first-post.md" class="blog-card hover-target" onclick="event.preventDefault(); openPost('my-first-post.md')" target="_blank" rel="noopener noreferrer">
                 <span class="blog-date">15. Mai 2026</span>
                 <h3>Der wirtschaftliche Nutzen von AR in der Instandhaltung</h3>
                 <p>Untersuchung, wie die Integration von Augmented Reality mit KI und Zustandsüberwachung ungeplante
@@ -222,7 +247,7 @@ body {
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg></span>
-            </div>
+            </a>
 
         </div>
     </section>

@@ -115,6 +115,7 @@ body {
 }
 </style>
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
 	<script src="script.js" defer></script>
     
     <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
@@ -138,6 +139,49 @@ body {
             
             /* 5. Stop the background CAD grid from animating to save CPU */
             .hero::before { animation: none !important; }
+
+            /* 6. Mobile Navigation Fallback when JS is disabled */
+            @media (max-width: 990px) {
+                .nav-links {
+                    position: static !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 15px !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    height: auto !important;
+                    padding: 10px 0 !important;
+                    background: transparent !important;
+                    backdrop-filter: none !important;
+                }
+                .nav-links li {
+                    width: auto !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .nav-links a {
+                    font-size: 1rem !important;
+                    padding: 5px 10px !important;
+                }
+                .nav-container {
+                    flex-direction: column !important;
+                    gap: 10px !important;
+                    padding: 10px 20px !important;
+                }
+                nav {
+                    position: static !important;
+                    padding: 10px 0 !important;
+                }
+                .hero {
+                    padding-top: 40px !important;
+                }
+                #theme-toggle {
+                    display: none !important;
+                }
+            }
         </style>
     </noscript>
 	
