@@ -17,6 +17,53 @@ function debounce(func, wait) {
     };
 }
 
+// ==========================================
+// 0.5 SCROLL READING PROGRESS BAR
+// ==========================================
+// The bar is primarily driven by CSS `animation-timeline: scroll(root)` —
+// a native browser feature that requires zero JavaScript.
+// This function provides a passive JS fallback for browsers that do not
+// yet support Scroll-Driven Animations (Safari < 15.4, older Firefox).
+function initScrollProgressBar() {
+    const bar  = document.querySelector('.scroll-progress-bar');
+    const fill = document.querySelector('.scroll-progress-fill');
+    if (!bar || !fill) return;
+
+    // If the browser natively supports CSS Scroll-Driven Animations,
+    // let the stylesheet handle everything — no JS overhead needed.
+    if (
+        typeof CSS !== 'undefined' &&
+        CSS.supports &&
+        (CSS.supports('animation-timeline', 'scroll()') ||
+         CSS.supports('animation-timeline', 'scroll(root)'))
+    ) {
+        return;
+    }
+
+    // Fallback: JS-driven progress for older browsers.
+    // Mark the nav so CSS suppresses the non-functional CSS animation.
+    const nav = bar.closest('nav');
+    if (nav) nav.classList.add('js-progress-active');
+
+    function updateProgress() {
+        const scrolled = window.scrollY || document.documentElement.scrollTop;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = total > 0 ? scrolled / total : 0;
+        fill.style.transform = `scaleX(${progress})`;
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress(); // Set initial state
+}
+
+// Run once DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollProgressBar);
+} else {
+    initScrollProgressBar();
+}
+
+
 function initDynamicLinks() {
     // Inject hrefs
     document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
