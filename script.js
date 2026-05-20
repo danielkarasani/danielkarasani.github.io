@@ -101,6 +101,7 @@ function initCommandPalette() {
     palette = document.createElement('div');
     palette.id = 'command-palette';
     palette.className = 'palette-hidden';
+    palette.style.display = 'none';
         
     const pageLang = document.documentElement.lang || "en";
     let placeholder = "Search... (e.g. 'Contact', 'CV', 'About')";
@@ -196,6 +197,8 @@ function initCommandPalette() {
 
     // Helper functions for unified open/close management
     function openPalette() {
+        palette.style.display = 'flex';
+        palette.offsetHeight; // Force reflow to register the display style change before opacity transition
         palette.classList.add('palette-visible');
         document.body.classList.add('no-scroll');
         
@@ -225,6 +228,13 @@ function initCommandPalette() {
         document.body.classList.remove('no-scroll');
         paletteItems.forEach(item => item.classList.remove('selected'));
         activeSearchIndex = -1;
+        
+        // Wait for the opacity transition (0.2s) to finish before setting display: none
+        setTimeout(() => {
+            if (!palette.classList.contains('palette-visible')) {
+                palette.style.display = 'none';
+            }
+        }, 200);
     }
 
     // 2. Dynamically Inject Search Button in Header next to theme toggle
