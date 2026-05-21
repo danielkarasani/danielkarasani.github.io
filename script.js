@@ -501,47 +501,74 @@ document.querySelectorAll('.reveal').forEach(element => {
 });
 
 // ==========================================
-// 4. CUSTOM CURSOR LOGIC
+// 4. CUSTOM CURSOR LOGIC (Touch/Desktop Adaptive)
 // ==========================================
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
-let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
-
-const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.matchMedia("(pointer: coarse)").matches);
 
 if (cursorDot && cursorOutline) {
-    if (isTouchDevice || window.innerWidth <= 990) {
-        cursorDot.style.display = 'none';
-        cursorOutline.style.display = 'none';
-    } else {
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-        });
+    let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+    let isCursorActive = false;
+    let isLoopRunning = false;
 
-        function animateCursor() {
-            if (!cursorOutline) return;
-            let distX = mouseX - outlineX; let distY = mouseY - outlineY;
-            outlineX += distX * 0.15; outlineY += distY * 0.15;
-            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-            if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
+    function animateCursor() {
+        if (!isLoopRunning) return;
+        let distX = mouseX - outlineX;
+        let distY = mouseY - outlineY;
+        outlineX += distX * 0.15;
+        outlineY += distY * 0.15;
+        
+        cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(animateCursor);
+    }
+
+    // Only activate cursor logic on mouse movement above 990px (Desktop)
+    window.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 990) return;
+
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+        if (!isCursorActive) {
+            isCursorActive = true;
+            document.body.classList.add('custom-cursor-active');
+            cursorDot.style.opacity = '1';
+            cursorOutline.style.opacity = '1';
         }
 
-        animateCursor();
+        if (!isLoopRunning) {
+            isLoopRunning = true;
+            outlineX = mouseX;
+            outlineY = mouseY;
+            animateCursor();
+        }
+    }, { passive: true });
 
-        window.addEventListener('resize', () => { 
-            if (window.innerWidth > 990 && cursorOutline.style.transform === "") { animateCursor(); } 
-        });
+    // Instantly hide custom cursor if touch interaction occurs (Surface/Touchscreen Laptops)
+    window.addEventListener('touchstart', () => {
+        if (isCursorActive) {
+            isCursorActive = false;
+            isLoopRunning = false;
+            document.body.classList.remove('custom-cursor-active');
+            cursorDot.style.opacity = '0';
+            cursorOutline.style.opacity = '0';
+        }
+    }, { passive: true });
 
-        // High-performance document-level cursor delegation
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('.hover-target, a, button, input, textarea')) {
-                document.body.classList.add('cursor-hover');
-            } else {
-                document.body.classList.remove('cursor-hover');
-            }
-        });
-    }
+    // High-performance event delegation for hover states
+    document.addEventListener('mouseover', (e) => {
+        if (window.innerWidth > 990 && e.target.closest('.hover-target, a, button, input, textarea')) {
+            document.body.classList.add('cursor-hover');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (window.innerWidth > 990 && e.target.closest('.hover-target, a, button, input, textarea')) {
+            document.body.classList.remove('cursor-hover');
+        }
+    });
 }
 
 // ==========================================

@@ -55,10 +55,46 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 .preloader-skipped #preloader, .loaded #preloader { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
 
 /* --- CUSTOM CURSOR (ZOOM EFFECT) --- */
-.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate3d(0, 0, 0) translate(-50%, -50%); z-index: 10000; pointer-events: none; transition: width 0.2s, height 0.2s; will-change: transform; }
-.cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(200, 155, 114, 0.5); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate3d(0, 0, 0) translate(-50%, -50%); z-index: 9999; pointer-events: none; transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s; will-change: transform; }
+.cursor-dot { 
+    width: 8px; 
+    height: 8px; 
+    background-color: var(--accent); 
+    border-radius: 50%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    transform: translate3d(0, 0, 0) translate(-50%, -50%); 
+    z-index: 10000; 
+    pointer-events: none; 
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.2s, height 0.2s;
+    will-change: transform; 
+}
+.cursor-outline { 
+    width: 40px; 
+    height: 40px; 
+    border: 1px solid rgba(200, 155, 114, 0.5); 
+    border-radius: 50%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    transform: translate3d(0, 0, 0) translate(-50%, -50%); 
+    z-index: 9999; 
+    pointer-events: none; 
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s; 
+    will-change: transform; 
+}
 .cursor-hover .cursor-dot { width: 0; height: 0; }
 .cursor-hover .cursor-outline { width: 80px; height: 80px; background-color: transparent; border: 2px solid var(--accent); }
+
+@media (min-width: 991px) {
+    /* Hide default mouse pointer only when custom cursor is actively moving */
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+        cursor: none !important;
+    }
+}
 
 /* Typography */
 h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-dark); }

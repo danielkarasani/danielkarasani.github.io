@@ -1,4 +1,4 @@
-const CACHE_NAME = 'daniel-portfolio-cache-v4';
+const CACHE_NAME = 'daniel-portfolio-cache-v5';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
