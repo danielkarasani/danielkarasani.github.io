@@ -91,7 +91,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 @media (min-width: 991px) {
     /* Hide default mouse pointer only when custom cursor is actively moving */
     body.custom-cursor-active,
-    body.custom-cursor-active * {
+    body.custom-cursor-active *:not(a):not(button):not(.hover-target):not(input):not(textarea) {
         cursor: none !important;
     }
     
@@ -1024,4 +1024,4 @@ body.no-scroll {
     to {
         transform: rotate(360deg);
     }
-}
+}
