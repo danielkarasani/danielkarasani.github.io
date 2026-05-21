@@ -91,8 +91,19 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 @media (min-width: 991px) {
     /* Hide default mouse pointer only when custom cursor is actively moving */
     body.custom-cursor-active,
-    body.custom-cursor-active * {
+    body.custom-cursor-active *:not(a):not(button):not(.hover-target):not(input):not(textarea) {
         cursor: none !important;
+    }
+    
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active .hover-target,
+    body.custom-cursor-active input,
+    body.custom-cursor-active textarea,
+    body.custom-cursor-active a *,
+    body.custom-cursor-active button *,
+    body.custom-cursor-active .hover-target * {
+        cursor: pointer !important;
     }
 }
 
@@ -333,6 +344,9 @@ body.dark-theme .premium-title {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: metallicShine 2.5s linear infinite;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
     transform: translateX(6px);
 }
 
