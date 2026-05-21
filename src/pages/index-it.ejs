@@ -1,22 +1,25 @@
-
+<%
+  const lang = 'it';
+  const page = 'index';
+%>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="it">
 <head>
     <!-- Performance Preconnects for Core Web Vitals -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-	<meta property="og:title" content="Daniel Karasani | Industrie- und Maschineningenieurwesen">
-    <meta property="og:description" content="Portfolio von Daniel Karasani. Spezialisiert auf Prozessoptimierung, Automatisierung und Digitalisierung.">
+	<meta property="og:title" content="Daniel Karasani | Ingegneria Industriale e Meccanica">
+    <meta property="og:description" content="Portfolio di Daniel Karasani. Specializzato in Ottimizzazione dei Processi, Automazione e Digitalizzazione.">
     <meta property="og:image" content="https://danielkarasani.github.io/images/daniel-karasani-industrial-engineer.webp">
-    <meta property="og:url" content="https://danielkarasani.github.io/index-de.html">
+    <meta property="og:url" content="https://danielkarasani.github.io/index-it.html">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Karasani | Industrie- und Maschineningenieurwesen</title>
-    <meta name="description" content="Portfolio von Daniel Karasani. Student des Industrie- und Maschineningenieurwesens mit Spezialisierung auf Prozessoptimierung und Digitalisierung.">
+    <title>Daniel Karasani | Ingegneria Industriale e Meccanica</title>
+    <meta name="description" content="Portfolio di Daniel Karasani. Studente di Ingegneria Industriale e Meccanica specializzato in Ottimizzazione dei Processi e Digitalizzazione.">
     <meta name="author" content="Daniel Karasani">
-    <link rel="canonical" href="https://danielkarasani.github.io/index-de.html" />
+    <link rel="canonical" href="https://danielkarasani.github.io/index-it.html" />
     <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/" />
     <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/index-de.html" />
     <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/index-it.html" />
@@ -29,7 +32,7 @@
 
     <!-- Zero-Latency Language Switch Prefetching -->
     <link rel="prefetch" href="index.html">
-    <link rel="prefetch" href="index-it.html">
+    <link rel="prefetch" href="index-de.html">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
     <script>
@@ -66,56 +69,7 @@ body {
     background-color: var(--bg-main);
     color: var(--text-dark);
 }
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--text-dark);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.8s ease, visibility 0.8s;
-}
-.loader-text {
-    color: var(--white);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-align: center;
-    padding: 0 20px;
-    min-height: 1.5em;
-    line-height: 1.5;
-}
-.loader-bar {
-    width: 250px;
-    height: 2px;
-    background: rgba(255,255,255,0.2);
-    position: relative;
-    overflow: hidden;
-}
-.loader-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    animation: loadBar 2s ease forwards;
-}
-@keyframes loadBar {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
-.loaded #preloader {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
+
 </style>
     <link rel="stylesheet" href="styles.css">
 	<script src="script.js" defer></script>
@@ -128,27 +82,18 @@ body {
         }
     </script>
 	<script>
-        localStorage.setItem('lang', 'de');
+        localStorage.setItem('lang', 'it');
     </script>
     <noscript>
         <style>
-            /* 1. Kill the preloader immediately */
             #preloader { display: none !important; }
-
-            /* 2. Force all hidden reveal elements to be visible */
-            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
-
-            /* 3. Hide the stuck custom cursor elements */
             .cursor-dot, .cursor-outline { display: none !important; }
-
-            /* 4. Ensure standard mouse cursors work normally */
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            body { overflow: auto !important; }
             * { cursor: auto !important; }
             a, button, input, textarea { cursor: pointer !important; }
-            
-            /* 5. Stop the background CAD grid from animating to save CPU */
-            .hero::before { animation: none !important; }
 
-            /* 6. Mobile Navigation Fallback when JS is disabled */
+            /* Mobile Navigation Fallback when JS is disabled */
             @media (max-width: 990px) {
                 .nav-links {
                     position: static !important;
@@ -192,7 +137,7 @@ body {
             }
         </style>
     </noscript>
-	
+		
 	<script type="application/ld+json">
     {
       "@context": "https://schema.org/",
@@ -213,7 +158,9 @@ body {
       ]
     }
     </script>
+	
 	<link rel="preconnect" href="https://www.googletagmanager.com">
+	
 </head>
 <body class="">
     <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
@@ -224,53 +171,26 @@ body {
     <div class="cursor-outline"></div>
 
     
-
-<nav>
-    <div class="nav-container">
-        <a href="index-de.html" class="logo hover-target">Daniel<span>.</span></a>
-        <ul class="nav-links">
-            <li><a href="index-de.html#about" class="hover-target">About</a></li>
-            <li><a href="index-de.html#projects" class="hover-target">Projects</a></li>
-            <li><a href="index-de.html#experience" class="hover-target">Experience</a></li>
-            <li><a href="index-de.html#education" class="hover-target">Education</a></li>
-            <li><a href="index-de.html#skills" class="hover-target">Skills</a></li>
-            <li><a href="blog-de.html" class="hover-target">Blog</a></li>
-        </ul>
-        
-        <div class="lang-switcher">
-            <a href="index.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target " aria-label="Switch language to English">EN</a> 
-            <span class="divider">|</span>
-            <a href="index-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target active" aria-label="Switch language to German">DE</a> 
-            <span class="divider">|</span>
-            <a href="index-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target " aria-label="Switch language to Italian">IT</a>
-        </div>
-
-        <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
-            🌙
-        </button>
-    </div>
-    <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
-</nav>
-
+<%- include('../components/nav', { lang, page }) %>
 
 
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text reveal">
-                <span class="tagline">Student des Industrie- & Maschineningenieurwesens @ unibz</span>
-                <h1>Systeme entwickeln.<br>
-                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text">Realität optimieren.</span></span>
+                <span class="tagline">Studente di Ingegneria Industriale e Meccanica @ unibz</span>
+                <h1>Ingegnerizzare sistemi.<br>
+                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text">Ottimizzare la realtà.</span></span>
                 </h1>
                 
-                <p class="quote">"Fortschritt beginnt im Kopf und zeigt sich in der Leistung."</p>
-                <p>Ich bewege mich an der Schnittstelle von Elektronik, Digitalisierung und Wirtschaft. Ich liebe die technische Herausforderung von Schaltkreisen und Code, verliere aber nie die unternehmerische Realität aus den Augen.</p>
+                <p class="quote">"Il progresso inizia nella mente e si rivela nelle prestazioni."</p>
+                <p>Lavoro all'incrocio tra elettronica, digitalizzazione ed economia. Amo la sfida tecnica dei circuiti e del codice, ma non perdo mai di vista la realtà aziendale.</p>
                 
                 <div class="hero-buttons-container">
-                    <a href="#experience" class="btn hover-target">Erfahrung Ansehen</a>
-                    <a href="#contact" class="btn hover-target">Kontakt Aufnehmen</a>
-                    <a href="Daniel_Karasani_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target js-local-cv-link">Lebenslauf (PDF) <span style="margin-left: 6px; font-size: 0.85em; font-weight: normal; opacity: 0.8;">(Englisch)</span></a>
-                    <a href="https://e.pcloud.link/publink/show?code=XZpKJrZH5ORGlFrt08s2ydJNPalt48JPirV" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target js-cloud-cv-link">In Cloud Ansehen <span style="margin-left: 6px; font-size: 0.85em; font-weight: normal; opacity: 0.8;">(Englisch)</span></a>
-                    <div class="hero-buttons-subtitle">Zuletzt aktualisiert: Mai 2026</div>
+                    <a href="#experience" class="btn hover-target">Vedi Esperienza</a>
+                    <a href="#contact" class="btn hover-target">Contattami</a>
+                    <a href="Daniel_Karasani_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target js-local-cv-link">Scarica CV (PDF) <span style="margin-left: 6px; font-size: 0.85em; font-weight: normal; opacity: 0.8;">(Inglese)</span></a>
+                    <a href="https://e.pcloud.link/publink/show?code=XZpKJrZH5ORGlFrt08s2ydJNPalt48JPirV" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target js-cloud-cv-link">Vedi in Cloud <span style="margin-left: 6px; font-size: 0.85em; font-weight: normal; opacity: 0.8;">(Inglese)</span></a>
+                    <div class="hero-buttons-subtitle">Ultimo aggiornamento: Maggio 2026</div>
                 </div>
             </div>
             <div class="hero-image reveal">
@@ -280,33 +200,33 @@ body {
     </section>
 
     <section id="about" class="container reveal">
-        <h2>Wer ich bin</h2>
+        <h2>Chi Sono</h2>
         <div style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.2rem;">
-            <p>Mich hat schon immer fasziniert, wie Dinge funktionieren, aber noch mehr treibt mich die Frage an, wie man sie verbessern kann. Als angehender Ingenieur betrachte ich die Welt mit analytischer Neugier, verankere meine Ideen jedoch stets in der pragmatischen Umsetzung.</p>
-            <p>Für mich bedeutet Innovation nicht, die Vergangenheit zu ignorieren, sondern auf ihr aufzubauen. Ich strebe danach, die Historie eines Systems zu verstehen, um meine Energie auf Lösungen zu fokussieren, die tatsächliche Probleme lösen und echten Mehrwert schaffen.</p>
+            <p>Sono sempre stato affascinato da come funzionano le cose, ma sono ancora più ossessionato da come farle funzionare meglio. Come aspirante ingegnere, guardo il mondo attraverso la lente della curiosità analitica, ma baso le mie idee su un'esecuzione pragmatica.</p>
+            <p>Per me l'innovazione non significa ignorare il passato, ma costruirci sopra. Cerco di comprendere la storia di un sistema per poter concentrare le mie energie su soluzioni che risolvano problemi reali e aggiungano vero valore.</p>
             <p style="font-weight: 700; color: var(--text-dark); margin-top: 40px; font-size: 1.4rem;">
-                "Ich glaube, dass exzellentes Engineering nicht nur die Technologie vorantreibt, sondern das gesamte Unternehmen."
+                "Credo che la migliore ingegneria non porti avanti solo la tecnologia, ma faccia progredire l'intera azienda."
             </p>
             
             <div style="margin-top: 40px;">
-                <a href="about-de.html" class="btn hover-target">Vollständige Story Lesen</a>
+                <a href="about-it.html" class="btn hover-target">Leggi la mia Storia</a>
             </div>
         </div>
     </section>
 
     <section id="projects" class="container reveal">
-        <h2>Ausgewählte Projekte</h2>
+        <h2>Progetti in Evidenza</h2>
         <div class="projects-grid">
             <div class="project-card hover-target">
                 <div class="project-image" style="background-image: url('images/air-analyzer-device-diy.webp');"></div>
                 <div class="project-content">
-                    <span class="project-tagline">Hardware & Software</span>
-                    <h3>Air Analyzer: Präzise Raumluft</h3>
-                    <p>Eine von Grund auf entwickelte Überwachungsstation für die Raumluftqualität. Ausgestattet mit maßgeschneiderten Leiterplatten, modularen Industriesensoren und Assembler-Software für NXP.</p>
+                    <span class="project-tagline">Hardware e Software</span>
+                    <h3>Air Analyzer: Qualità dell'Aria</h3>
+                    <p>Una stazione di monitoraggio della qualità dell'aria sviluppata da zero. Dotata di PCB progettati su misura, un array di sensori industriali e software in Assembler per NXP.</p>
                     <div class="project-footer">
                         <span class="skill-tag" style="padding: 5px 10px; font-size: 0.75rem;">Assembler | EAGLE</span>
-                        <a href="air-analyzer-de.html" class="project-link hover-target">
-                            Fallstudie Ansehen 
+                        <a href="air-analyzer-it.html" class="project-link hover-target">
+                            Caso di Studio 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
                     </div>
@@ -316,13 +236,13 @@ body {
             <div class="project-card hover-target">
                 <div class="project-image project-image-ar" style="background-image: url('images/ar-maintenance-concept.webp');"></div>
                 <div class="project-content">
-                    <span class="project-tagline">Akademische Forschung (2026)</span>
-                    <h3>AR in der Instandhaltung</h3>
-                    <p>Untersuchung der digitalen Transformation im Lebensmittelsektor. Entwicklung eines Rahmenwerks zur Integration von Augmented Reality mit KI, um betriebliche Ausfallzeiten zu reduzieren.</p>
+                    <span class="project-tagline">Ricerca Accademica (2026)</span>
+                    <h3>AR nella Manutenzione</h3>
+                    <p>Esplorazione della trasformazione digitale nel settore alimentare. Creazione di un framework per integrare la Realtà Aumentata con l'IA per ridurre i tempi di inattività.</p>
                     <div class="project-footer">
-                        <span class="skill-tag" style="padding: 5px 10px; font-size: 0.75rem;">Strategie | Optimierung</span>
+                        <span class="skill-tag" style="padding: 5px 10px; font-size: 0.75rem;">Strategia | Ottimizzazione</span>
                         <a href="#contact" class="project-link hover-target">
-                            Projekt Diskutieren
+                            Discuti Progetto
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
                     </div>
@@ -333,51 +253,51 @@ body {
 
     <section id="experience" style="background-color: var(--white); padding: 70px 0; transition: background-color 0.4s;">
         <div class="container reveal">
-            <h2>Berufserfahrung</h2>
+            <h2>Esperienza Professionale</h2>
             <div class="timeline">
                 
                 <div class="timeline-item reveal">
-                    <div class="timeline-date">Jul 2021 – Jul 2025 (4 Jahre 1 Monat)</div>
+                    <div class="timeline-date">Lug 2021 – Lug 2025 (4 anni 1 mese)</div>
                     <div class="timeline-content hover-target">
                         
                         <a href="https://www.drschaer.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                             <div class="logo-group">
-                                <img src="images/logo-schaer.webp" alt="Dr. Schär Logo" class="entity-logo" loading="lazy" width="75" height="75">
+								<img src="images/logo-schaer.webp" alt="Dr. Schär Logo" class="entity-logo" loading="lazy" width="75" height="75">
                             </div>
                             <h3 class="premium-title">Dr. Schär</h3>
                         </a>
                         
                         <div style="margin-top: 10px;">
-                            <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;">Global Production Engineer</h4>
-                            <span class="date-muted">Jun 2023 - Jul 2025 | Burgstall, Italien</span>
+                            <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;">Ingegnere di Produzione Globale</h4>
+                            <span class="date-muted">Giu 2023 - Lug 2025 | Postal, Italia</span>
                             <ul>
-                                <li>Maßgebliche Beteiligung an der werksübergreifenden Implementierung von Instandhaltungssoftware durch unabhängige Konsolidierung von Stammdaten.</li>
-                                <li>Entwicklung von Anwenderdokumentationen und Video-Tutorials zur Steigerung der Nutzerakzeptanz.</li>
-                                <li>Ganzheitliche Unterstützung der Abteilung bei operativen und organisatorischen Projektaufgaben.</li>
+                                <li>Coinvolgimento significativo nell'implementazione multi-impianto di software di manutenzione attraverso il consolidamento dei dati anagrafici.</li>
+                                <li>Sviluppo di documentazione utente e video tutorial per aumentare l'efficienza.</li>
+                                <li>Supporto integrale al dipartimento nei compiti operativi e organizzativi.</li>
                             </ul>
                         </div>
 
                         <div class="sub-role">
-                            <h4>Global Technical Project Manager</h4>
-                            <span class="date-muted">Jan 2023 - Jun 2023 | Burgstall, Italien</span>
+                            <h4>Responsabile Tecnico di Progetto Globale</h4>
+                            <span class="date-muted">Gen 2023 - Giu 2023 | Postal, Italia</span>
                             <ul>
-                                <li>Verantwortlich für technische Projekte im Bereich der Lebensmittelindustrie.</li>
+                                <li>Responsabile di progetti tecnici per l'industria alimentare.</li>
                             </ul>
                         </div>
 
                         <div class="sub-role">
-                            <h4>Corporate Technical Project Manager</h4>
-                            <span class="date-muted">Jul 2022 - Dez 2022</span>
+                            <h4>Responsabile Tecnico di Progetto Corporate</h4>
+                            <span class="date-muted">Lug 2022 - Dic 2022</span>
                             <ul>
-                                <li>Mitarbeit an hochprioritären Investitionsprojekten über alle Werke hinweg.</li>
-                                <li>Betreuung interner PowerBI-Dashboards zur Förderung datenbasierter Entscheidungsprozesse.</li>
+                                <li>Collaborazione a progetti di investimento ad alta priorità in tutti gli stabilimenti.</li>
+                                <li>Supervisione all'introduzione di processi decisionali basati sui dati e gestione di dashboard interne in PowerBI.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="timeline-item reveal">
-                    <div class="timeline-date">Feb 2022 – Heute</div>
+                    <div class="timeline-date">Feb 2022 – Presente</div>
                     <div class="timeline-content hover-target">
                         
                         <a href="https://idalbau.github.io/" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
@@ -387,38 +307,38 @@ body {
                             <h3 class="premium-title">IDAL BAU of Karasani Fatos</h3>
                         </a>
 
-                        <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-top: 10px; margin-bottom: 5px;">Kaufmännischer Assistent</h4>
-                        <span class="date-muted">Meran, Italien</span>
+                        <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-top: 10px; margin-bottom: 5px;">Assistente Amministrativo</h4>
+                        <span class="date-muted">Merano, Italia</span>
                         <ul>
-                            <li>Unterstützung der täglichen administrativen Abläufe eines selbstständigen Bauunternehmens.</li>
-                            <li>Erstellung von Angeboten, Preiskalkulationen und Rechnungen (MS Office 365).</li>
+                            <li>Supporto alle operazioni amministrative quotidiane di un'impresa edile.</li>
+                            <li>Preparazione preventivi, calcoli dei prezzi e fatturazione tramite MS Office 365.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="timeline-item reveal">
-                    <div class="timeline-date">Jul 2019 – Aug 2020</div>
+                    <div class="timeline-date">Lug 2019 – Ago 2020</div>
                     <div class="timeline-content hover-target">
-                        <h3>Technische Praktika</h3>
+                        <h3>Tirocini Tecnici</h3>
                         
                         <div class="sub-role" style="margin-top: 10px; border-top: none; padding-top: 0;">
                             <a href="https://www.zoeschg.it" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
                                     <img src="images/logo-zoeschg.webp" alt="Zoeschg GmbH Logo" class="entity-logo logo-rect" loading="lazy" width="120" height="65">
                                 </div>
-                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Elektriker | Zoeschg GmbH</h4>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Elettricista | Zoeschg GmbH</h4>
                             </a>
-                            <span class="date-muted">Jul 2020 - Aug 2020 | Meran, Italien</span>
+                            <span class="date-muted">Lug 2020 - Ago 2020 | Merano, Italia</span>
                         </div>
 
                         <div class="sub-role">
                             <a href="https://www.frigothermferrari.com" target="_blank" rel="noopener noreferrer" class="header-with-logo hover-target" style="text-decoration: none; color: inherit; display: inline-flex;">
                                 <div class="logo-group">
-                                    <img src="images/logo-frigotherm.webp" alt="Frigotherm Ferrari Logo" class="entity-logo logo-rect" loading="lazy" width="120" height="65">
-                                </div>
-                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Kältetechniker | Frigotherm Ferrari</h4>
+									<img src="images/logo-frigotherm.webp" alt="Frigotherm Ferrari Logo" class="entity-logo logo-rect" loading="lazy" width="120" height="65">
+								</div>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0;">Tecnico Frigorista | Frigotherm Ferrari</h4>
                             </a>
-                            <span class="date-muted">Jul 2019 - Aug 2019 | Lana, Italien</span>
+                            <span class="date-muted">Lug 2019 - Ago 2019 | Lana, Italia</span>
                         </div>
                     </div>
                 </div>
@@ -428,7 +348,7 @@ body {
     </section>
 
     <section id="education" class="container reveal">
-        <h2>Ausbildung & Qualifikationen</h2>
+        <h2>Formazione e Credenziali</h2>
         <div class="edu-grid">
             
             <div class="edu-card tilt-card hover-target">
@@ -438,11 +358,11 @@ body {
                             <img src="images/logo-unibz.webp" alt="Unibz Logo" class="entity-logo logo-square" loading="lazy" width="75" height="75">
                             <img src="images/logo-unibz-engineering.webp" alt="unibz Engineering Dept Logo" class="entity-logo" loading="lazy" width="75" height="75">
                         </div>
-                        <h3 class="premium-title">Freie Universität Bozen</h3>
+                        <h3 class="premium-title">Libera Università di Bolzano</h3>
                     </a>
-                    <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sept 2021 - Juli 2026</span>
-                    <p><strong>Bachelor of Science (B.Sc.)</strong> in Industrie- und Maschineningenieurwesen.</p>
-                    <p>Duales Studium mit Schwerpunkt in der <strong>Automatisierungstechnik</strong>.</p>
+                    <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sett 2021 - Luglio 2026</span>
+                    <p><strong>Laurea Triennale (B.Sc.)</strong> in Ingegneria Industriale e Meccanica.</p>
+                    <p>Programma di studio duale con focus sull'<strong>Automazione</strong>.</p>
                 </div>
             </div>
 
@@ -452,11 +372,11 @@ body {
                         <div class="logo-group">
                             <img src="images/logo-tfo.webp" alt="TFO Merano Logo" class="entity-logo logo-square" loading="lazy" width="75" height="75">
                         </div>
-                        <h3 class="premium-title">TFO "Oskar von Miller" Meran</h3>
+                        <h3 class="premium-title">TFO "Oskar von Miller" Merano</h3>
                     </a>
                     <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">2016 - 2021</span>
-                    <p><strong>Abitur / Matura</strong></p>
-                    <p>Technologische Fachoberschule. Fachrichtung Elektronik und Elektrotechnik.</p>
+                    <p><strong>Diploma di Maturità Tecnica</strong></p>
+                    <p>Specializzazione in Elettronica e Informatica Industriale.</p>
                 </div>
             </div>
             
@@ -465,17 +385,17 @@ body {
 
     <section id="skills" style="background-color: var(--white); padding: 70px 0; transition: background-color 0.4s;">
         <div class="container reveal">
-            <h2>Technische Kompetenzen</h2>
+            <h2>Conoscenze e Competenze Tecniche</h2>
             <div class="skills-grid">
                 
                 <div class="skill-category">
-                    <h3>Kernkompetenzen</h3>
+                    <h3>Competenze Principali</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag hover-target">Digitalisierung</span>
-                        <span class="skill-tag hover-target">Ingenieurwesen</span>
-                        <span class="skill-tag hover-target">Technisches Projektmanagement</span>
-                        <span class="skill-tag hover-target">Wissensmanagement</span>
-                        <span class="skill-tag hover-target">Strategische Entwicklung</span>
+                        <span class="skill-tag hover-target">Digitalizzazione</span>
+                        <span class="skill-tag hover-target">Ingegneria Industriale</span>
+                        <span class="skill-tag hover-target">Project Management Tecnico</span>
+                        <span class="skill-tag hover-target">Gestione della Conoscenza</span>
+                        <span class="skill-tag hover-target">Sviluppo Strategico</span>
                     </div>
                 </div>
 
@@ -491,7 +411,7 @@ body {
                 </div>
 
                 <div class="skill-category">
-                    <h3>Simulation & Automatisierung</h3>
+                    <h3>Automazione & Simulazione</h3>
                     <div class="skill-tags">
                         <span class="skill-tag hover-target">MATLAB / Simulink</span>
                         <span class="skill-tag hover-target">C# / Visual Basic</span>
@@ -512,11 +432,11 @@ body {
                 </div>
 
                 <div class="skill-category">
-                    <h3>Sprachen</h3>
+                    <h3>Lingue</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Deutsch (Muttersprache)</span>
-                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Italienisch (Muttersprache)</span>
-                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Englisch (Verhandlungssicher)</span>
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Tedesco (Madrelingua)</span>
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Italiano (Madrelingua)</span>
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Inglese (Avanzato/C1)</span>
                     </div>
                 </div>
 
@@ -525,90 +445,72 @@ body {
     </section>
 
     <section class="container reveal">
-        <h2 style="text-align: center; margin-bottom: 30px;">Kernkompetenzen & Expertise</h2>
+        <h2 style="text-align: center; margin-bottom: 30px;">Competenze Principali</h2>
         <div class="keyword-cloud">
             <span class="keyword-tag hover-target">Industrial Engineering & Automation</span>
             <span class="keyword-tag hover-target">Digitalization</span>
-            <span class="keyword-tag hover-target">Digitalisierung</span>
+            <span class="keyword-tag hover-target">Digitalizzazione</span>
             <span class="keyword-tag hover-target">Industry 4.0 & 5.0</span>
-            <span class="keyword-tag hover-target">Industrie 4.0</span>
+            <span class="keyword-tag hover-target">Industria 4.0</span>
             <span class="keyword-tag hover-target">Artificial Intelligence</span>
-            <span class="keyword-tag hover-target">Künstliche Intelligenz</span>
+            <span class="keyword-tag hover-target">Intelligenza Artificiale</span>
             <span class="keyword-tag hover-target">Process Optimization</span>
-            <span class="keyword-tag hover-target">Prozessoptimierung</span>
+            <span class="keyword-tag hover-target">Ottimizzazione dei Processi</span>
             <span class="keyword-tag hover-target">Data Analysis</span>
-            <span class="keyword-tag hover-target">Datenanalyse</span>
-            <span class="keyword-tag hover-target">Automatisierung</span>
+            <span class="keyword-tag hover-target">Analisi dei Dati</span>
+            <span class="keyword-tag hover-target">Automazione</span>
             <span class="keyword-tag hover-target">Production Processes</span>
-            <span class="keyword-tag hover-target">Produktionsprozesse</span>
+            <span class="keyword-tag hover-target">Processi Produttivi</span>
             <span class="keyword-tag hover-target">Lean Management</span>
-            <span class="keyword-tag hover-target">Lean-Methoden</span>
+            <span class="keyword-tag hover-target">Metodi Lean</span>
             <span class="keyword-tag hover-target">Continuous Improvement</span>
-            <span class="keyword-tag hover-target">Kontinuierliche Verbesserung</span>
+            <span class="keyword-tag hover-target">Miglioramento Continuo</span>
             <span class="keyword-tag hover-target">Smart Maintenance</span>
             <span class="keyword-tag hover-target">Virtual & Augmented Reality</span>
             <span class="keyword-tag hover-target">Robotics</span>
-            <span class="keyword-tag hover-target">Robotik</span>
+            <span class="keyword-tag hover-target">Robotica</span>
             <span class="keyword-tag hover-target">Digital Twins</span>
-            <span class="keyword-tag hover-target">Digitale Zwillinge</span>
+            <span class="keyword-tag hover-target">Gemelli Digitali</span>
             <span class="keyword-tag hover-target">Human-Robot Collaboration</span>
-            <span class="keyword-tag hover-target">Mensch-Roboter-Kollaboration</span>
+            <span class="keyword-tag hover-target">Collaborazione Uomo-Robot</span>
             <span class="keyword-tag hover-target">Sustainability</span>
-            <span class="keyword-tag hover-target">Nachhaltigkeit</span>
+            <span class="keyword-tag hover-target">Sostenibilità</span>
             <span class="keyword-tag hover-target">Circular Economy</span>
+            <span class="keyword-tag hover-target">Economia Circolare</span>
             <span class="keyword-tag hover-target">New Didactic Systems</span>
-            <span class="keyword-tag hover-target">Neue Didaktische Systeme</span>
+            <span class="keyword-tag hover-target">Nuovi Sistemi Didattici</span>
             <span class="keyword-tag hover-target">Productivity</span>
-            <span class="keyword-tag hover-target">Produktivität</span>
+            <span class="keyword-tag hover-target">Produttività</span>
             <span class="keyword-tag hover-target">Personal Knowledge Management</span>
-            <span class="keyword-tag hover-target">Wissensmanagement</span>
+            <span class="keyword-tag hover-target">Gestione della Conoscenza Personale</span>
             <span class="keyword-tag hover-target">Innovation</span>
             <span class="keyword-tag hover-target">Mindset</span>
         </div>
     </section>
 
     <section id="contact" class="container reveal">
-        <h2>Kontakt Aufnehmen</h2>
+        <h2>Invia un Messaggio</h2>
         <div class="contact-box hover-target">
             <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="53b801c1-6542-49ee-b808-b7525ba2935f">
-                <input type="hidden" name="redirect" value="https://danielkarasani.github.io/index-de.html">
+                <input type="hidden" name="redirect" value="https://danielkarasani.github.io/index-it.html">
                 <input type="checkbox" name="botcheck" style="display: none;">
 
                 <div class="form-row">
-                    <input type="text" name="name" class="hover-target" placeholder="Name" required>
-                    <input type="email" name="email" class="hover-target" placeholder="E-Mail Adresse" required>
+                    <input type="text" name="name" class="hover-target" placeholder="Nome" required>
+                    <input type="email" name="email" class="hover-target" placeholder="Indirizzo Email" required>
                 </div>
-                <textarea name="message" rows="5" class="hover-target" placeholder="Ihre Nachricht..." required></textarea>
+                <textarea name="message" rows="5" class="hover-target" placeholder="Il tuo messaggio..." required></textarea>
                 
-                <button type="submit" class="btn hover-target" style="width: 100%; font-size: 1.2rem;">Nachricht Senden</button>
+                <button type="submit" class="btn hover-target" style="width: 100%; font-size: 1.2rem;">Invia Messaggio Sicuro</button>
             </form>
         </div>
     </section>
 
     
+<%- include('../components/footer', { lang, page }) %>
 
-<footer>
-    <div class="container">
-        <h2>Let's build something great.</h2>
-        <p class="footer-details">Whether you have a specific project in mind, need advice on digitalization, or just want to discuss the future of industrial engineering—I'm always open to connecting. Based in South Tyrol, serving globally.</p>
-        <div class="social-links">
-            <a href="https://linkedin.com/in/daniel-karasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a href="mailto:daniel.karasani@outlook.com" class="hover-target" aria-label="Email">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </a>
-            <a href="https://github.com/danielkarasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </a>
-        </div>
-        <p style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">&copy; 2026 Daniel Karasani. All rights reserved.</p>
-    </div>
-</footer>
-
-
-    
 </body>
 </html>
+
 

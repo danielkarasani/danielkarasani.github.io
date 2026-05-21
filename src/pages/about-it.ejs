@@ -1,4 +1,7 @@
-
+<%
+  const lang = 'it';
+  const page = 'about';
+%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -57,56 +60,7 @@ body {
     background-color: var(--bg-main);
     color: var(--text-dark);
 }
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--text-dark);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.8s ease, visibility 0.8s;
-}
-.loader-text {
-    color: var(--white);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-align: center;
-    padding: 0 20px;
-    min-height: 1.5em;
-    line-height: 1.5;
-}
-.loader-bar {
-    width: 250px;
-    height: 2px;
-    background: rgba(255,255,255,0.2);
-    position: relative;
-    overflow: hidden;
-}
-.loader-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    animation: loadBar 2s ease forwards;
-}
-@keyframes loadBar {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
-.loaded #preloader {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
+
 </style>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
@@ -179,34 +133,7 @@ body {
     <div class="cursor-outline"></div>
 
     
-
-<nav>
-    <div class="nav-container">
-        <a href="index-it.html" class="logo hover-target">Daniel<span>.</span></a>
-        <ul class="nav-links">
-            <li><a href="index-it.html#about" class="hover-target">About</a></li>
-            <li><a href="index-it.html#projects" class="hover-target">Projects</a></li>
-            <li><a href="index-it.html#experience" class="hover-target">Experience</a></li>
-            <li><a href="index-it.html#education" class="hover-target">Education</a></li>
-            <li><a href="index-it.html#skills" class="hover-target">Skills</a></li>
-            <li><a href="blog-it.html" class="hover-target">Blog</a></li>
-        </ul>
-        
-        <div class="lang-switcher">
-            <a href="about.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target " aria-label="Switch language to English">EN</a> 
-            <span class="divider">|</span>
-            <a href="about-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target " aria-label="Switch language to German">DE</a> 
-            <span class="divider">|</span>
-            <a href="about-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target active" aria-label="Switch language to Italian">IT</a>
-        </div>
-
-        <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
-            🌙
-        </button>
-    </div>
-    <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
-</nav>
-
+<%- include('../components/nav', { lang, page }) %>
 
 
     <section class="about-split">
@@ -242,29 +169,11 @@ body {
     </section>
 
     
-
-<footer>
-    <div class="container">
-        <h2>Let's build something great.</h2>
-        <p class="footer-details">Whether you have a specific project in mind, need advice on digitalization, or just want to discuss the future of industrial engineering—I'm always open to connecting. Based in South Tyrol, serving globally.</p>
-        <div class="social-links">
-            <a href="https://linkedin.com/in/daniel-karasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a href="mailto:daniel.karasani@outlook.com" class="hover-target" aria-label="Email">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </a>
-            <a href="https://github.com/danielkarasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </a>
-        </div>
-        <p style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">&copy; 2026 Daniel Karasani. All rights reserved.</p>
-    </div>
-</footer>
-
+<%- include('../components/footer', { lang, page }) %>
 
 
 
 </body>
 </html>
+
 

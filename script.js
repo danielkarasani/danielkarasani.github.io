@@ -461,25 +461,6 @@ if (document.readyState === 'loading') {
 // ==========================================
 // 3. HARDWARE ACCELERATED SCROLL REVEAL
 // ==========================================
-// Close when clicking outside the box
-const hidePreloader = () => {
-    if (!document.body.classList.contains('loaded')) {
-        document.body.classList.add('loaded');
-        try {
-            sessionStorage.setItem('preloader-completed', 'true');
-        } catch (e) {
-            console.warn("Could not save sessionStorage state:", e);
-        }
-    }
-};
-
-if (document.readyState === 'complete') {
-    hidePreloader();
-} else {
-    window.addEventListener('load', hidePreloader);
-    // Failsafe timeout to prevent preloader lock if external assets hang
-    setTimeout(hidePreloader, 2000);
-}
 
 const revealOptions = {
     root: null,
