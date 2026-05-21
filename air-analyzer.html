@@ -70,12 +70,14 @@ body {
 }
 .loader-text {
     color: var(--white);
-    font-family: monospace;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 1.2rem;
     letter-spacing: 2px;
     margin-bottom: 20px;
     text-align: center;
     padding: 0 20px;
+    min-height: 1.5em;
+    line-height: 1.5;
 }
 .loader-bar {
     width: 250px;
@@ -103,6 +105,7 @@ body {
     pointer-events: none;
 }
 </style>
+    <link rel="preload" href="styles.css" as="style">
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
     <script src="script.js" defer></script>

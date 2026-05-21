@@ -63,6 +63,61 @@ if (document.readyState === 'loading') {
     initScrollProgressBar();
 }
 
+// ==========================================
+// 0.6 AUTO-HIDE NAV ON MOBILE SCROLL
+// ==========================================
+// On mobile (≤990px), hides the nav when scrolling down and reveals it
+// when scrolling up. The 3px progress bar remains visible at all times.
+function initAutoHideNav() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+
+    let lastScrollY = 0;
+    const scrollThreshold = 10; // px of scroll required before toggling
+
+    function handleScroll() {
+        // Only auto-hide on mobile widths
+        if (window.innerWidth > 990) {
+            nav.classList.remove('nav-hidden');
+            return;
+        }
+
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+        const delta = currentScrollY - lastScrollY;
+
+        // Don't hide at the very top of the page
+        if (currentScrollY <= 60) {
+            nav.classList.remove('nav-hidden');
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        // Don't toggle if the mobile drawer is open
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks && navLinks.classList.contains('active')) {
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        if (delta > scrollThreshold) {
+            // Scrolling DOWN → hide nav
+            nav.classList.add('nav-hidden');
+            lastScrollY = currentScrollY;
+        } else if (delta < -scrollThreshold) {
+            // Scrolling UP → show nav
+            nav.classList.remove('nav-hidden');
+            lastScrollY = currentScrollY;
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAutoHideNav);
+} else {
+    initAutoHideNav();
+}
 
 function initDynamicLinks() {
     // Inject hrefs
