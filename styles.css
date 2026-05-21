@@ -623,7 +623,7 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
         transform: translateY(100%);
     }
     /* Keep nav visible when mobile drawer is open */
-    nav:has(.nav-links.active) {
+    nav.menu-open {
         transform: translateY(0) !important;
     }
     /* Hide progress bar behind the fullscreen nav overlay */

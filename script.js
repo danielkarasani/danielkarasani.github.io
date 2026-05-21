@@ -737,8 +737,9 @@ window.closePost = function() {
 function initMobileNav() {
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
+    const nav = document.querySelector('nav');
     
-    if (!navContainer || !navLinks) return;
+    if (!navContainer || !navLinks || !nav) return;
 
     // 1. Create Hamburger Button
     const hamburger = document.createElement('button');
@@ -758,6 +759,7 @@ function initMobileNav() {
     function toggleMenu() {
         const isActive = navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
+        nav.classList.toggle('menu-open', isActive);
         document.body.classList.toggle('no-scroll');
         hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     }
@@ -766,6 +768,7 @@ function initMobileNav() {
     function closeMenu() {
         navLinks.classList.remove('active');
         hamburger.classList.remove('active');
+        nav.classList.remove('menu-open');
         document.body.classList.remove('no-scroll');
         hamburger.setAttribute('aria-expanded', 'false');
     }
