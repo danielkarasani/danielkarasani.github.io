@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Run Static Site Generator
         run: node build.js
@@ -32,8 +34,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # Add all generated files in the root
-          git add *.html styles.css script.js
+          # Add all generated HTML, CSS, and JS files in the root
+          git add *.html *.css *.js
           # Commit only if there are changes. [skip ci] prevents infinite loops.
           git commit -m "chore: auto-build static HTML files [skip ci]" || echo "No changes to commit"
           git push
