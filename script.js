@@ -979,8 +979,9 @@ async function initDynamicBlogFeed() {
             const titleStr = post.title[lang] || post.title.en;
             const descStr = post.description[lang] || post.description.en;
             
+            const catStr = post.category || 'General Topics';
             cardsHTML += `
-                <a href="posts/${post.id}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')" target="_blank" rel="noopener noreferrer">
+                <a href="posts/${post.id}" data-category="${catStr}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')" target="_blank" rel="noopener noreferrer">
                     <span class="blog-date">${dateStr}</span>
                     <h3>${titleStr}</h3>
                     <p>${descStr}</p>
@@ -1026,23 +1027,55 @@ function initBlogSorting() {
 
     // Keep a copy of original card nodes in their initial manual order
     const originalCards = Array.from(grid.querySelectorAll('.blog-card'));
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let activeCategory = 'all';
 
-    function applySearch() {
-        if (!searchInput) return;
-        const query = searchInput.value.toLowerCase().trim();
+    function applyFilters() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const cards = grid.querySelectorAll('.blog-card');
         
         cards.forEach(card => {
             const dateText = (card.querySelector('.blog-date')?.textContent || '').toLowerCase();
             const titleText = (card.querySelector('h3')?.textContent || '').toLowerCase();
             const descText = (card.querySelector('p')?.textContent || '').toLowerCase();
+            const categoryAttr = card.dataset.category || 'General Topics';
             
-            if (dateText.includes(query) || titleText.includes(query) || descText.includes(query)) {
+            const matchesSearch = !query || dateText.includes(query) || titleText.includes(query) || descText.includes(query);
+            
+            let matchesCategory = false;
+            if (activeCategory === 'all') {
+                matchesCategory = true;
+            } else if (activeCategory === 'Engineering & Research' && categoryAttr === 'Engineering & Research') {
+                matchesCategory = true;
+            } else if (activeCategory === 'General Topics' && categoryAttr === 'General Topics') {
+                matchesCategory = true;
+            } else if (activeCategory === 'Off-Topic' && categoryAttr === 'Off-Topic') {
+                matchesCategory = true;
+            } else if (categoryAttr === activeCategory) {
+                matchesCategory = true;
+            }
+
+            if (matchesSearch && matchesCategory) {
                 card.style.display = '';
             } else {
                 card.style.display = 'none';
             }
         });
+    }
+
+    if (filterBtns) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                activeCategory = e.target.dataset.filter;
+                applyFilters();
+            });
+        });
+    }
+
+    function applySearch() {
+        applyFilters();
     }
 
     // Helper to parse date strings (e.g. "May 19, 2026", "19. Mai 2026", "19 Maggio 2026") into Date objects
@@ -1099,7 +1132,7 @@ function initBlogSorting() {
             if (val === 'default') {
                 grid.innerHTML = '';
                 originalCards.forEach(card => grid.appendChild(card));
-                applySearch();
+                applyFilters();
                 return;
             }
 
@@ -1120,12 +1153,12 @@ function initBlogSorting() {
 
             grid.innerHTML = '';
             cards.forEach(card => grid.appendChild(card));
-            applySearch();
+            applyFilters();
         });
     }
 
     if (searchInput) {
-        searchInput.addEventListener('input', debounce(applySearch, 150));
+        searchInput.addEventListener('input', debounce(applyFilters, 150));
     }
 }
 

@@ -776,7 +776,7 @@ body.no-scroll {
     
     /* Prevent Logo & Controls Overlap on narrow smartphones */
     .nav-container { padding: 0 15px; }
-    .logo { font-size: 1.5rem; }
+    .logo { font-size: 1.25rem; white-space: nowrap; }
     .hamburger-menu { right: 15px; }
     #theme-toggle { right: 55px; }
     #search-toggle { right: 85px; }

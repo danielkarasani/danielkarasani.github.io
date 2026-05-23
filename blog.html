@@ -208,7 +208,7 @@ body {
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo hover-target">Daniel<span>.</span></a>
+            <a href="index.html" class="logo hover-target">Daniel Karasani<span>.</span></a>
             <ul class="nav-links">
                 <li><a href="index.html#projects" class="hover-target">Projects</a></li>
                 <li><a href="about.html" class="hover-target">About</a></li>
@@ -240,6 +240,12 @@ body {
 
     <!-- Blog Grid Section -->
     <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;" class="category-filters">
+            <button class="filter-btn active hover-target" data-filter="all" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: transparent; color: var(--text-dark); cursor: pointer; font-weight: 500;">All Posts</button>
+            <button class="filter-btn hover-target" data-filter="Engineering & Research" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: transparent; color: var(--text-dark); cursor: pointer; font-weight: 500;">Engineering & Research</button>
+            <button class="filter-btn hover-target" data-filter="General Topics" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: transparent; color: var(--text-dark); cursor: pointer; font-weight: 500;">General Topics</button>
+            <button class="filter-btn hover-target" data-filter="Off-Topic" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: transparent; color: var(--text-dark); cursor: pointer; font-weight: 500;">Off-Topic</button>
+        </div>
         <div class="blog-controls-wrapper">
             <div class="blog-search-box hover-target">
                 <input type="text" id="blogSearchInput" placeholder="Search articles...">
