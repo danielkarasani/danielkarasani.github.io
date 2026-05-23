@@ -10,6 +10,7 @@ on:
       - 'build.js'
       - 'posts/**'
       - 'blog-posts.json'
+      - '.github/workflows/**'
 
 jobs:
   build-and-commit:
