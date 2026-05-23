@@ -1181,3 +1181,26 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// ==========================================
+// 13. PRELOADER LOGIC & FAILSAFE
+// ==========================================
+function hidePreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        document.body.classList.add('loaded'); // This triggers CSS opacity transition
+        sessionStorage.setItem('preloader-completed', 'true');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 800); // Wait for the 0.8s CSS fade-out transition
+    }
+}
+
+// 1. Hide instantly when HTML is ready (don't wait for massive images/iframes)
+document.addEventListener('DOMContentLoaded', hidePreloader);
+
+// 2. Failsafe: Force hide after 2.5 seconds no matter what (protects against ad-blocker hangs)
+setTimeout(hidePreloader, 2500);
+
+// 3. Fallback just in case load fires before DOMContentLoaded (rare edge cases)
+window.addEventListener('load', hidePreloader);
