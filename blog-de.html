@@ -3,6 +3,16 @@
 <html lang="de">
 
 <head>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+    caches.keys().then((keyList) => Promise.all(keyList.map((key) => caches.delete(key))));
+</script>
     <!-- Performance Preconnects for Core Web Vitals -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -294,3 +304,4 @@ body {
 </body>
 
 </html>
+

@@ -2,6 +2,16 @@
 <html lang="de">
 
 <head>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+    caches.keys().then((keyList) => Promise.all(keyList.map((key) => caches.delete(key))));
+</script>
     <!-- Performance Preconnects for Core Web Vitals -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,12 +183,7 @@ body {
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
     </script>
 
-    <div id="preloader">
-        <div class="loader-text">ENGINEERING-SYSTEM WIRD INITIALISIERT...</div>
-        <div class="loader-bar">
-            <div class="loader-fill"></div>
-        </div>
-    </div>
+    
 
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -357,3 +362,6 @@ body {
 </body>
 
 </html>
+
+
+
