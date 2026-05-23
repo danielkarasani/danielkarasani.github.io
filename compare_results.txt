@@ -1,0 +1,23 @@
+
+--- Missing in index.html ---
+- Laubengasse 254, 39012 Meran (BZ) | +39 3245808570
+
+--- Missing in index-de.html ---
+- Student für Industrie- & Maschineningenieurwesen @ unibz
+
+--- Missing in index-it.html ---
+- &copy; 2026 Daniel Karasani. Designed & Engineered for Performance.
+
+--- Missing in about.html ---
+- About Daniel Karasani | The Full Story
+- I thrive at the crossroads of electronics, digitalization, and economics. While I love the deep technical challenges of routing custom PCBs and writing embedded code, my ultimate goal is systemic efficiency. I approach every project—from a single sensor module to an enterprise-wide maintenance software rollout—with the same question: How does this add tangible value to the business?
+
+--- No missing text found in air-analyzer.html ---
+
+--- Missing in blog.html ---
+- May 15, 2026
+- The Business Case for AR in Maintenance
+- Exploring how integrating Augmented Reality with AI and Condition Monitoring reduces operational downtime in food manufacturing.
+- Read Article
+- &times;
+- &copy; 2026 Daniel Karasani. Designed & Engineered for Performance.

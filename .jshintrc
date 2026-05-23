@@ -1,0 +1,19 @@
+{
+  "esversion": 11,
+  "browser": true,
+  "node": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "console": true,
+    "setTimeout": true,
+    "clearTimeout": true,
+    "document": true,
+    "window": true,
+    "localStorage": true,
+    "sessionStorage": true,
+    "IntersectionObserver": true,
+    "fetch": true,
+    "APP_CONFIG": true
+  }
+}

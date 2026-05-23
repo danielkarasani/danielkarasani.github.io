@@ -136,8 +136,8 @@ function initDynamicLinks() {
     
     document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
         el.addEventListener("click", () => {
-            if (typeof gtag === "function") {
-                gtag("event", "click", {
+            if (typeof window.gtag === "function") {
+                window.gtag("event", "click", {
                     "event_category": "Outbound Link",
                     "event_label": `Cloud CV View ${pageLang.toUpperCase()}`
                 });
@@ -147,8 +147,8 @@ function initDynamicLinks() {
 
     document.querySelectorAll(".js-local-cv-link").forEach(el => {
         el.addEventListener("click", () => {
-            if (typeof gtag === "function") {
-                gtag("event", "click", {
+            if (typeof window.gtag === "function") {
+                window.gtag("event", "click", {
                     "event_category": "Download",
                     "event_label": `Local CV Download ${pageLang.toUpperCase()}`
                 });
@@ -158,8 +158,8 @@ function initDynamicLinks() {
 
     document.querySelectorAll(".js-cloud-doc-link").forEach(el => {
         el.addEventListener("click", () => {
-            if (typeof gtag === "function") {
-                gtag("event", "click", {
+            if (typeof window.gtag === "function") {
+                window.gtag("event", "click", {
                     "event_category": "Outbound Link",
                     "event_label": `Air Analyzer Doc Download ${pageLang.toUpperCase()}`
                 });
@@ -274,8 +274,8 @@ function initCommandPalette() {
     if (dynamicCv && typeof APP_CONFIG !== 'undefined') {
         dynamicCv.href = APP_CONFIG.localCvPath;
         dynamicCv.addEventListener("click", () => {
-            if (typeof gtag === "function") {
-                gtag("event", "click", {
+            if (typeof window.gtag === "function") {
+                window.gtag("event", "click", {
                     "event_category": "Download",
                     "event_label": `Local CV Download ${pageLang.toUpperCase()}`
                 });
@@ -310,7 +310,7 @@ function initCommandPalette() {
     // Helper functions for unified open/close management
     function openPalette() {
         palette.style.display = 'flex';
-        palette.offsetHeight; // Force reflow to register the display style change before opacity transition
+        void palette.offsetHeight; // Force reflow to register the display style change before opacity transition
         palette.classList.add('palette-visible');
         document.body.classList.add('no-scroll');
         
@@ -511,7 +511,7 @@ if (cursorDot && cursorOutline) {
     let isCursorActive = false;
     let isLoopRunning = false;
 
-    function animateCursor() {
+    const animateCursor = function() {
         if (!isLoopRunning) return;
         let distX = mouseX - outlineX;
         let distY = mouseY - outlineY;
@@ -520,7 +520,7 @@ if (cursorDot && cursorOutline) {
         
         cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
         requestAnimationFrame(animateCursor);
-    }
+    };
 
     // Only activate cursor logic on mouse movement above 990px (Desktop)
     window.addEventListener('mousemove', (e) => {
@@ -697,8 +697,8 @@ window.openPost = async function(filename) {
         if (!response.ok) throw new Error('Post not found on server.');
         
         const markdownText = await response.text();
-        if (typeof marked !== 'undefined') {
-            reader.innerHTML = marked.parse(markdownText);
+        if (typeof window.marked !== 'undefined') {
+            reader.innerHTML = window.marked.parse(markdownText);
         } else {
             reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText}</pre>`;
         }
@@ -865,7 +865,7 @@ function initContactForm() {
             body: json
         })
         .then(async (response) => {
-            let jsonRes = await response.json();
+            await response.json();
             if (response.status === 200) {
                 // 4. Success Animation Transition
                 contactForm.classList.add('contact-fade-out');
@@ -920,13 +920,13 @@ function initContactForm() {
 
             } else {
                 // Handle API error state
-                alert(t.error);
+                window.alert(t.error);
                 resetSubmitButton();
             }
         })
         .catch(error => {
             console.error("Error submitting form:", error);
-            alert(t.error);
+            window.alert(t.error);
             resetSubmitButton();
         });
     });
@@ -1056,7 +1056,7 @@ function initBlogSorting() {
             jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11,
             january:0, february:1, march:2, april:3, june:5, july:6, august:7, september:8, october:9, november:10, december:11,
             // German
-            januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, august:7, september:8, oktober:9, november:10, dezember:11,
+            januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, oktober:9, dezember:11,
             // Italian
             gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
         };
