@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <!-- Performance Preconnects for Core Web Vitals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Analyzer Fallstudie | Daniel Karasani</title>
+    <meta name="description"
+        content="Detaillierte Fallstudie zum Air Analyzer - eine von Grund auf entwickelte Hardware- und Software-Station zur Überwachung der Raumluftqualität.">
+    <meta name="author" content="Daniel Karasani">
+    <link rel="canonical" href="https://danielkarasani.github.io/air-analyzer-de.html" />
+    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/air-analyzer.html" />
+    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/air-analyzer-de.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/air-analyzer-it.html" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c89b72">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-MSX3GD41Z0');
+    </script>
+    <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    
+    <style id="critical-path-css">
+:root {
+    --bg-main: #fcfaf8;       
+    --bg-hero: #ece6dd;       
+    --text-dark: #2c2420;     
+    --text-muted: #5a4f48;    
+    --accent: #c89b72;        
+    --accent-hover: #b3855c;  
+    --white: #ffffff;
+    --nav-bg: rgba(252, 250, 248, 0.7); 
+    --gradient-text: linear-gradient(135deg, var(--text-dark), var(--accent));
+}
+body.dark-theme, html.dark-theme body {
+    --bg-main: #1a1512;       
+    --bg-hero: #241e1a;       
+    --text-dark: #fcfaf8;     
+    --text-muted: #b5a89f;    
+    --accent: #d8b08d;        
+    --white: #241e1a;         
+    --nav-bg: rgba(26, 21, 18, 0.85); 
+}
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+}
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--text-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+.loader-text {
+    color: var(--white);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 20px;
+    min-height: 1.5em;
+    line-height: 1.5;
+}
+.loader-bar {
+    width: 250px;
+    height: 2px;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.loader-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    animation: loadBar 2s ease forwards;
+}
+@keyframes loadBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+.loaded #preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+</style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        html.preloader-skipped #preloader { display: none !important; }
+    </style>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-theme');
+        if (sessionStorage.getItem('preloader-completed') === 'true') {
+            document.documentElement.classList.add('preloader-skipped');
+        }
+        
+        // Failsafe: Ensure preloader always hides even if JS fails
+        function fallbackHidePreloader() {
+            var p = document.getElementById('preloader');
+            if (p && (!document.body || !document.body.classList.contains('loaded'))) {
+                p.style.opacity = '0';
+                p.style.visibility = 'hidden';
+                p.style.pointerEvents = 'none';
+                if (document.body) document.body.classList.add('loaded');
+                try { sessionStorage.setItem('preloader-completed', 'true'); } catch(e) {}
+            }
+        }
+        window.addEventListener('load', function() { setTimeout(fallbackHidePreloader, 2000); });
+        setTimeout(fallbackHidePreloader, 3500);
+    </script>
+    <noscript>
+        <style>
+            #preloader { display: none !important; }
+            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, input, textarea { cursor: pointer !important; }
+
+            /* Mobile Navigation Fallback when JS is disabled */
+            @media (max-width: 990px) {
+                .nav-links {
+                    position: static !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 15px !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    height: auto !important;
+                    padding: 10px 0 !important;
+                    background: transparent !important;
+                    backdrop-filter: none !important;
+                }
+                .nav-links li {
+                    width: auto !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .nav-links a {
+                    font-size: 1rem !important;
+                    padding: 5px 10px !important;
+                }
+                .nav-container {
+                    flex-direction: column !important;
+                    gap: 10px !important;
+                    padding: 10px 20px !important;
+                }
+                nav {
+                    position: static !important;
+                    padding: 10px 0 !important;
+                }
+                .hero {
+                    padding-top: 40px !important;
+                }
+                #theme-toggle {
+                    display: none !important;
+                }
+            }
+        </style>
+    </noscript>
+</head>
+
+<body class="">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
+    </script>
+
+    <div id="preloader">
+        <div class="loader-text">ENGINEERING-SYSTEM WIRD INITIALISIERT...</div>
+        <div class="loader-bar">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index-de.html" class="logo hover-target">Daniel<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index-de.html#projects" class="hover-target">← Zurück zum Portfolio</a></li>
+            </ul>
+
+            <div class="lang-switcher">
+                <a href="air-analyzer.html" class="hover-target" aria-label="Sprache auf Englisch umstellen">EN</a>
+                <span class="divider">|</span>
+                <a href="air-analyzer-de.html" class="active hover-target" aria-label="Sprache auf Deutsch umstellen">DE</a>
+                <span class="divider">|</span>
+                <a href="air-analyzer-it.html" class="hover-target" aria-label="Sprache auf Italienisch umstellen">IT</a>
+            </div>
+
+            <button id="theme-toggle" class="hover-target" aria-label="Licht- und Dunkelmodus umschalten"
+                style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+                🌙
+            </button>
+        </div>
+        <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
+    </nav>
+
+    <section class="hero case-study-hero">
+        <div class="container reveal">
+            <span class="tagline">Matura-Projekt der TFO Meran</span>
+            <h1>Air Analyzer: Präzise Raumluftüberwachung</h1>
+            <p class="quote">"Jetzt wird's angezeigt!"</p>
+        </div>
+    </section>
+
+    <section class="case-study-body reveal"
+        style="background: var(--white); border-radius: 16px; margin-top: -40px; position: relative; z-index: 10; box-shadow: 0 20px 50px rgba(0,0,0,0.05);">
+
+        <p style="font-size: 1.2rem; color: var(--text-dark); font-weight: 500;">
+            Die Entstehung des Air Analyzers wurde durch die globalen COVID-19-Lockdowns inspiriert – eine Zeit, die
+            unsere Verbindung zur Natur abrupt trennte und die kritische Bedeutung der Raumluftqualität verdeutlichte.
+            Zu oft bleiben gesundheitsschädliche Gewohnheiten bestehen, schlicht weil schlechte Luftqualität unsichtbar
+            ist. Durch die Entwicklung eines Geräts, das wesentliche Luftparameter transparent darstellt, wird das
+            Unsichtbare greifbar und veränderbar.
+        </p>
+
+        <h3>Systemarchitektur & Hardware-Design</h3>
+        <p>Um eine optimale Platzierung der Komponenten und eine hohe Modularität zu gewährleisten, wurde die
+            Hardware-Architektur in zwei separate, individuell geroutete Leiterplatten (PCBs) aufgeteilt, die über ein
+            Flachbandkabel verbunden sind:</p>
+        <ul>
+            <li><strong>Die Hauptplatine (Main Board):</strong> Dient als zentrale Recheneinheit und beherbergt den
+                Mikrocontroller, die Spannungsregler (LM1117 5V und 3V3) sowie das primäre Sensor-Array.</li>
+            <li><strong>Die HMI-Platine (HMI Board):</strong> Beherbergt das 2,8-Zoll SPI TFT-Display, die Taster, das
+                Potentiometer zur Steuerung der Hintergrundbeleuchtung, einen 90dB Piezo-Summer für Grenzwertalarme
+                sowie die Status-LEDs.</li>
+        </ul>
+
+        <h3>Hardware-Entwicklung & Montage</h3>
+        <div class="project-gallery">
+            <img src="images/air-analyzer-pcb.webp" alt="Individuell geroutetes PCB-Design in EAGLE"
+                class="gallery-img hover-target">
+            <img src="images/air-analyzer-assembly.webp" alt="Interne Hardware-Montage und Sensor-Verkabelung"
+                class="gallery-img hover-target">
+            <img src="images/air-analyzer-device-diy.webp" alt="DIY-Hardware-Prototyp mit Breadboard-Layout"
+                class="gallery-img hover-target">
+            <img src="images/air-analyzer-final-diy.webp" alt="DIY-Air-Analyzer-Prototyp mit aktiver Sensorauslesung"
+                class="gallery-img hover-target">
+            <img src="images/air-analyzer-final.webp" alt="Ursprüngliches Design des Air Analyzer-Geräts"
+                class="gallery-img hover-target">
+        </div>
+
+        <h3>Industrietaugliches Sensor-Array</h3>
+        <ul>
+            <li><strong>Sensirion SPS30:</strong> MCERTS-zertifizierter optischer Feinstaubsenor, der Laserstreuung für
+                hochpräzise PM2.5-Messungen nutzt.</li>
+            <li><strong>Sensirion SGP30:</strong> Ein Multipixel-CMOSens®-Gassensor zur Messung von TVOC (flüchtige
+                organische Verbindungen) und eCO2.</li>
+            <li><strong>Freescale/NXP MPL3115A2:</strong> Piezoresistiver Absolutdrucksensor mit integrierter
+                Höhenberechnung und einer I2C-Schnittstelle.</li>
+            <li><strong>Grove Luminanzsensor:</strong> Misst die Intensität des Umgebungslichts, gepaart mit einem
+                speziell berechneten Rail-to-Rail-Operationsverstärker (AD8615), um das 2,3-V-Ausgangssignal auf den
+                erforderlichen 5-V-Logikpegel anzuheben.</li>
+        </ul>
+
+        <h3>Embedded Software & Protokoll-Integration</h3>
+        <p>Das System wird von einem Freescale/NXP MC9S08AW32 Mikrocontroller gesteuert. Anstatt auf Hochsprachen wie C
+            zurückzugreifen, wurde die endgültige Software vollständig in Assembler geschrieben, um maximale Kontrolle
+            und Effizienz zu gewährleisten.</p>
+        <ul>
+            <li><strong>Modulare Codebasis:</strong> Die Software nutzt eine hochgradig modulare Struktur, um
+                Initialisierungsroutinen, Sensorabfragen, TFT-Rendering und Tastenlogik sauber zu trennen.</li>
+            <li><strong>Multiprotokoll-Kommunikation:</strong> Der Mikrocontroller koordiniert simultan I2C-, UART- und
+                SPI-Verbindungen.</li>
+            <li><strong>Fehlerbehebung & Engpässe:</strong> Eine große technische Herausforderung war das Debuggen der
+                TFT-Initialisierungssequenz. Durch die Analyse des SPI-Taktsignals mittels Oszilloskop wurde
+                festgestellt, dass die Baudrate die Grenzwerte des Bauteils überschritt und das 5-V-Signal bei 3 V
+                abschnitt. Eine Anpassung der internen Takt-Skalierung behob den Timing-Fehler.</li>
+        </ul>
+
+        <h3>Wirtschaftlichkeit & Projektmanagement</h3>
+        <p>Dieses Projekt wurde unter strengen Projektmanagement-Richtlinien durchgeführt, unter Verwendung von
+            Gantt-Diagrammen und definierten Arbeitspaketen (WPs), um den Fortschritt lückenlos zu dokumentieren.</p>
+        <ul>
+            <li><strong>BOM (Stückliste):</strong> Die reinen Bauteilkosten für eine einzelne Prototypeneinheit beliefen
+                sich auf ca. 258,27 €.</li>
+            <li><strong>Arbeitszeiterfassung:</strong> Der Entwicklungszyklus beanspruchte exakt 192 dokumentierte
+                Arbeitsstunden.</li>
+            <li><strong>Skalierungsprognosen:</strong> Die gesamten Forschungs- und Entwicklungskosten für die erste
+                Einheit wurden mit 3.854,77 € veranschlagt. Eine simulierte Skalierung zeigte jedoch, dass eine
+                Serienproduktion von 1.000 Einheiten die Stückkosten drastisch reduzieren würde.</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://e.pcloud.link/publink/show?code=XZRdJrZip1FWlOLtK87Iev3mcasHJQRvYPk" target="_blank"
+                rel="noopener noreferrer" class="btn hover-target js-cloud-doc-link">Vollständige technische
+                Dokumentation herunterladen (PDF) <span
+                    style="margin-left: 6px; font-size: 0.9em; font-weight: normal; opacity: 0.85;">(nur auf
+                    Deutsch)</span></a>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="social-links" style="flex-wrap: wrap;">
+            <a href="https://www.linkedin.com/in/daniel-karasani" class="hover-target" target="_blank"
+                rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com/danielkarasani" class="hover-target" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                    </path>
+                </svg>
+                GitHub
+            </a>
+            <a href="mailto:daniel.karasani@gmail.com" class="hover-target">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Email
+            </a>
+            <a href="https://wa.me/393245808570" class="hover-target" target="_blank" rel="noopener noreferrer"
+                onmouseover="this.style.color='#25D366'" onmouseout="this.style.color=''">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.04-.967-.281-.099-.488-.15-.693.148-.205.297-.771.967-.945 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.693-1.67-.948-2.285-.25-.598-.505-.517-.694-.527-.174-.009-.373-.009-.571-.009s-.521.074-.794.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.703.248-1.302.173-1.422-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.029 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                WhatsApp
+            </a>
+        </div>
+        <div class="footer-details">
+            <p
+                style="margin-bottom: 30px; font-size: 1.05rem; color: #fcfaf8; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span
+                    style="display: inline-block; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80;"></span>
+                Verfügbar für Projekte in Meran, Südtirol und darüber hinaus.
+            </p>
+            <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Meran (BZ) | +39 3245808570 |
+                daniel.karasani@gmail.com</p>
+            <p>&copy; 2026 Daniel Karasani. Designed & Engineered for Performance.</p>
+        </div>
+    </footer>
+
+    <!-- Inline script block removed. Functions are handled by central script.js -->
+</body>
+
+</html>
