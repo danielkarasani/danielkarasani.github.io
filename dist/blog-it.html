@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Performance Preconnects for Core Web Vitals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <!-- KaTeX Math Rendering Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsEw0920m8j98XND8bJvd5Q54xSjdG2m2LweO1E020HjBvX/Hw0nN8E1Dq" crossorigin="anonymous">
+    <!-- Fallback if JS is disabled -->
+    <noscript><style>#preloader { display: none !important; }</style></noscript>
+	
+    
+    <meta property="og:title" content="Il Diario della Logica">
+    <meta property="og:description" content="Portfolio of Daniel Karasani. Industrial &amp; Mechanical Engineering Student specializing in Process Optimization, Digital Transformation, and Data Analysis.">
+    <meta property="og:image" content="https://danielkarasani.github.io/images/daniel-karasani-industrial-engineer.webp">
+    
+    <meta property="og:url" content="https://danielkarasani.github.io/blog-it.html">
+    <meta property="og:type" content="website">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Diario della Logica</title>
+    <meta name="description" content="Portfolio of Daniel Karasani. Industrial &amp; Mechanical Engineering Student specializing in Process Optimization, Digital Transformation, and Data Analysis.">
+    <meta name="author" content="Daniel Karasani">
+    <link rel="canonical" href="https://danielkarasani.github.io/blog-it.html" />
+    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/blog.html" />
+    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/blog-de.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/blog-it.html" />
+    <link rel="alternate" hreflang="x-default" href="https://danielkarasani.github.io/blog.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c89b72">
+
+    <!-- LCP Hero Image Preload -->
+    <link rel="preload" href="/images/daniel-karasani-industrial-engineer.webp" as="image" type="image/webp">
+    
+    <link rel="stylesheet" href="/_assets/styles/global.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MSX3GD41Z0');
+    </script>
+    <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
+        
+        const savedLang = localStorage.getItem('lang');
+        const pageLang = document.documentElement.lang || 'en';
+        
+        if (savedLang && savedLang !== pageLang) {
+            const altLink = document.querySelector(`link[hreflang="${savedLang}"]`);
+            if (altLink && altLink.href && altLink.href !== window.location.href) {
+                window.location.href = altLink.href;
+            }
+        }
+    </script>
+    
+    <noscript>
+        <style>
+            /* Fallbacks when JS is disabled */
+            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, input, textarea { cursor: pointer !important; }
+            .hero::before { animation: none !important; }
+            @media (max-width: 990px) {
+                .nav-links {
+                    position: static !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 15px !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    height: auto !important;
+                    padding: 10px 0 !important;
+                    background: transparent !important;
+                    backdrop-filter: none !important;
+                }
+                .nav-links li {
+                    width: auto !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .nav-links a {
+                    font-size: 1rem !important;
+                    padding: 5px 10px !important;
+                }
+                .nav-container {
+                    flex-direction: column !important;
+                    gap: 10px !important;
+                    padding: 10px 20px !important;
+                }
+                nav {
+                    position: static !important;
+                    padding: 10px 0 !important;
+                }
+                .hero { padding-top: 40px !important; }
+                #theme-toggle { display: none !important; }
+            }
+        </style>
+    </noscript>
+    <!-- Dynamic Theme Variables -->
+    <style>
+      :root {
+        --bg-main: #fcfaf8 !important;
+        --bg-hero: #ece6dd !important;
+        --text-dark: #2c2420 !important;
+        --text-muted: #5a4f48 !important;
+        --accent: #c89b72 !important;
+        --accent-hover: #b3855c !important;
+        --font-base: 16px !important;
+        --h1-size: 4.5rem !important;
+        --h2-size: 3.5rem !important;
+        --h3-size: 2rem !important;
+        --border-radius: 12px !important;
+        --transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+      }
+
+      html {
+        font-size: var(--font-base);
+      }
+      h1, .h1 { font-size: var(--h1-size); }
+      h2, .h2 { font-size: var(--h2-size); }
+      h3, .h3 { font-size: var(--h3-size); }
+      .btn, .project-card, .timeline-content, .logo-rect { border-radius: var(--border-radius); }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader-text">INIZIALIZZAZIONE DEL SISTEMA...</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    
+<nav>
+    <div class="nav-container">
+        <a href="/index-it.html" class="logo hover-target">Daniel Karasani<span>.</span></a>
+        <ul class="nav-links">
+            
+                <li><a href="index-it.html#experience" class="hover-target">Esperienza</a></li>
+            
+                <li><a href="index-it.html#projects" class="hover-target">Progetti</a></li>
+            
+                <li><a href="index-it.html#education" class="hover-target">Istruzione</a></li>
+            
+                <li><a href="blog-it.html" class="hover-target">Blog</a></li>
+            
+                <li><a href="index-it.html#contact" class="hover-target">Contatto</a></li>
+            
+        </ul>
+        
+        <div class="lang-switcher">
+            <a href="/blog.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target " aria-label="Switch language to English">EN</a> 
+            <span class="divider">|</span>
+            <a href="/blog-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target " aria-label="Switch language to German">DE</a> 
+            <span class="divider">|</span>
+            <a href="/blog-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target active" aria-label="Switch language to Italian">IT</a>
+        </div>
+
+        <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+            🌙
+        </button>
+    </div>
+    <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
+</nav>
+
+    
+
+<section class="hero case-study-hero">
+    <div class="container reveal">
+        <span class="tagline">Approfondimenti e Ricerca Ingegneristica</span>
+        <h1>Il Diario della Logica</h1>
+        <p class="quote">Documentare l'intersezione tra sistemi, hardware e strategia.</p>
+    </div>
+</section>
+
+<!-- Blog Grid Section -->
+<section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
+    <div class="blog-controls-wrapper" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;" class="category-filters">
+            <button class="filter-btn active hover-target" data-filter="all" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: var(--bg-color); color: var(--text-dark); cursor: pointer; font-weight: 500;">Tutti gli Articoli</button>
+            <button class="filter-btn hover-target" data-filter="Engineering & Research" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: var(--bg-color); color: var(--text-dark); cursor: pointer; font-weight: 500;">Ingegneria & Ricerca</button>
+            <button class="filter-btn hover-target" data-filter="General Topics" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: var(--bg-color); color: var(--text-dark); cursor: pointer; font-weight: 500;">Argomenti Generali</button>
+            <button class="filter-btn hover-target" data-filter="Off-Topic" style="padding: 6px 14px; border-radius: 20px; border: 1px solid #ccc; background: var(--bg-color); color: var(--text-dark); cursor: pointer; font-weight: 500;">Off-Topic</button>
+        </div>
+        <div style="display: flex; gap: 15px; align-items: center; justify-content: space-between; flex-wrap: wrap; width: 100%;">
+            <div class="blog-search-box hover-target" style="flex: 1; min-width: 250px;">
+                <input type="text" id="blogSearchInput" placeholder="Cerca articoli o #tag...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="blog-sort-box">
+                <label for="blogSortSelect">Ordina per:</label>
+                <select id="blogSortSelect" class="blog-sort-select hover-target">
+                    <option value="default">Predefinito (Manuale)</option>
+                    <option value="newest">Più recenti</option>
+                    <option value="oldest">Meno recenti</option>
+                    <option value="az">Alfabetico (A-Z)</option>
+                    <option value="za">Alfabetico (Z-A)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="blog-grid" id="blog-grid-container">
+        
+    </div>
+</section>
+
+    <footer>
+    <div class="social-links" style="flex-wrap: wrap;">
+        <a href="https://www.linkedin.com/in/daniel-karasani/" class="hover-target" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            LinkedIn
+        </a>
+        <a href="https://github.com/danielkarasani" class="hover-target" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            GitHub
+        </a>
+        <a href="mailto:daniel.karasani@gmail.com" class="hover-target">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Email
+        </a>
+        <a href="https://wa.me/393245808570" class="hover-target" target="_blank" rel="noopener noreferrer" onmouseover="this.style.color='#25D366'" onmouseout="this.style.color=''">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.04-.967-.281-.099-.488-.15-.693.148-.205.297-.771.967-.945 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.693-1.67-.948-2.285-.25-.598-.505-.517-.694-.527-.174-.009-.373-.009-.571-.009s-.521.074-.794.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.703.248-1.302.173-1.422-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.029 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp
+        </a>
+    </div>
+    <div class="footer-details">
+        <p style="margin-bottom: 30px; font-size: 1.05rem; color: #fcfaf8; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <span style="display: inline-block; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80;"></span>
+            Disponibile per progetti a Merano, Alto Adige e oltre.
+        </p>
+        <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Merano (BZ) | +39 3245808570 | daniel.karasani@gmail.com</p>
+        <p>Progettato e ingegnerizzato per massime prestazioni.</p>
+        <p>Sviluppato da Daniel Karasani &copy; 2026 . All rights reserved.</p>
+    </div>
+</footer>
+
+
+    <script src="/_assets/scripts/main.js"></script>
+    
+    <!-- KaTeX JS and Auto-Render -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Gl1m004mQ/A50E86u8zNxaK5E/zEquKNRqG+zCq1" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</body>
+</html>
