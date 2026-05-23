@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Daniel Karasani</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
+    </script>
+</head>
+<body class="loaded">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
+    </script>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo hover-target">Daniel<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects" class="hover-target">Projects</a></li>
+                <li><a href="about.html" class="hover-target">About</a></li>
+                <li><a href="blog.html" class="hover-target" style="color: var(--accent);">Blog</a></li>
+            </ul>
+            
+            <div class="lang-switcher">
+                <a href="blog.html" class="active hover-target">EN</a> 
+                <span class="divider">|</span>
+                <a href="blog-de.html" class="hover-target">DE</a> 
+                <span class="divider">|</span>
+                <a href="blog-it.html" class="hover-target">IT</a>
+            </div>
+
+            <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+                🌙
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero case-study-hero">
+        <div class="container reveal">
+            <span class="tagline">Engineering Insights & Research</span>
+            <h1>The Logic Log</h1>
+            <p class="quote">Documenting the intersection of systems, hardware, and strategy.</p>
+        </div>
+    </section>
+
+    <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
+        <div class="blog-grid">
+            
+            <div class="blog-card hover-target" onclick="openPost('my-first-post.md')">
+                <span class="blog-date">May 15, 2026</span>
+                <h3>The Business Case for AR in Maintenance</h3>
+                <p>Exploring how integrating Augmented Reality with AI and Condition Monitoring reduces operational downtime in food manufacturing.</p>
+                <span class="project-link">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="blog-modal" class="blog-modal">
+        <div class="modal-content hover-target">
+            <button class="close-modal hover-target" onclick="closePost()">&times;</button>
+            <div id="md-reader">Loading...</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-details">
+            <p>&copy; 2026 Daniel Karasani. Designed & Engineered for Performance.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        async function openPost(filename) {
+            const modal = document.getElementById('blog-modal');
+            const reader = document.getElementById('md-reader');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+            reader.innerHTML = '<i>Fetching data from repository...</i>';
+
+            try {
+                const response = await fetch(`posts/${filename}`);
+                if (!response.ok) throw new Error('Post not found on server.');
+                
+                const markdownText = await response.text();
+                reader.innerHTML = marked.parse(markdownText);
+
+                // --- NEW: RE-APPLY CURSOR HOVER EFFECT TO DYNAMIC LINKS ---
+                const newLinks = reader.querySelectorAll('a');
+                newLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+                    link.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+                });
+            } catch (error) {
+                console.error(error);
+                reader.innerHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
+            }
+        }
+
+        function closePost() {
+            document.getElementById('blog-modal').classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+            setTimeout(() => { document.getElementById('md-reader').innerHTML = ''; }, 500);
+        }
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal); reveal();
+
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+        });
+
+        function animateCursor() {
+            let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+            outlineX += distX * 0.15; outlineY += distY * 0.15;
+            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+            if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
+        }
+        
+        if (window.innerWidth > 990) { animateCursor(); }
+        window.addEventListener('resize', () => { if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } });
+
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+            target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+        });
+
+        // --- DARK MODE TOGGLE LOGIC ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark') {
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            let theme = 'light';
+            if (document.body.classList.contains('dark-theme')) {
+                theme = 'dark';
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>

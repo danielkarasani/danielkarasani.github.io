@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Karasani | Industrial Mechanical Engineer</title>
+    <meta name="description" content="Portfolio of Daniel Karasani. Industrial & Mechanical Engineering Student specializing in Process Optimization, Digital Transformation, and Data Analysis.">
+    <meta name="author" content="Daniel Karasani">
+    <link rel="canonical" href="https://danielkarasani.github.io/" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MSX3GD41Z0');
+    </script>
+    <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';</script>
+</head>
+<body class="">
+    <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
+
+    <div id="preloader">
+        <div class="loader-text">INITIALIZING ENGINEERING SYSTEM...</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo hover-target">Daniel<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#about" class="hover-target">About</a></li>
+                <li><a href="#projects" class="hover-target">Projects</a></li>
+                <li><a href="#experience" class="hover-target">Experience</a></li>
+                <li><a href="#education" class="hover-target">Education</a></li>
+                <li><a href="#skills" class="hover-target">Skills</a></li>
+                <li><a href="blog.html" class="hover-target">Blog</a></li>
+            </ul>
+            
+            <div class="lang-switcher">
+                <a href="index.html" class="active hover-target">EN</a> 
+                <span class="divider">|</span>
+                <a href="index-de.html" class="hover-target">DE</a> 
+                <span class="divider">|</span>
+                <a href="index-it.html" class="hover-target">IT</a>
+            </div>
+
+            <button id="theme-toggle" class="hover-target" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+                🌙
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text reveal">
+                <span class="tagline">Ind. & Mechanical Engineering Student @ unibz</span>
+                <h1>Engineering systems.<br>
+                    <span class="text-gradient typing-container"><span id="typewriter" class="typing-text"></span></span>
+                </h1>
+                
+                <p class="quote">"Progress begins in the mind and reveals itself in performance."</p>
+                <p>I thrive at the crossroads of electronics, digitalization, and economics. I love the technical challenge of circuits and code, but I never lose sight of the business reality.</p>
+                
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 40px; align-items: flex-start;">
+                    <a href="#experience" class="btn hover-target">View Experience</a>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="Daniel_Karasani_CV.pdf" target="_blank" class="btn btn-outline hover-target" onclick="gtag('event', 'download', {'event_category': 'CV', 'event_label': 'PDF Download'});">Download CV</a>
+                            <a href="#" target="_blank" class="btn btn-outline hover-target">View in Cloud</a>
+                        </div>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; padding-left: 5px; letter-spacing: 0.5px;">Last updated: May 2026</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image reveal">
+                <img src="images/daniel-karasani-industrial-engineer.jpg" alt="Daniel Karasani" class="hover-target">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container reveal">
+        <h2>Who I Am</h2>
+        <div style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.2rem;">
+            <p>I’ve always been fascinated by how things work, but I’m even more obsessed with how to make them work better. As an aspiring engineer, I view the world through a lens of analytical curiosity, but I ground my ideas in pragmatic execution.</p>
+            <p>To me, innovation isn't about ignoring the past; it’s about building upon it. I strive to understand the history of a system so I can focus my energy on solutions that solve actual problems and add real value through innovation.</p>
+            <p style="font-weight: 700; color: var(--text-dark); margin-top: 40px; font-size: 1.4rem;">
+                "I believe the best engineering doesn't just push technology forward, it pushes the business forward."
+            </p>
+            
+            <div style="margin-top: 40px;">
+                <a href="about.html" class="btn hover-target">Read My Full Story</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container reveal">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card hover-target">
+                <div class="project-image" style="background-image: url('images/air-analyzer-device.jpg');"></div>
+                <div class="project-content">
+                    <span class="project-tagline">Hardware & Software</span>
+                    <h3>Air Analyzer: Precision IAQ</h3>
+                    <p>An end-to-end engineered indoor air quality monitoring station. Features custom-routed PCBs, a modular industrial sensor array, and software written in Assembler for an NXP microcontroller.</p>
+                    <div class="project-footer">
+                        <span class="skill-tag" style="padding: 5px 10px; font-size: 0.75rem;">Assembler | EAGLE</span>
+                        <a href="air-analyzer.html" class="project-link hover-target">
+                            View Case Study 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card hover-target">
+                <div class="project-image" style="background-image: url('images/ar-maintenance-concept.jpg');"></div>
+                <div class="project-content">
+                    <span class="project-tagline">Academic Research (2026)</span>
+                    <h3>AR in Industrial Maintenance</h3>
+                    <p>Exploring the digital transformation of the food manufacturing sector. Establishing a framework for integrating Augmented Reality with AI and Condition Monitoring to reduce operational downtime.</p>
+                    <div class="project-footer">
+                        <span class="skill-tag" style="padding: 5px 10px; font-size: 0.75rem;">Optimization | Strategy</span>
+                        <a href="#contact" class="project-link hover-target">
+                            Discuss Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background-color: var(--white); padding: 120px 0; transition: background-color 0.4s;">
+        <div class="container reveal">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Jul 2021 – Jul 2025 (4 yrs 1 mo)</div>
+                    <div class="timeline-content hover-target">
+                        
+                        <div class="header-with-logo">
+                            <div class="logo-group">
+                                <img src="images/logo-schaer.png" alt="Dr. Schär Logo" class="entity-logo">
+                            </div>
+                            <h3 class="premium-title">Dr. Schär</h3>
+                        </div>
+                        
+                        <div style="margin-top: 10px;">
+                            <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;">Global Production Engineer</h4>
+                            <span class="date-muted">Jun 2023 - Jul 2025 | Burgstall, Italy</span>
+                            <ul>
+                                <li>Significant involvement in the cross-plant implementation of maintenance software through independent consolidation of master data.</li>
+                                <li>Development of user documentation and video tutorials to increase user acceptance and application efficiency.</li>
+                                <li>Integral support of the department in operational and organisational project tasks.</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <h4>Global Technical Project Manager</h4>
+                            <span class="date-muted">Jan 2023 - Jun 2023 (6 mos) | Burgstall, Italy</span>
+                            <ul>
+                                <li>Responsible for technical projects across the food industry sector.</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <h4>Corporate Technical Project Manager</h4>
+                            <span class="date-muted">Jul 2022 - Dec 2022 (6 mos)</span>
+                            <ul>
+                                <li>Collaborated on high-priority investment projects across all plants, drawing up technical specifications and cross-plant guidelines.</li>
+                                <li>Supervised the introduction of data-driven decision-making processes and maintained internal PowerBI dashboards.</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <h4>Corporate Technical Project Intern</h4>
+                            <span class="date-muted">Jul 2021 - Jun 2022 (1 yr) | Postal, Italy</span>
+                            <ul>
+                                <li>Participated in the implementation and data consolidation of cross-site maintenance software, focusing on spare parts management.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Feb 2022 – Present (4 yrs 4 mos)</div>
+                    <div class="timeline-content hover-target">
+                        
+                        <div class="header-with-logo">
+                            <div class="logo-group">
+                                <img src="images/logo-idal.png" alt="IDAL BAU Logo" class="entity-logo">
+                            </div>
+                            <h3 class="premium-title">IDAL BAU of Karasani Fatos</h3>
+                        </div>
+
+                        <h4 style="color: var(--text-dark); font-weight: 700; font-size: 1.2rem; margin-top: 10px; margin-bottom: 5px;">Administrative Office Assistant</h4>
+                        <span class="date-muted">Merano, Italy</span>
+                        <ul>
+                            <li>Support daily administrative operations of a self-employed construction business, ensuring smooth workflow.</li>
+                            <li>Prepare and send quotes, price calculations, and invoices using MS Office 365.</li>
+                            <li>Maintain organized digital and physical filing system.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-date">Jul 2019 – Aug 2020</div>
+                    <div class="timeline-content hover-target">
+                        <h3>Technical Traineeships</h3>
+                        
+                        <div class="sub-role" style="margin-top: 10px; border-top: none; padding-top: 0;">
+                            <div class="header-with-logo">
+                                <div class="logo-group">
+                                    <img src="images/logo-zoeschg.png" alt="Zoeschg GmbH Logo" class="entity-logo">
+                                </div>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem;">Electrician | Zoeschg GmbH</h4>
+                            </div>
+                            <span class="date-muted">Jul 2020 - Aug 2020 | Merano, Italy</span>
+                            <ul>
+                                <li>Assisted in electrical installation, wiring, and troubleshooting in residential and commercial environments.</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-role">
+                            <div class="header-with-logo">
+                                <div class="logo-group">
+                                    <img src="images/logo-frigotherm.png" alt="Frigotherm Ferrari Logo" class="entity-logo">
+                                </div>
+                                <h4 class="premium-title" style="color: var(--text-dark); font-size: 1.2rem;">Refrigeration Tech | Frigotherm Ferrari</h4>
+                            </div>
+                            <span class="date-muted">Jul 2019 - Aug 2019 | Lana, Italy</span>
+                            <ul>
+                                <li>Assisted in assembling and installing refrigeration and air-conditioning systems.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="container reveal">
+        <h2>Education & Credentials</h2>
+        <div class="edu-grid">
+            
+            <div class="edu-card tilt-card hover-target">
+                <div class="tilt-inner">
+                    <div class="header-with-logo">
+                        <div class="logo-group">
+                            <img src="images/logo-unibz.png" alt="unibz General Logo" class="entity-logo">
+                            <img src="images/logo-unibz-engineering.png" alt="unibz Engineering Dept Logo" class="entity-logo">
+                        </div>
+                        <h3 class="premium-title">Free University of Bolzano</h3>
+                    </div>
+                    <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sept 2021 - July 2026</span>
+                    <p><strong>Bachelor of Science (B.Sc.)</strong> in Industrial & Mechanical Engineering.</p>
+                    <p>Dual study programme with a major in <strong>Automation</strong>.</p>
+                </div>
+            </div>
+
+            <div class="edu-card tilt-card hover-target">
+                <div class="tilt-inner">
+                    <div class="header-with-logo">
+                        <div class="logo-group">
+                            <img src="images/logo-tfo.png" alt="TFO Merano Logo" class="entity-logo">
+                        </div>
+                        <h3 class="premium-title">TFO "Oskar von Miller" Merano</h3>
+                    </div>
+                    <span class="date" style="display: block; font-weight: bold; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">2016 - 2021</span>
+                    <p><strong>Technical Highschool Diploma</strong></p>
+                    <p>Upper secondary education diploma. Specialization in Electronics and Industrial Informatics.</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <div style="margin-top: 60px; text-align: center;">
+            <h3 style="margin-bottom: 30px; font-size: 1.8rem;">Licenses & Certifications</h3>
+            <div class="cert-container">
+                <span class="cert-tag hover-target">📄 English C1 Certification</span>
+                <span class="cert-tag hover-target">🤖 Career Essentials in Generative AI</span>
+                <span class="cert-tag hover-target">🚗 Driving License (Class B)</span>
+                <span class="cert-tag hover-target">🛡️ Specific Health & Safety Training (ATECO C, F, H, J)</span>
+                <span class="cert-tag hover-target">⛑️ Occupational Health & Safety (Basic)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background-color: var(--white); padding: 120px 0; transition: background-color 0.4s;">
+        <div class="container reveal">
+            <h2>Technical Knowledge & Skills</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-category">
+                    <h3>Top Professional Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag hover-target">Digitalization (Digitalisierung)</span>
+                        <span class="skill-tag hover-target">Engineering (Ingenieurwesen)</span>
+                        <span class="skill-tag hover-target">Technical Project Management</span>
+                        <span class="skill-tag hover-target">Knowledge Management</span>
+                        <span class="skill-tag hover-target">Strategic Development</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Software & CAD</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag hover-target">AutoCAD</span>
+                        <span class="skill-tag hover-target">ANSYS</span>
+                        <span class="skill-tag hover-target">MSC Adams</span>
+                        <span class="skill-tag hover-target">visTABLE</span>
+                        <span class="skill-tag hover-target">Autodesk EAGLE (PCB)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Simulation & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag hover-target">MATLAB / Simulink</span>
+                        <span class="skill-tag hover-target">C# / Visual Basic</span>
+                        <span class="skill-tag hover-target">SQL</span>
+                        <span class="skill-tag hover-target">Arduino (C/C++)</span>
+                        <span class="skill-tag hover-target">Siemens Step 7 (SPS)</span>
+                        <span class="skill-tag hover-target">LTSpice</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag hover-target">Dynamics 365</span>
+                        <span class="skill-tag hover-target">PowerBI</span>
+                        <span class="skill-tag hover-target">IFS Ultimo (EAM)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">German (Native/Bilingual)</span>
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">Italian (Native/Bilingual)</span>
+                        <span class="skill-tag hover-target" style="background: var(--text-dark); color: var(--bg-main); border-color: var(--text-dark);">English (Full Professional)</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+        <h2>Start a Conversation</h2>
+        <div class="contact-box hover-target">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="53b801c1-6542-49ee-b808-b7525ba2935f">
+                <input type="hidden" name="redirect" value="https://danielkarasani.github.io/">
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-row">
+                    <input type="text" name="name" class="hover-target" placeholder="Name" required>
+                    <input type="email" name="email" class="hover-target" placeholder="Email Address" required>
+                </div>
+                <textarea name="message" rows="5" class="hover-target" placeholder="Your Message..." required></textarea>
+                
+                <button type="submit" class="btn hover-target" style="width: 100%; font-size: 1.2rem;">Send Secure Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/daniel-karasani" class="hover-target" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com/danielkarasani" class="hover-target" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                GitHub
+            </a>
+            <a href="mailto:daniel.karasani@gmail.com" class="hover-target">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Email
+            </a>
+        </div>
+        <div class="footer-details">
+            <p style="margin-bottom: 5px; color: #ccc;">Laubengasse 254, 39012 Meran (BZ) | +39 3245808570</p>
+            <p>&copy; 2026 Daniel Karasani. Designed & Engineered for Performance.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => { setTimeout(() => { document.body.classList.add('loaded'); }, 2000); });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal); reveal();
+
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+        });
+
+        function animateCursor() {
+            let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+            outlineX += distX * 0.15; outlineY += distY * 0.15;
+            cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+            if (window.innerWidth > 990) { requestAnimationFrame(animateCursor); }
+        }
+        
+        if (window.innerWidth > 990) { animateCursor(); }
+        window.addEventListener('resize', () => { if (window.innerWidth > 990 && cursorOutline.style.left === "") { animateCursor(); } });
+
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, textarea');
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
+            target.addEventListener('mouseleave', () => { document.body.classList.remove('cursor-hover'); });
+        });
+
+        const words = ["Optimizing reality.", "Automating processes.", "Driving efficiency.", "Transforming data."];
+        let wordIndex = 0; let charIndex = 0; let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) { charIndex--; } else { charIndex++; }
+            typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; isDeleting = true; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; 
+            }
+            setTimeout(type, typeSpeed);
+        }
+        setTimeout(type, 2500); 
+
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                const centerX = rect.width / 2; const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10; 
+                const rotateY = ((x - centerX) / centerX) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // --- DARK MODE TOGGLE LOGIC ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark') {
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            let theme = 'light';
+            
+            if (document.body.classList.contains('dark-theme')) {
+                theme = 'dark';
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>
