@@ -1,0 +1,27 @@
+
+<nav>
+    <div class="nav-container">
+        <a href="index<%= lang === 'en' ? '' : '-' + lang %>.html" class="logo hover-target">Daniel<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index<%= lang === 'en' ? '' : '-' + lang %>.html#about" class="hover-target">About</a></li>
+            <li><a href="index<%= lang === 'en' ? '' : '-' + lang %>.html#projects" class="hover-target">Projects</a></li>
+            <li><a href="index<%= lang === 'en' ? '' : '-' + lang %>.html#experience" class="hover-target">Experience</a></li>
+            <li><a href="index<%= lang === 'en' ? '' : '-' + lang %>.html#education" class="hover-target">Education</a></li>
+            <li><a href="index<%= lang === 'en' ? '' : '-' + lang %>.html#skills" class="hover-target">Skills</a></li>
+            <li><a href="blog<%= lang === 'en' ? '' : '-' + lang %>.html" class="hover-target">Blog</a></li>
+        </ul>
+        
+        <div class="lang-switcher">
+            <a href="<%= page %>.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target <%= lang === 'en' ? 'active' : '' %>" aria-label="Switch language to English">EN</a> 
+            <span class="divider">|</span>
+            <a href="<%= page === 'index' ? 'index' : page %>-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target <%= lang === 'de' ? 'active' : '' %>" aria-label="Switch language to German">DE</a> 
+            <span class="divider">|</span>
+            <a href="<%= page === 'index' ? 'index' : page %>-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target <%= lang === 'it' ? 'active' : '' %>" aria-label="Switch language to Italian">IT</a>
+        </div>
+
+        <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+            🌙
+        </button>
+    </div>
+    <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
+</nav>

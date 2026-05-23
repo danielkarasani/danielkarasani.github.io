@@ -13,8 +13,6 @@ const PRECACHE_ASSETS = [
   './air-analyzer.html',
   './air-analyzer-de.html',
   './air-analyzer-it.html',
-  './styles.css',
-  './script.js',
   './manifest.json',
   './blog-posts.json',
   './DanielKarasani-favcon.svg',

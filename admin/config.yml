@@ -1,0 +1,51 @@
+backend:
+  name: github
+  repo: danielkarasani/danielkarasani.github.io
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "blog_metadata"
+    label: "Blog Posts Metadata"
+    files:
+      - name: "blog_posts"
+        label: "Blog Posts List"
+        file: "blog-posts.json"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            fields:
+              - {label: "ID (Markdown Filename)", name: "id", widget: "string"}
+              - label: "Date"
+                name: "date"
+                widget: "object"
+                fields:
+                  - {label: "Date (EN)", name: "en", widget: "string"}
+                  - {label: "Date (DE)", name: "de", widget: "string"}
+                  - {label: "Date (IT)", name: "it", widget: "string"}
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "Title (EN)", name: "en", widget: "string"}
+                  - {label: "Title (DE)", name: "de", widget: "string"}
+                  - {label: "Title (IT)", name: "it", widget: "string"}
+              - label: "Description"
+                name: "description"
+                widget: "object"
+                fields:
+                  - {label: "Description (EN)", name: "en", widget: "text"}
+                  - {label: "Description (DE)", name: "de", widget: "text"}
+                  - {label: "Description (IT)", name: "it", widget: "text"}
+              - {label: "Languages", name: "languages", widget: "list"}
+  - name: "blog_content"
+    label: "Blog Markdown Content"
+    folder: "posts"
+    create: true
+    extension: "md"
+    format: "raw"
+    fields:
+      - {label: "Body", name: "body", widget: "markdown"}
