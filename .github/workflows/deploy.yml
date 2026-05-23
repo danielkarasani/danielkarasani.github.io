@@ -1,0 +1,39 @@
+name: Build and Deploy Static HTML
+
+on:
+  push:
+    branches:
+      - main
+    # Only trigger when source files are changed, to prevent loops
+    paths:
+      - 'src/**'
+      - 'build.js'
+      - 'posts/**'
+      - 'blog-posts.json'
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Static Site Generator
+        run: node build.js
+
+      - name: Commit and Push generated files back to main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # Add all generated files in the root
+          git add *.html styles.css script.js
+          # Commit only if there are changes. [skip ci] prevents infinite loops.
+          git commit -m "chore: auto-build static HTML files [skip ci]" || echo "No changes to commit"
+          git push
