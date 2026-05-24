@@ -217,11 +217,11 @@ body {
             </ul>
 
             <div class="lang-switcher">
-                <a href="blog.html" class="hover-target" aria-label="Passa alla lingua inglese">EN</a>
+                <a href="blog.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target" aria-label="Passa alla lingua inglese">EN</a>
                 <span class="divider">|</span>
-                <a href="blog-de.html" class="hover-target" aria-label="Passa alla lingua tedesca">DE</a>
+                <a href="blog-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target" aria-label="Passa alla lingua tedesca">DE</a>
                 <span class="divider">|</span>
-                <a href="blog-it.html" class="active hover-target" aria-label="Passa alla lingua italiana">IT</a>
+                <a href="blog-it.html" onclick="localStorage.setItem('lang', 'it')" class="active hover-target" aria-label="Passa alla lingua italiana">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" aria-label="Attiva/disattiva tema chiaro e scuro"

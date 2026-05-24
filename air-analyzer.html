@@ -207,11 +207,11 @@ body {
             </ul>
 
             <div class="lang-switcher">
-                <a href="air-analyzer.html" class="active hover-target" aria-label="Switch language to English">EN</a>
+                <a href="air-analyzer.html" onclick="localStorage.setItem('lang', 'en')" class="active hover-target" aria-label="Switch language to English">EN</a>
                 <span class="divider">|</span>
-                <a href="air-analyzer-de.html" class="hover-target" aria-label="Switch language to German">DE</a>
+                <a href="air-analyzer-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target" aria-label="Switch language to German">DE</a>
                 <span class="divider">|</span>
-                <a href="air-analyzer-it.html" class="hover-target" aria-label="Switch language to Italian">IT</a>
+                <a href="air-analyzer-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target" aria-label="Switch language to Italian">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme"

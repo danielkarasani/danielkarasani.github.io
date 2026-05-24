@@ -204,11 +204,11 @@ body {
             </ul>
             
             <div class="lang-switcher">
-                <a href="about.html" class="hover-target" aria-label="Sprache auf Englisch umstellen">EN</a> 
+                <a href="about.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target" aria-label="Sprache auf Englisch umstellen">EN</a> 
                 <span class="divider">|</span>
-                <a href="about-de.html" class="active hover-target" aria-label="Sprache auf Deutsch umstellen">DE</a> 
+                <a href="about-de.html" onclick="localStorage.setItem('lang', 'de')" class="active hover-target" aria-label="Sprache auf Deutsch umstellen">DE</a> 
                 <span class="divider">|</span>
-                <a href="about-it.html" class="hover-target" aria-label="Sprache auf Italienisch umstellen">IT</a>
+                <a href="about-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target" aria-label="Sprache auf Italienisch umstellen">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" aria-label="Licht- und Dunkelmodus umschalten" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">

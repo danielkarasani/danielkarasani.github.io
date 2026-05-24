@@ -216,11 +216,11 @@ body {
             </ul>
 
             <div class="lang-switcher">
-                <a href="blog.html" class="active hover-target" aria-label="Switch language to English">EN</a>
+                <a href="blog.html" onclick="localStorage.setItem('lang', 'en')" class="active hover-target" aria-label="Switch language to English">EN</a>
                 <span class="divider">|</span>
-                <a href="blog-de.html" class="hover-target" aria-label="Switch language to German">DE</a>
+                <a href="blog-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target" aria-label="Switch language to German">DE</a>
                 <span class="divider">|</span>
-                <a href="blog-it.html" class="hover-target" aria-label="Switch language to Italian">IT</a>
+                <a href="blog-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target" aria-label="Switch language to Italian">IT</a>
             </div>
 
             <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">

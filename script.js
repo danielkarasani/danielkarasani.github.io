@@ -190,8 +190,14 @@ if (document.readyState === 'loading') {
 // ==========================================
 let originalTitle = document.title;
 window.addEventListener("blur", () => {
-    document.title = "Come back! 👀";
-	// Optional: Swap the favicon to a different SVG here
+    const pageLang = document.documentElement.lang || "en";
+    if (pageLang === 'de') {
+        document.title = "Komm zurück! 👀";
+    } else if (pageLang === 'it') {
+        document.title = "Torna presto! 👀";
+    } else {
+        document.title = "Come back! 👀";
+    }
 });
 window.addEventListener("focus", () => {
     document.title = originalTitle;
@@ -703,6 +709,13 @@ window.openPost = async function(filename) {
             reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText}</pre>`;
         }
 
+        // Dynamically extract the article's top-level header and update the browser tab title
+        const matchTitle = markdownText.match(/^#\s+(.+)$/m);
+        if (matchTitle) {
+            const postTitle = matchTitle[1].trim();
+            document.title = `${postTitle} | The Logic Log`;
+        }
+
     } catch (error) {
         console.error(error);
         reader.innerHTML = errorHTML;
@@ -719,6 +732,12 @@ window.closePost = function() {
     if (reader) {
         setTimeout(() => { reader.innerHTML = ''; }, 500);
     }
+    
+    // Restore the browser tab title to the original page title
+    if (typeof originalTitle !== 'undefined') {
+        document.title = originalTitle;
+    }
+
     // Remove URL query parameter
     try {
         const url = new URL(window.location);
@@ -1128,10 +1147,16 @@ function initBlogSorting() {
         sortSelect.addEventListener('change', () => {
             const val = sortSelect.value;
             const cards = Array.from(grid.querySelectorAll('.blog-card'));
+            const noscriptElement = grid.querySelector('noscript');
 
             if (val === 'default') {
-                grid.innerHTML = '';
-                originalCards.forEach(card => grid.appendChild(card));
+                originalCards.forEach(card => {
+                    if (noscriptElement) {
+                        grid.insertBefore(card, noscriptElement);
+                    } else {
+                        grid.appendChild(card);
+                    }
+                });
                 applyFilters();
                 return;
             }
@@ -1151,8 +1176,13 @@ function initBlogSorting() {
                 return 0;
             });
 
-            grid.innerHTML = '';
-            cards.forEach(card => grid.appendChild(card));
+            cards.forEach(card => {
+                if (noscriptElement) {
+                    grid.insertBefore(card, noscriptElement);
+                } else {
+                    grid.appendChild(card);
+                }
+            });
             applyFilters();
         });
     }
