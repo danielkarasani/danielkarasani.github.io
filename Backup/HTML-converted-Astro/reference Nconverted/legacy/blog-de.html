@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <!-- Performance Preconnects for Core Web Vitals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Daniel Karasani</title>
+    <meta name="description"
+        content="Entdecken Sie den Engineering-Blog von Daniel Karasani - Das Logik-Logbuch, in dem Systeme, Hardware und strategische Erkenntnisse dokumentiert werden.">
+    <meta name="author" content="Daniel Karasani">
+    <link rel="canonical" href="https://danielkarasani.github.io/blog-de.html" />
+    <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/blog.html" />
+    <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/blog-de.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/blog-it.html" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c89b72">
+    
+    <!-- CDN Preconnecting -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Zero-Latency Language Switch Prefetching -->
+    <link rel="prefetch" href="blog.html">
+    <link rel="prefetch" href="blog-it.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MSX3GD41Z0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-MSX3GD41Z0');
+    </script>
+    <script data-goatcounter="https://danielkarasani01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    
+    <style id="critical-path-css">
+:root {
+    --bg-main: #fcfaf8;       
+    --bg-hero: #ece6dd;       
+    --text-dark: #2c2420;     
+    --text-muted: #5a4f48;    
+    --accent: #c89b72;        
+    --accent-hover: #b3855c;  
+    --white: #ffffff;
+    --nav-bg: rgba(252, 250, 248, 0.7); 
+    --gradient-text: linear-gradient(135deg, var(--text-dark), var(--accent));
+}
+body.dark-theme, html.dark-theme body {
+    --bg-main: #1a1512;       
+    --bg-hero: #241e1a;       
+    --text-dark: #fcfaf8;     
+    --text-muted: #b5a89f;    
+    --accent: #d8b08d;        
+    --white: #241e1a;         
+    --nav-bg: rgba(26, 21, 18, 0.85); 
+}
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+}
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--text-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+.loader-text {
+    color: var(--white);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 20px;
+    min-height: 1.5em;
+    line-height: 1.5;
+}
+.loader-bar {
+    width: 250px;
+    height: 2px;
+    background: rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.loader-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    animation: loadBar 2s ease forwards;
+}
+@keyframes loadBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+.loaded #preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+</style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.className += ' dark-theme';
+        if (sessionStorage.getItem('preloader-completed') === 'true') {
+            document.documentElement.classList.add('preloader-skipped');
+            document.write('<style>#preloader { display: none !important; }</style>');
+        }
+    </script>
+    <noscript>
+        <style>
+            #preloader { display: none !important; }
+            .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, input, textarea { cursor: pointer !important; }
+
+            /* Mobile Navigation Fallback when JS is disabled */
+            @media (max-width: 990px) {
+                .nav-links {
+                    position: static !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 15px !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    height: auto !important;
+                    padding: 10px 0 !important;
+                    background: transparent !important;
+                    backdrop-filter: none !important;
+                }
+                .nav-links li {
+                    width: auto !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .nav-links a {
+                    font-size: 1rem !important;
+                    padding: 5px 10px !important;
+                }
+                .nav-container {
+                    flex-direction: column !important;
+                    gap: 10px !important;
+                    padding: 10px 20px !important;
+                }
+                nav {
+                    position: static !important;
+                    padding: 10px 0 !important;
+                }
+                .hero {
+                    padding-top: 40px !important;
+                }
+                #theme-toggle {
+                    display: none !important;
+                }
+            }
+        </style>
+    </noscript>
+</head>
+
+<body class="">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
+    </script>
+
+    
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    
+
+<nav>
+    <div class="nav-container">
+        <a href="index-de.html" class="logo hover-target">Daniel<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index-de.html#about" class="hover-target">About</a></li>
+            <li><a href="index-de.html#projects" class="hover-target">Projects</a></li>
+            <li><a href="index-de.html#experience" class="hover-target">Experience</a></li>
+            <li><a href="index-de.html#education" class="hover-target">Education</a></li>
+            <li><a href="index-de.html#skills" class="hover-target">Skills</a></li>
+            <li><a href="blog-de.html" class="hover-target">Blog</a></li>
+        </ul>
+        
+        <div class="lang-switcher">
+            <a href="blog.html" onclick="localStorage.setItem('lang', 'en')" class="hover-target " aria-label="Switch language to English">EN</a> 
+            <span class="divider">|</span>
+            <a href="blog-de.html" onclick="localStorage.setItem('lang', 'de')" class="hover-target active" aria-label="Switch language to German">DE</a> 
+            <span class="divider">|</span>
+            <a href="blog-it.html" onclick="localStorage.setItem('lang', 'it')" class="hover-target " aria-label="Switch language to Italian">IT</a>
+        </div>
+
+        <button id="theme-toggle" class="hover-target" aria-label="Toggle light and dark theme" style="background: none; border: none; font-size: 1.2rem; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer;">
+            🌙
+        </button>
+    </div>
+    <div class="scroll-progress-bar" role="presentation" aria-hidden="true"><div class="scroll-progress-fill"></div></div>
+</nav>
+
+
+
+    <section class="hero case-study-hero">
+        <div class="container reveal">
+            <span class="tagline">Technische Einblicke & Forschung</span>
+            <h1>Das Logik-Logbuch</h1>
+            <p class="quote">Die Schnittstelle von Systemen, Hardware und Strategie dokumentieren.</p>
+        </div>
+    </section>
+
+    <section class="container reveal" style="margin-top: -60px; position: relative; z-index: 10;">
+        <div class="blog-controls-wrapper">
+            <div class="blog-search-box hover-target">
+                <input type="text" id="blogSearchInput" placeholder="Artikel suchen...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="blog-sort-box">
+                <label for="blogSortSelect">Sortieren nach:</label>
+                <select id="blogSortSelect" class="blog-sort-select hover-target">
+                    <option value="default">Standard (Manuell)</option>
+                    <option value="newest">Neueste zuerst</option>
+                    <option value="oldest">Älteste zuerst</option>
+                    <option value="az">Alphabetisch (A-Z)</option>
+                    <option value="za">Alphabetisch (Z-A)</option>
+                </select>
+            </div>
+        </div>
+        <div class="blog-grid">
+            <noscript>
+                <a href="posts/my-first-post.md" class="blog-card hover-target" target="_blank" rel="noopener noreferrer">
+                    <span class="blog-date">15. Mai 2026</span>
+                    <h3>Der wirtschaftliche Nutzen von AR in der Instandhaltung</h3>
+                    <p>Untersuchung, wie die Integration von Augmented Reality mit KI und Zustandsüberwachung ungeplante
+                        Ausfallzeiten in der Lebensmittelindustrie reduziert.</p>
+                    <span class="project-link">Artikel lesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg></span>
+                </a>
+            </noscript>
+        </div>
+    </section>
+
+    <div id="blog-modal" class="blog-modal">
+        <div class="modal-content hover-target">
+            <button class="close-modal hover-target" onclick="closePost()">&times;</button>
+            <div id="md-reader">Laden...</div>
+        </div>
+    </div>
+
+    
+
+<footer>
+    <div class="container">
+        <h2>Let's build something great.</h2>
+        <p class="footer-details">Whether you have a specific project in mind, need advice on digitalization, or just want to discuss the future of industrial engineering—I'm always open to connecting. Based in South Tyrol, serving globally.</p>
+        <div class="social-links">
+            <a href="https://linkedin.com/in/daniel-karasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="mailto:daniel.karasani@outlook.com" class="hover-target" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://github.com/danielkarasani" target="_blank" rel="noopener noreferrer" class="hover-target" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+        </div>
+        <p style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">&copy; 2026 Daniel Karasani. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+
+</html>

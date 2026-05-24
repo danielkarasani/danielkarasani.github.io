@@ -46,7 +46,7 @@ function checkHtmlFile(filePath, lang) {
 
   // 1. Check manifest linkage
   if (!content.includes('href="manifest.json"') && !content.includes("href='manifest.json'")) {
-    errors.append("Missing PWA manifest linkage: <link rel=\"manifest\" href=\"manifest.json\">");
+    errors.push("Missing PWA manifest linkage: <link rel=\"manifest\" href=\"manifest.json\">");
   }
 
   // 2. Check theme-color linkage
@@ -81,8 +81,8 @@ function checkSw() {
 
   const content = fs.readFileSync(swPath, 'utf8');
 
-  if (!content.includes("const CACHE_NAME = 'daniel-portfolio-cache-v2';")) {
-    errors.push("CACHE_NAME is not updated to 'daniel-portfolio-cache-v2' in sw.js");
+  if (!/const\s+CACHE_NAME\s*=\s*['"]daniel-portfolio-cache-v\d+['"];/.test(content)) {
+    errors.push("CACHE_NAME is not defined or does not match 'daniel-portfolio-cache-v<N>' in sw.js");
   }
 
   if (!content.includes("'./manifest.json'") && !content.includes('"./manifest.json"')) {
