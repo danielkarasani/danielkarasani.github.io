@@ -104,7 +104,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
     body.custom-cursor-active a *,
     body.custom-cursor-active button *,
     body.custom-cursor-active .hover-target * {
-        cursor: none !important;
+        cursor: pointer !important;
     }
 }
 
