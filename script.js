@@ -487,24 +487,31 @@ if (document.readyState === 'complete') {
     setTimeout(hidePreloader, 2000);
 }
 
-const revealOptions = {
-    root: null,
-    rootMargin: '0px 0px -50px 0px',
-    threshold: 0 
-};
+function initRevealObserver() {
+    const revealOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0 
+    };
 
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target); 
-        }
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal').forEach(element => {
+        revealObserver.observe(element);
     });
-}, revealOptions);
-
-document.querySelectorAll('.reveal').forEach(element => {
-    revealObserver.observe(element);
-});
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRevealObserver);
+} else {
+    initRevealObserver();
+}
 
 // ==========================================
 // 4. CUSTOM CURSOR LOGIC (Touch/Desktop Adaptive)
@@ -516,6 +523,7 @@ if (cursorDot && cursorOutline) {
     let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
     let isCursorActive = false;
     let isLoopRunning = false;
+    let cursorIdleTimer = null;
 
     const animateCursor = function() {
         if (!isLoopRunning) return;
@@ -543,6 +551,9 @@ if (cursorDot && cursorOutline) {
             cursorDot.style.opacity = '1';
             cursorOutline.style.opacity = '1';
         }
+
+        clearTimeout(cursorIdleTimer);
+        cursorIdleTimer = setTimeout(() => { isLoopRunning = false; }, 200);
 
         if (!isLoopRunning) {
             isLoopRunning = true;
@@ -614,27 +625,34 @@ if (typeTarget) { setTimeout(type, 2500); }
 // ==========================================
 // 6. 3D TILT CARDS
 // ==========================================
-const tiltCards = document.querySelectorAll('.tilt-card');
-tiltCards.forEach(card => {
-    let rect = null;
-    card.addEventListener('mouseenter', () => {
-        rect = card.getBoundingClientRect();
-    });
-    card.addEventListener('mousemove', e => {
-        if (!rect) {
+function initTiltCards() {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+        let rect = null;
+        card.addEventListener('mouseenter', () => {
             rect = card.getBoundingClientRect();
-        }
-        const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-        const centerX = rect.width / 2; const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -10; 
-        const rotateY = ((x - centerX) / centerX) * 10;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        card.addEventListener('mousemove', e => {
+            if (!rect) {
+                rect = card.getBoundingClientRect();
+            }
+            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+            const centerX = rect.width / 2; const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -10; 
+            const rotateY = ((x - centerX) / centerX) * 10;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            rect = null;
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
     });
-    card.addEventListener('mouseleave', () => {
-        rect = null;
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-    });
-});
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiltCards);
+} else {
+    initTiltCards();
+}
 
 // ==========================================
 // 7. DARK MODE TOGGLE LOGIC
@@ -643,6 +661,8 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
 
 if (currentTheme === 'dark' && themeToggleBtn) {
+    document.body.classList.add('dark-theme');
+    document.documentElement.classList.add('dark-theme');
     themeToggleBtn.textContent = '☀️';
 }
 
@@ -706,7 +726,7 @@ window.openPost = async function(filename) {
         if (typeof window.marked !== 'undefined') {
             reader.innerHTML = window.marked.parse(markdownText);
         } else {
-            reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText}</pre>`;
+            reader.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace;">${markdownText.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
         }
 
         // Dynamically extract the article's top-level header and update the browser tab title
@@ -779,7 +799,7 @@ function initMobileNav() {
         const isActive = navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
         nav.classList.toggle('menu-open', isActive);
-        document.body.classList.toggle('no-scroll');
+        document.body.classList.toggle('no-scroll', isActive);
         hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     }
 
@@ -884,8 +904,8 @@ function initContactForm() {
             body: json
         })
         .then(async (response) => {
-            await response.json();
-            if (response.status === 200) {
+            const result = await response.json();
+            if (response.status === 200 && result.success) {
                 // 4. Success Animation Transition
                 contactForm.classList.add('contact-fade-out');
                 
@@ -992,6 +1012,11 @@ async function initDynamicBlogFeed() {
 
         const filteredPosts = posts.filter(post => post.languages && post.languages.includes(lang));
 
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
         let cardsHTML = '';
         filteredPosts.forEach(post => {
             const dateStr = post.date[lang] || post.date.en;
@@ -1000,10 +1025,10 @@ async function initDynamicBlogFeed() {
             
             const catStr = post.category || 'General Topics';
             cardsHTML += `
-                <a href="posts/${post.id}" data-category="${catStr}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')" target="_blank" rel="noopener noreferrer">
-                    <span class="blog-date">${dateStr}</span>
-                    <h3>${titleStr}</h3>
-                    <p>${descStr}</p>
+                <a href="posts/${post.id}" data-category="${escapeHTML(catStr)}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')">
+                    <span class="blog-date">${escapeHTML(dateStr)}</span>
+                    <h3>${escapeHTML(titleStr)}</h3>
+                    <p>${escapeHTML(descStr)}</p>
                     <span class="project-link">${readText} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
@@ -1028,7 +1053,12 @@ async function initDynamicBlogFeed() {
 
     } catch (error) {
         console.error("Error loading dynamic blog feed:", error);
-        grid.innerHTML = `<div class="blog-error-message" style="grid-column: 1/-1; text-align: center; padding: 40px; font-family: monospace; font-size: 1.1rem; color: #ff5555;">Could not load blog posts. Please refresh or try again later.</div>`;
+        const errorTranslations = {
+            en: 'Could not load blog posts. Please refresh or try again later.',
+            de: 'Blog-Beiträge konnten nicht geladen werden. Bitte aktualisieren oder versuchen Sie es später erneut.',
+            it: 'Impossibile caricare gli articoli del blog. Aggiorna la pagina o riprova più tardi.'
+        };
+        grid.innerHTML = `<div class="blog-error-message" style="grid-column: 1/-1; text-align: center; padding: 40px; font-family: monospace; font-size: 1.1rem; color: #ff5555;">${errorTranslations[lang] || errorTranslations.en}</div>`;
         if (noscriptElement) {
             grid.appendChild(noscriptElement);
         }
@@ -1061,18 +1091,7 @@ function initBlogSorting() {
             
             const matchesSearch = !query || dateText.includes(query) || titleText.includes(query) || descText.includes(query);
             
-            let matchesCategory = false;
-            if (activeCategory === 'all') {
-                matchesCategory = true;
-            } else if (activeCategory === 'Engineering & Research' && categoryAttr === 'Engineering & Research') {
-                matchesCategory = true;
-            } else if (activeCategory === 'General Topics' && categoryAttr === 'General Topics') {
-                matchesCategory = true;
-            } else if (activeCategory === 'Off-Topic' && categoryAttr === 'Off-Topic') {
-                matchesCategory = true;
-            } else if (categoryAttr === activeCategory) {
-                matchesCategory = true;
-            }
+            const matchesCategory = activeCategory === 'all' || categoryAttr === activeCategory;
 
             if (matchesSearch && matchesCategory) {
                 card.style.display = '';
@@ -1082,7 +1101,7 @@ function initBlogSorting() {
         });
     }
 
-    if (filterBtns) {
+    if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -1093,9 +1112,7 @@ function initBlogSorting() {
         });
     }
 
-    function applySearch() {
-        applyFilters();
-    }
+
 
     // Helper to parse date strings (e.g. "May 19, 2026", "19. Mai 2026", "19 Maggio 2026") into Date objects
     function parseDate(card) {
@@ -1202,22 +1219,15 @@ function prefetchBlogPosts() {
 
     const runPrefetch = () => {
         cards.forEach(card => {
-            const onclickAttr = card.getAttribute('onclick');
-            if (onclickAttr) {
-                // Parse out the filename argument, e.g. openPost('my-first-post.md')
-                const match = onclickAttr.match(/openPost\(['"]([^'"]+)['"]\)/);
-                if (match && match[1]) {
-                    const filename = match[1];
-                    const prefetchUrl = `posts/${filename}`;
-                    
-                    // Inject prefetch link element to preload resources dynamically
-                    if (!document.querySelector(`link[href="${prefetchUrl}"]`)) {
-                        const link = document.createElement('link');
-                        link.rel = 'prefetch';
-                        link.href = prefetchUrl;
-                        link.as = 'fetch';
-                        document.head.appendChild(link);
-                    }
+            const href = card.getAttribute('href');
+            if (href && href.startsWith('posts/')) {
+                const prefetchUrl = href;
+                if (!document.querySelector(`link[href="${prefetchUrl}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = prefetchUrl;
+                    link.as = 'fetch';
+                    document.head.appendChild(link);
                 }
             }
         });

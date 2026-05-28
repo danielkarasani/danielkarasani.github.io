@@ -9,13 +9,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Analyzer Case Study | Daniel Karasani</title>
+    <meta property="og:title" content="Air Analyzer Project | Daniel Karasani">
+    <meta property="og:description" content="An end-to-end engineered indoor air quality monitoring station with custom PCBs and sensor arrays.">
+    <meta property="og:image" content="https://danielkarasani.github.io/images/air-analyzer-device-diy.webp">
+    <meta property="og:url" content="https://danielkarasani.github.io/air-analyzer.html">
+    <meta property="og:type" content="website">
     <meta name="description"
         content="Detailed case study of Air Analyzer - an end-to-end hardware and software indoor air quality monitoring station.">
     <meta name="author" content="Daniel Karasani">
     <link rel="canonical" href="https://danielkarasani.github.io/air-analyzer.html" />
     <link rel="alternate" hreflang="en" href="https://danielkarasani.github.io/air-analyzer.html" />
     <link rel="alternate" hreflang="de" href="https://danielkarasani.github.io/air-analyzer-de.html" />
-    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/air-analyzer-it.html" />
+    <link rel="alternate" hreflang="it" href="https://danielkarasani.github.io/air-analyzer-it.html" /> 
+    <link rel="alternate" hreflang="x-default" href="https://danielkarasani.github.io/air-analyzer.html" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#c89b72">
 
@@ -182,6 +188,8 @@ body {
             }
         </style>
     </noscript>
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="DanielKarasani-favcon.svg">
 </head>
 
 <body class="">
@@ -199,7 +207,7 @@ body {
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <nav>
+    <nav aria-label="Main navigation">
         <div class="nav-container">
             <a href="index.html" class="logo hover-target">Daniel Karasani<span>.</span></a>
             <ul class="nav-links">
@@ -240,7 +248,7 @@ body {
             to transparently display essential air parameters, the invisible becomes actionable.
         </p>
 
-        <h3>System Architecture & Hardware Design</h3>
+        <h3>System Architecture &amp; Hardware Design</h3>
         <p>To ensure optimal component placement and modularity, the hardware architecture was divided into two
             distinct, custom-routed PCBs connected via a ribbon cable:</p>
         <ul>
@@ -345,8 +353,7 @@ body {
                 </svg>
                 Email
             </a>
-            <a href="https://wa.me/393245808570" class="hover-target" target="_blank" rel="noopener noreferrer"
-                onmouseover="this.style.color='#25D366'" onmouseout="this.style.color=''">
+            <a href="https://wa.me/393245808570" class="hover-target whatsapp-link" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M17.472 14.382c-.297-.149-1.758-.867-2.04-.967-.281-.099-.488-.15-.693.148-.205.297-.771.967-.945 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.693-1.67-.948-2.285-.25-.598-.505-.517-.694-.527-.174-.009-.373-.009-.571-.009s-.521.074-.794.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.703.248-1.302.173-1.422-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.029 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />

@@ -78,7 +78,7 @@ htmlFiles.forEach(f => {
         const ctaHtml = `
     <section class="reveal" style="text-align: center; padding: 20px 20px; margin-top: -30px; margin-bottom: 40px;">
         <h2>Let's build something great.</h2>
-        <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 20px auto 0; line-height: 1.8;">Whether you have a specific project in mind, need advices, or just want to discuss the future of industrial engineering, I'm always open to connecting. Based in South Tyrol, serving globally.</p>
+        <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 20px auto 0; line-height: 1.8;">Whether you have a specific project in mind, need advice, or just want to discuss the future of industrial engineering, I'm always open to connecting. Based in South Tyrol, serving globally.</p>
     </section>
 
     <section id="contact"`;

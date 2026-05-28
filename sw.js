@@ -54,12 +54,12 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
+        cacheNames
+          .filter((cache) => cache !== CACHE_NAME)
+          .map((cache) => {
             console.log('[Service Worker] Clearing old cache', cache);
             return caches.delete(cache);
-          }
-        })
+          })
       );
     }).then(() => self.clients.claim())
   );
@@ -91,7 +91,11 @@ self.addEventListener('fetch', (event) => {
           console.log('[Service Worker] Fetch failed, network offline:', err);
           // If offline and request is an HTML page, fallback to cached index
           if (event.request.headers.get('accept')?.includes('text/html')) {
-             return cachedResponse || cache.match('./index.html');
+             const requestUrl = event.request.url;
+             let fallbackPage = './index.html';
+             if (requestUrl.includes('-de.')) fallbackPage = './index-de.html';
+             else if (requestUrl.includes('-it.')) fallbackPage = './index-it.html';
+             return cachedResponse || cache.match(fallbackPage);
           }
           throw err;
         });
