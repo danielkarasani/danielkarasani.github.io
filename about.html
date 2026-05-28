@@ -120,7 +120,7 @@ body {
         html.preloader-skipped #preloader { display: none !important; }
     </style>
     <script>
-        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-theme');
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark-theme');
         if (sessionStorage.getItem('preloader-completed') === 'true') {
             document.documentElement.classList.add('preloader-skipped');
         }
@@ -193,7 +193,7 @@ body {
     </noscript>
 </head>
 <body class="">
-    <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
+    <script>if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark-theme');</script>
 
     <div id="preloader">
         <div class="loader-text">INITIALIZING ENGINEERING SYSTEM...</div>

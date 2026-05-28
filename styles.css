@@ -1055,19 +1055,7 @@ body.no-scroll {
     }
 }
 
-/* Dark mode fallback for users with system dark mode when JS is disabled */
-@media (prefers-color-scheme: dark) {
-    :root:not(.dark-theme) body:not(.dark-theme) {
-        --bg-main: #1a1512;
-        --bg-hero: #241e1a;
-        --text-dark: #fcfaf8;
-        --text-muted: #b5a89f;
-        --accent: #d8b08d;
-        --accent-hover: #c4956a;
-        --white: #241e1a;
-        --nav-bg: rgba(26, 21, 18, 0.85);
-    }
-}
+
 
 /* Accessibility: Screen Reader Only */
 .sr-only {

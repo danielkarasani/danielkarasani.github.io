@@ -659,11 +659,16 @@ if (document.readyState === 'loading') {
 // ==========================================
 const themeToggleBtn = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
+const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-if (currentTheme === 'dark' && themeToggleBtn) {
+if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
     document.body.classList.add('dark-theme');
     document.documentElement.classList.add('dark-theme');
-    themeToggleBtn.textContent = '☀️';
+    if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
+} else {
+    document.body.classList.remove('dark-theme');
+    document.documentElement.classList.remove('dark-theme');
+    if (themeToggleBtn) themeToggleBtn.textContent = '🌙';
 }
 
 if (themeToggleBtn) {

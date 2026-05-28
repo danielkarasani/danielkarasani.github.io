@@ -1,9 +1,10 @@
 {
-    "name": "Daniel Karasani — Portfolio",
+    "name": "Daniel Karasani Portfolio",
     "short_name": "DK Portfolio",
-    "description": "Personal engineering portfolio of Daniel Karasani.",
+    "description": "Portfolio of Daniel Karasani. Industrial & Mechanical Engineer specializing in Process Optimization, Automation, and Digital Transformation.",
     "start_url": "./",
     "scope": "./",
+    "orientation": "portrait-primary",
     "display": "standalone",
     "background_color": "#fcfaf8",
     "theme_color": "#c89b72",
