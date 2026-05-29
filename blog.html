@@ -197,6 +197,17 @@ body {
     </noscript>
     
     <link rel="icon" type="image/svg+xml" href="DanielKarasani-favcon.svg">
+
+    <!-- Dark Mode Theme Preference Initializer -->
+    <script>
+        (function() {
+            const currentTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark-theme');
+            }
+        })();
+    </script>
 </head>
 
 <body>
