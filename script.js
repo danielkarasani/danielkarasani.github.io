@@ -384,7 +384,28 @@ function initCommandPalette() {
         themeToggle.parentNode.insertBefore(searchBtn, themeToggle);
     }
 
-    // 3. Register Global Keyboard Shortcuts (Cmd+K / Ctrl+K and Escape)
+    // Helper function for handling smooth scrolling to anchors on the same page
+    function handleLinkClick(link, e) {
+        if (!link) return false;
+        const href = link.getAttribute('href');
+        if (href && href.includes('#contact')) {
+            const currentPath = window.location.pathname;
+            const targetPath = href.split('#')[0];
+            // Match current page or jump on index
+            if (currentPath.endsWith(targetPath) || targetPath === '' || currentPath === '/' && targetPath === 'index.html') {
+                if (e) e.preventDefault();
+                closePalette();
+                const contactEl = document.getElementById('contact');
+                if (contactEl) {
+                    contactEl.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', href);
+                }
+                return true; // Handled smoothly
+            }
+        }
+        return false;
+    }
+
     document.addEventListener('keydown', (e) => {
         const isVisible = palette.classList.contains('palette-visible');
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -418,8 +439,10 @@ function initCommandPalette() {
                 if (activeSearchIndex >= 0 && activeSearchIndex < visibleItems.length) {
                     const activeLink = visibleItems[activeSearchIndex].querySelector('a');
                     if (activeLink) {
-                        activeLink.click();
-                        closePalette();
+                        if (!handleLinkClick(activeLink, null)) {
+                            activeLink.click();
+                            closePalette();
+                        }
                     }
                 }
             }
@@ -437,8 +460,15 @@ function initCommandPalette() {
 
     // 5. Dismiss when clicking backdrop or selecting a search result link
     palette.addEventListener('click', (e) => {
-        if (e.target === palette || e.target.closest('#palette-results a')) {
+        if (e.target === palette) {
             closePalette();
+        } else {
+            const link = e.target.closest('#palette-results a');
+            if (link) {
+                if (!handleLinkClick(link, e)) {
+                    closePalette();
+                }
+            }
         }
     });
 
@@ -535,6 +565,9 @@ if (cursorDot && cursorOutline) {
         cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
         
         if (Math.abs(distX) < 0.1 && Math.abs(distY) < 0.1) {
+            outlineX = mouseX;
+            outlineY = mouseY;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
             isLoopRunning = false;
             return;
         }
@@ -595,34 +628,39 @@ if (cursorDot && cursorOutline) {
 // ==========================================
 // 5. TYPEWRITER EFFECT (Multi-Language)
 // ==========================================
-const pageLang = document.documentElement.lang; // Detects 'en', 'de', or 'it'
-let words = ["Industrial Engineer", "Curious Learner", "Problem Solver"];
-if (pageLang === 'de') {
-    words = ["Wirtschaftsingenieur", "Neugieriger Lerner", "Problemlöser"];
-} else if (pageLang === 'it') {
-    words = ["Ingegnere Gestionale", "Apprendista Curioso", "Risolutore di Problemi"];
-}
-let wordIndex = 0; let charIndex = 0; let isDeleting = false;
-const typeTarget = document.getElementById("typewriter");
-let isTypewriterVisible = true;
-let typewriterTimeout = null;
-
-function type() {
-    if (!typeTarget || !isTypewriterVisible) return; 
-    const currentWord = words[wordIndex];
-    if (isDeleting) { charIndex--; } else { charIndex++; }
-    typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
-    
-    let typeSpeed = isDeleting ? 50 : 100;
-    if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; isDeleting = true; 
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; 
+function initTypewriter() {
+    const pageLang = document.documentElement.lang || "en"; // Detects 'en', 'de', or 'it'
+    let words = ["Industrial Engineer", "Curious Learner", "Problem Solver"];
+    if (pageLang === 'de') {
+        words = ["Wirtschaftsingenieur", "Neugieriger Lerner", "Problemlöser"];
+    } else if (pageLang === 'it') {
+        words = ["Ingegnere Gestionale", "Apprendista Curioso", "Risolutore di Problemi"];
     }
-    typewriterTimeout = setTimeout(type, typeSpeed);
-}
+    
+    let wordIndex = 0; 
+    let charIndex = 0; 
+    let isDeleting = false;
+    const typeTarget = document.getElementById("typewriter");
+    if (!typeTarget) return;
 
-if (typeTarget) { 
+    let isTypewriterVisible = true;
+    let typewriterTimeout = null;
+
+    function type() {
+        if (!isTypewriterVisible) return; 
+        const currentWord = words[wordIndex];
+        if (isDeleting) { charIndex--; } else { charIndex++; }
+        typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2000; isDeleting = true; 
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; 
+        }
+        typewriterTimeout = setTimeout(type, typeSpeed);
+    }
+
     const observer = new IntersectionObserver((entries) => {
         isTypewriterVisible = entries[0].isIntersecting;
         if (isTypewriterVisible) {
@@ -674,14 +712,23 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
 const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+function updateThemeMetaTag(isDark) {
+    let metaThemeColor = document.querySelector("meta[name=theme-color]");
+    if (metaThemeColor) {
+        metaThemeColor.setAttribute("content", isDark ? "#1a1512" : "#c89b72");
+    }
+}
+
 if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
     document.body.classList.add('dark-theme');
     document.documentElement.classList.add('dark-theme');
     if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
+    updateThemeMetaTag(true);
 } else {
     document.body.classList.remove('dark-theme');
     document.documentElement.classList.remove('dark-theme');
     if (themeToggleBtn) themeToggleBtn.textContent = '🌙';
+    updateThemeMetaTag(false);
 }
 
 if (themeToggleBtn) {
@@ -689,14 +736,17 @@ if (themeToggleBtn) {
         document.body.classList.toggle('dark-theme');
         document.documentElement.classList.toggle('dark-theme'); // Backup toggle
         let theme = 'light';
+        let isDark = false;
         
         if (document.body.classList.contains('dark-theme')) {
             theme = 'dark';
+            isDark = true;
             themeToggleBtn.textContent = '☀️';
         } else {
             themeToggleBtn.textContent = '🌙';
         }
         localStorage.setItem('theme', theme);
+        updateThemeMetaTag(isDark);
     });
 }
 
@@ -1301,6 +1351,7 @@ function prefetchBlogPosts() {
 const runInitializations = () => {
     initMobileNav();
     initContactForm();
+    initTypewriter();
     
     // Check if we are on a blog page
     const isBlogPage = document.querySelector('.blog-grid') !== null;

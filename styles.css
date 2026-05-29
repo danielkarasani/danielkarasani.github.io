@@ -70,7 +70,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
     pointer-events: none; 
     opacity: 0;
     transition: opacity 0.3s ease, width 0.2s, height 0.2s;
-    will-change: transform; 
+    will-change: transform, width, height; 
 }
 .cursor-outline { 
     width: 40px; 
@@ -85,7 +85,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
     pointer-events: none; 
     opacity: 0;
     transition: opacity 0.3s ease, width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s; 
-    will-change: transform; 
+    will-change: transform, width, height; 
 }
 .cursor-hover .cursor-dot { width: 0; height: 0; }
 .cursor-hover .cursor-outline { width: 80px; height: 80px; background-color: transparent; border: 2px solid var(--accent); }
@@ -110,7 +110,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
 }
 
 /* Typography */
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-dark); }
+h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-dark); word-break: break-word; }
 h1 { font-size: 4.2rem; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 15px;}
 h2 { font-size: 3rem; margin-bottom: 20px; text-align: center; }
 h2::after { content: ''; display: block; width: 80px; height: 4px; background: var(--accent); margin: 15px auto 50px auto; border-radius: 2px; }
@@ -768,7 +768,7 @@ body.no-scroll {
     
     /* Prevent Logo & Controls Overlap on narrow smartphones */
     .nav-container { padding: 0 15px; }
-    .logo { font-size: 1.25rem; white-space: nowrap; }
+    .logo { font-size: 1.25rem; white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
     .hamburger-menu { right: 15px; }
     #theme-toggle { right: 55px; }
     #search-toggle { right: 85px; }
