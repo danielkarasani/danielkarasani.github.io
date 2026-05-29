@@ -719,7 +719,7 @@ function updateThemeMetaTag(isDark) {
     }
 }
 
-if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
+if (currentTheme === 'dark') {
     document.body.classList.add('dark-theme');
     document.documentElement.classList.add('dark-theme');
     if (themeToggleBtn) themeToggleBtn.textContent = '☀️';

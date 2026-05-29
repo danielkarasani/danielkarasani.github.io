@@ -117,7 +117,7 @@ body {
         html.preloader-skipped #preloader { display: none !important; }
     </style>
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark-theme');
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-theme');
         if (sessionStorage.getItem('preloader-completed') === 'true') {
             document.documentElement.classList.add('preloader-skipped');
         }
@@ -194,7 +194,7 @@ body {
 
 <body class="">
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark-theme');
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
     </script>
 
     <div id="preloader">
@@ -209,7 +209,7 @@ body {
 
     <nav aria-label="Main navigation">
         <div class="nav-container">
-            <a href="index.html" class="logo hover-target">Daniel Karasani<span>.</span></a>
+            <a href="index.html" class="logo hover-target">Daniel<span class="logo-last-name"> Karasani</span><span>.</span></a>
             <ul class="nav-links">
                 <li><a href="index.html#projects" class="hover-target">← Back to Portfolio</a></li>
             </ul>

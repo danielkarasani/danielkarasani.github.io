@@ -1083,4 +1083,11 @@ body.no-scroll {
 /* WhatsApp Hover Target */
 .whatsapp-link:hover {
     color: #25D366 !important;
-}
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .logo-last-name {
+        display: none;
+    }
+}

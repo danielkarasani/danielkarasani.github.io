@@ -123,7 +123,7 @@ body {
         html.preloader-skipped #preloader { display: none !important; }
     </style>
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark-theme');
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-theme');
         if (sessionStorage.getItem('preloader-completed') === 'true') {
             document.documentElement.classList.add('preloader-skipped');
         }
@@ -232,7 +232,7 @@ body {
     <meta property="og:type" content="website">
 </head>
 <body class="">
-    <script>if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark-theme');</script>
+    <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');</script>
 
     <div id="preloader">
         <div class="loader-text">ENGINEERING-SYSTEM WIRD INITIALISIERT...</div>
@@ -244,7 +244,7 @@ body {
 
     <nav aria-label="Hauptnavigation">
         <div class="nav-container">
-            <a href="index-de.html" class="logo hover-target">Daniel Karasani<span>.</span></a>
+            <a href="index-de.html" class="logo hover-target">Daniel<span class="logo-last-name"> Karasani</span><span>.</span></a>
             <ul class="nav-links">
                 <li><a href="#about" class="hover-target">Über mich</a></li>
                 <li><a href="#projects" class="hover-target">Projekte</a></li>
