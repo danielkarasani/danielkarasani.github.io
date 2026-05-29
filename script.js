@@ -266,7 +266,7 @@ function initCommandPalette() {
     
     palette.innerHTML = `
         <div class="palette-content" style="position: relative;">
-            <button id="palette-close" class="hover-target" aria-label="Close search" style="position: absolute; top: 18px; right: 20px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; padding: 0; transition: background 0.2s, transform 0.2s; z-index: 10;">
+            <button id="palette-close" class="hover-target" aria-label="Close search" style="position: absolute; top: 18px; right: 20px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; padding: 0; transition: background 0.2s, transform 0.2s; z-index: 10;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; color: var(--text-dark);"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <input type="text" id="palette-input" placeholder="${placeholder}" style="padding-right: 60px !important;">
@@ -366,7 +366,7 @@ function initCommandPalette() {
         searchBtn.setAttribute('aria-label', 'Search');
         
         // Beautiful, responsive touch target centering & margin matching
-        searchBtn.style.cssText = 'background: none; border: none; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; padding: 0;';
+        searchBtn.style.cssText = 'background: none; border: none; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; padding: 0;';
         
         // Crisp, high-contrast, perfectly-centered vector SVG instead of emoji
         searchBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; color: var(--text-dark);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`;

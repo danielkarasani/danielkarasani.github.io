@@ -39,7 +39,7 @@ body.dark-theme .skill-category {
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
-body.no-scroll { overflow: hidden !important; }
+body.no-scroll { overflow: hidden !important; touch-action: none; }
 a { color: var(--accent); text-decoration: none; transition: var(--transition-fast); }
 
 ::selection { background: var(--accent); color: var(--white); }
@@ -744,7 +744,7 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
     }
 
     .hero-image { animation: none; }
-    .hero-image img { max-width: 350px; }
+    .hero-image img { max-width: min(100%, 350px); }
     .edu-grid { grid-template-columns: 1fr; }
     .cursor-dot, .cursor-outline { display: none; } 
     .about-split { flex-direction: column; padding-top: 100px; }
@@ -762,8 +762,8 @@ body.no-scroll {
     section[style*="padding"] { padding: 20px 0 !important; }
     .form-row { flex-direction: column; gap: 0; }
     .timeline-content { padding: 30px 20px; }
-    h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.3rem; }
+    h1 { font-size: 2.4rem; }
+    h2 { font-size: 1.8rem; }
     .contact-box { padding: 40px 20px;}
     
     /* Prevent Logo & Controls Overlap on narrow smartphones */
@@ -793,7 +793,7 @@ body.no-scroll {
 
 /* --- CMD+K PALETTE STYLES --- */
 #command-palette {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh;
     background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
     display: flex; justify-content: center; align-items: flex-start;
     padding-top: 15vh; z-index: 9997;
@@ -1090,4 +1090,50 @@ body.no-scroll {
     .logo-last-name {
         display: none;
     }
+}
+
+/* --- MOBILE FIXES OVERRIDES --- */
+@media (max-width: 990px) {
+    /* Reset absolute positioning on nav elements */
+    .hamburger-menu, .lang-switcher, #search-toggle, #theme-toggle {
+        position: static !important;
+        transform: none !important;
+        margin-left: 10px !important;
+    }
+    .lang-switcher {
+        margin-left: auto !important; /* Push everything else to the right */
+        gap: 8px;
+    }
+    /* Make the container a flexbox that wraps/adjusts */
+    .nav-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        padding: 0 20px;
+    }
+    .logo {
+        margin-right: auto;
+    }
+    
+    /* On very small screens, adjust gap */
+    @media (max-width: 400px) {
+        .lang-switcher { gap: 4px; font-size: 0.75rem; margin-left: 5px !important; }
+        .hamburger-menu, #search-toggle, #theme-toggle { margin-left: 5px !important; }
+        .logo { font-size: 1.15rem; }
+    }
+}
+
+/* 5. Mobile hover fix override */
+@media (hover: none) {
+    .btn:hover { transform: none !important; box-shadow: none !important; }
+    .project-card:hover { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; border-color: #f0f0f0 !important; }
+    .skill-category:hover { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important; border-top-color: var(--text-dark) !important; }
+    .timeline-item:hover .timeline-content { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important; border-left-color: transparent !important; }
+    .gallery-img:hover { transform: none !important; box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important; border-color: rgba(200,155,114,0.2) !important; }
+    .blog-card:hover { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important; border-color: #f0f0f0 !important; }
+    .cert-tag:hover { transform: none !important; box-shadow: 0 4px 10px rgba(0,0,0,0.03) !important; border-color: rgba(200,155,114,0.2) !important; color: inherit !important; }
+    .skill-tag:hover { transform: none !important; box-shadow: none !important; background: var(--bg-main) !important; color: var(--text-dark) !important; border-color: rgba(200,155,114,0.2) !important; }
+    .narrative-block:hover { transform: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important; }
+    .about-visual img:hover { transform: none !important; box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important; border-color: var(--white) !important; }
 }
