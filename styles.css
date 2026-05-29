@@ -39,6 +39,7 @@ body.dark-theme .skill-category {
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: var(--bg-main); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
+body.no-scroll { overflow: hidden !important; }
 a { color: var(--accent); text-decoration: none; transition: var(--transition-fast); }
 
 ::selection { background: var(--accent); color: var(--white); }

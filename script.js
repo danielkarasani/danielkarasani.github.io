@@ -597,6 +597,12 @@ if (cursorDot && cursorOutline) {
 // 5. TYPEWRITER EFFECT (Multi-Language)
 // ==========================================
 const pageLang = document.documentElement.lang; // Detects 'en', 'de', or 'it'
+let words = ["Industrial Engineer", "Curious Learner", "Problem Solver"];
+if (pageLang === 'de') {
+    words = ["Wirtschaftsingenieur", "Neugieriger Lerner", "Problemlöser"];
+} else if (pageLang === 'it') {
+    words = ["Ingegnere Gestionale", "Apprendista Curioso", "Risolutore di Problemi"];
+}
 let wordIndex = 0; let charIndex = 0; let isDeleting = false;
 const typeTarget = document.getElementById("typewriter");
 let isTypewriterVisible = true;
