@@ -1,4 +1,4 @@
-// ==========================================
+﻿// ==========================================
 // 0. CENTRALIZED CONFIGURATION ("JS Brain")
 // ==========================================
 const APP_CONFIG = {
@@ -10,7 +10,7 @@ const APP_CONFIG = {
 // Reusable high-performance event debouncing utility
 function debounce(func, wait) {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         const context = this;
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(context, args), wait);
@@ -25,7 +25,7 @@ function debounce(func, wait) {
 // This function provides a passive JS fallback for browsers that do not
 // yet support Scroll-Driven Animations (Safari < 15.4, older Firefox).
 function initScrollProgressBar() {
-    const bar  = document.querySelector('.scroll-progress-bar');
+    const bar = document.querySelector('.scroll-progress-bar');
     const fill = document.querySelector('.scroll-progress-fill');
     if (!bar || !fill) return;
 
@@ -35,7 +35,7 @@ function initScrollProgressBar() {
         typeof CSS !== 'undefined' &&
         CSS.supports &&
         (CSS.supports('animation-timeline', 'scroll()') ||
-         CSS.supports('animation-timeline', 'scroll(root)'))
+            CSS.supports('animation-timeline', 'scroll(root)'))
     ) {
         return;
     }
@@ -133,7 +133,7 @@ function initDynamicLinks() {
 
     // Centralized Google Analytics Event Tracking
     const pageLang = document.documentElement.lang || "en";
-    
+
     document.querySelectorAll(".js-cloud-cv-link").forEach(el => {
         el.addEventListener("click", () => {
             if (typeof window.gtag === "function") {
@@ -211,22 +211,22 @@ window.addEventListener("focus", () => {
 // ==========================================
 function initCommandPalette() {
     let palette = document.getElementById('command-palette');
-    
+
     // Clear any static/pre-existing command palette to ensure unified dynamic links
     if (palette) {
         palette.remove();
     }
-    
+
     // 1. Dynamically Create & Inject Command Palette
     palette = document.createElement('div');
     palette.id = 'command-palette';
     palette.className = 'palette-hidden';
     palette.style.display = 'none';
-        
+
     const pageLang = document.documentElement.lang || "en";
     let placeholder = "Search... (e.g. 'Contact', 'CV', 'About')";
     let itemsHTML = '';
-    
+
     if (pageLang === 'de') {
         placeholder = "Suche... (z.B. 'Kontakt', 'Lebenslauf', 'Über mich')";
         itemsHTML = `
@@ -263,7 +263,7 @@ function initCommandPalette() {
             <li><a href="index-it.html">Switch Language: Italian (Italiano)</a></li>
         `;
     }
-    
+
     palette.innerHTML = `
         <div class="palette-content" style="position: relative;">
             <button id="palette-close" class="hover-target" aria-label="Close search" style="position: absolute; top: 18px; right: 20px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; padding: 0; transition: background 0.2s, transform 0.2s; z-index: 10;">
@@ -276,7 +276,7 @@ function initCommandPalette() {
         </div>
     `;
     document.body.appendChild(palette);
-    
+
     // Ensure the newly added CV link has dynamic link listeners applied
     const dynamicCv = palette.querySelector('.js-local-cv-link');
     if (dynamicCv && typeof APP_CONFIG !== 'undefined') {
@@ -290,7 +290,7 @@ function initCommandPalette() {
             }
         });
     }
-    
+
     const paletteInput = document.getElementById('palette-input');
     if (!paletteInput) return;
 
@@ -321,7 +321,7 @@ function initCommandPalette() {
         void palette.offsetHeight; // Force reflow to register the display style change before opacity transition
         palette.classList.add('palette-visible');
         document.body.classList.add('no-scroll');
-        
+
         // Auto-dismiss mobile drawer if active to prevent overlapping layouts
         const navLinks = document.querySelector('.nav-links');
         const hamburger = document.querySelector('.hamburger-menu');
@@ -332,7 +332,7 @@ function initCommandPalette() {
                 hamburger.setAttribute('aria-expanded', 'false');
             }
         }
-        
+
         paletteInput.value = '';
         paletteItems.forEach(item => {
             item.style.display = 'block';
@@ -342,13 +342,13 @@ function initCommandPalette() {
         updateSelection();
         setTimeout(() => paletteInput.focus(), 50);
     }
-    
+
     function closePalette() {
         palette.classList.remove('palette-visible');
         document.body.classList.remove('no-scroll');
         paletteItems.forEach(item => item.classList.remove('selected'));
         activeSearchIndex = -1;
-        
+
         // Wait for the opacity transition (0.2s) to finish before setting display: none
         setTimeout(() => {
             if (!palette.classList.contains('palette-visible')) {
@@ -364,13 +364,13 @@ function initCommandPalette() {
         searchBtn.id = 'search-toggle';
         searchBtn.className = 'hover-target';
         searchBtn.setAttribute('aria-label', 'Search');
-        
+
         // Beautiful, responsive touch target centering & margin matching
         searchBtn.style.cssText = 'background: none; border: none; margin-left: 20px; color: var(--text-dark); transition: var(--transition-fast); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; padding: 0;';
-        
+
         // Crisp, high-contrast, perfectly-centered vector SVG instead of emoji
         searchBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; color: var(--text-dark);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`;
-        
+
         // Toggle command palette on click
         searchBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -380,7 +380,7 @@ function initCommandPalette() {
                 openPalette();
             }
         });
-        
+
         themeToggle.parentNode.insertBefore(searchBtn, themeToggle);
     }
 
@@ -409,7 +409,7 @@ function initCommandPalette() {
     document.addEventListener('keydown', (e) => {
         const isVisible = palette.classList.contains('palette-visible');
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault(); 
+            e.preventDefault();
             if (isVisible) {
                 closePalette();
             } else {
@@ -523,14 +523,14 @@ function initRevealObserver() {
     const revealOptions = {
         root: null,
         rootMargin: '0px 0px -50px 0px',
-        threshold: 0 
+        threshold: 0
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); 
+                observer.unobserve(entry.target);
             }
         });
     }, revealOptions);
@@ -556,14 +556,14 @@ if (cursorDot && cursorOutline) {
     let isCursorActive = false;
     let isLoopRunning = false;
 
-    const animateCursor = function() {
+    const animateCursor = function () {
         let distX = mouseX - outlineX;
         let distY = mouseY - outlineY;
         outlineX += distX * 0.15;
         outlineY += distY * 0.15;
-        
+
         cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-        
+
         if (Math.abs(distX) < 0.1 && Math.abs(distY) < 0.1) {
             outlineX = mouseX;
             outlineY = mouseY;
@@ -571,7 +571,7 @@ if (cursorDot && cursorOutline) {
             isLoopRunning = false;
             return;
         }
-        
+
         requestAnimationFrame(animateCursor);
     };
 
@@ -581,7 +581,7 @@ if (cursorDot && cursorOutline) {
 
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
+
         cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
 
         if (!isCursorActive) {
@@ -630,15 +630,15 @@ if (cursorDot && cursorOutline) {
 // ==========================================
 function initTypewriter() {
     const pageLang = document.documentElement.lang || "en"; // Detects 'en', 'de', or 'it'
-    let words = ["Industrial Engineer", "Curious Learner", "Problem Solver"];
+    let words = ["Industrial and Mechanical Engineering Student", "Curious Learner", "Problem Solver", "Optimizing reality.", "Automating processes.", "Driving efficiency.", "Transforming data."];
     if (pageLang === 'de') {
-        words = ["Wirtschaftsingenieur", "Neugieriger Lerner", "Problemlöser"];
+        words = ["Student im Industrie- und Maschineningenieurwesen", "Neugieriger Lerner", "Problemlöser", "Realität optimieren.", "Prozesse automatisieren.", "Effizienz steigern.", "Daten transformieren."];
     } else if (pageLang === 'it') {
-        words = ["Ingegnere Gestionale", "Apprendista Curioso", "Risolutore di Problemi"];
+        words = ["Studente in Ingegneria industriale meccanica", "Spirito curioso", "Risolutore di Problemi", "Ottimizzare la realtà.", "Automatizzare i processi.", "Guidare l'efficienza.", "Trasformare i dati."];
     }
-    
-    let wordIndex = 0; 
-    let charIndex = 0; 
+
+    let wordIndex = 0;
+    let charIndex = 0;
     let isDeleting = false;
     const typeTarget = document.getElementById("typewriter");
     if (!typeTarget) return;
@@ -647,16 +647,16 @@ function initTypewriter() {
     let typewriterTimeout = null;
 
     function type() {
-        if (!isTypewriterVisible) return; 
+        if (!isTypewriterVisible) return;
         const currentWord = words[wordIndex];
         if (isDeleting) { charIndex--; } else { charIndex++; }
         typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
-        
+
         let typeSpeed = isDeleting ? 50 : 100;
         if (!isDeleting && charIndex === currentWord.length) {
-            typeSpeed = 2000; isDeleting = true; 
+            typeSpeed = 2000; isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
-            isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; 
+            isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
         }
         typewriterTimeout = setTimeout(type, typeSpeed);
     }
@@ -668,7 +668,7 @@ function initTypewriter() {
             type();
         }
     }, { threshold: 0.1 });
-    
+
     const heroSection = typeTarget.closest('.hero');
     if (heroSection) observer.observe(heroSection);
 }
@@ -689,7 +689,7 @@ function initTiltCards() {
             }
             const x = e.clientX - rect.left; const y = e.clientY - rect.top;
             const centerX = rect.width / 2; const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -10; 
+            const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
@@ -737,7 +737,7 @@ if (themeToggleBtn) {
         document.documentElement.classList.toggle('dark-theme'); // Backup toggle
         let theme = 'light';
         let isDark = false;
-        
+
         if (document.body.classList.contains('dark-theme')) {
             theme = 'dark';
             isDark = true;
@@ -759,14 +759,14 @@ window.addEventListener('popstate', (e) => {
     const url = new URL(window.location);
     const postFile = url.searchParams.get('post');
     const modal = document.getElementById('blog-modal');
-    
+
     if (postFile) {
         if (!modal || !modal.classList.contains('active')) {
-            window.openPost(postFile, false); 
+            window.openPost(postFile, false);
         }
     } else {
         if (modal && modal.classList.contains('active')) {
-            window.closePost(false); 
+            window.closePost(false);
         }
     }
 });
@@ -780,22 +780,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.openPost = async function(filename, pushHistory = true) {
+window.openPost = async function (filename, pushHistory = true) {
     const modal = document.getElementById('blog-modal');
     const reader = document.getElementById('md-reader');
-    
+
     if (!modal || !reader) return;
-    
+
     // Path traversal protection
     if (typeof filename !== 'string' || filename.includes('/') || filename.includes('\\') || filename.includes('..')) {
         console.error("Invalid post filename");
         return;
     }
-    
+
     const pageLang = document.documentElement.lang || "en";
     let loadingText = '<i>Fetching data from repository...</i>';
     let errorHTML = '<h2 style="color: red;">Error 404</h2><p>Could not load the requested document. Ensure the markdown file exists in the /posts directory.</p>';
-    
+
     if (pageLang === 'de') {
         loadingText = '<i>Lade Daten aus Repository...</i>';
         errorHTML = '<h2 style="color: red;">Fehler 404</h2><p>Das angeforderte Dokument konnte nicht geladen werden. Stellen Sie sicher, dass die Markdown-Datei im Verzeichnis /posts existiert.</p>';
@@ -803,9 +803,9 @@ window.openPost = async function(filename, pushHistory = true) {
         loadingText = '<i>Caricamento in corso dal repository...</i>';
         errorHTML = '<h2 style="color: red;">Errore 404</h2><p>Impossibile caricare il documento richiesto. Assicurati che il file markdown esista nella cartella /posts.</p>';
     }
-    
+
     modal.classList.add('active');
-    document.body.classList.add('no-scroll'); 
+    document.body.classList.add('no-scroll');
     reader.innerHTML = loadingText;
 
     // Update URL query parameter
@@ -824,7 +824,7 @@ window.openPost = async function(filename, pushHistory = true) {
     try {
         const response = await fetch(`posts/${filename}`);
         if (!response.ok) throw new Error('Post not found on server.');
-        
+
         const markdownText = await response.text();
         if (typeof window.marked !== 'undefined') {
             reader.innerHTML = window.marked.parse(markdownText);
@@ -846,16 +846,16 @@ window.openPost = async function(filename, pushHistory = true) {
 };
 
 
-window.closePost = function(pushHistory = true) {
+window.closePost = function (pushHistory = true) {
     const modal = document.getElementById('blog-modal');
     const reader = document.getElementById('md-reader');
     if (!modal) return;
     modal.classList.remove('active');
-    document.body.classList.remove('no-scroll'); 
+    document.body.classList.remove('no-scroll');
     if (reader) {
         setTimeout(() => { reader.innerHTML = ''; }, 500);
     }
-    
+
     // Restore the browser tab title to the original page title
     if (typeof originalTitle !== 'undefined') {
         document.title = originalTitle;
@@ -882,7 +882,7 @@ function initMobileNav() {
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
     const nav = document.querySelector('nav');
-    
+
     if (!navContainer || !navLinks || !nav) return;
     if (document.querySelector('.hamburger-menu')) return;
 
@@ -933,8 +933,8 @@ function initMobileNav() {
 
     // Close menu when clicking outside of the active menu drawer
     document.addEventListener('click', (e) => {
-        if (navLinks.classList.contains('active') && 
-            !navLinks.contains(e.target) && 
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(e.target) &&
             !hamburger.contains(e.target)) {
             closeMenu();
         }
@@ -1009,19 +1009,19 @@ function initContactForm() {
             },
             body: json
         })
-        .then(async (response) => {
-            const result = await response.json();
-            if (response.status === 200 && result.success) {
-                // 4. Success Animation Transition
-                contactForm.classList.add('contact-fade-out');
-                
-                setTimeout(() => {
-                    contactForm.style.display = 'none';
-                    
-                    // Create beautiful success card
-                    const thankYouCard = document.createElement('div');
-                    thankYouCard.className = 'thank-you-card';
-                    thankYouCard.innerHTML = `
+            .then(async (response) => {
+                const result = await response.json();
+                if (response.status === 200 && result.success) {
+                    // 4. Success Animation Transition
+                    contactForm.classList.add('contact-fade-out');
+
+                    setTimeout(() => {
+                        contactForm.style.display = 'none';
+
+                        // Create beautiful success card
+                        const thankYouCard = document.createElement('div');
+                        thankYouCard.className = 'thank-you-card';
+                        thankYouCard.innerHTML = `
                         <div class="success-animation">
                             <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                                 <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
@@ -1032,48 +1032,48 @@ function initContactForm() {
                         <p>${t.successText}</p>
                         <button class="btn hover-target" id="btn-reset-form" style="padding: 14px 28px; font-size: 1rem;">${t.resetBtn}</button>
                     `;
-                    
-                    contactBox.appendChild(thankYouCard);
 
-                    // Add reset button listener
-                    const resetBtn = thankYouCard.querySelector('#btn-reset-form');
-                    if (resetBtn) {
-                        resetBtn.addEventListener('click', function () {
-                            // Fade out thank you card
-                            thankYouCard.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                            thankYouCard.style.opacity = '0';
-                            thankYouCard.style.transform = 'scale(0.95)';
-                            
-                            setTimeout(() => {
-                                thankYouCard.remove();
-                                
-                                // Reset form values and UI states
-                                contactForm.reset();
-                                contactForm.style.display = 'block';
-                                
-                                // Clean up states
+                        contactBox.appendChild(thankYouCard);
+
+                        // Add reset button listener
+                        const resetBtn = thankYouCard.querySelector('#btn-reset-form');
+                        if (resetBtn) {
+                            resetBtn.addEventListener('click', function () {
+                                // Fade out thank you card
+                                thankYouCard.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                                thankYouCard.style.opacity = '0';
+                                thankYouCard.style.transform = 'scale(0.95)';
+
                                 setTimeout(() => {
-                                    contactForm.classList.remove('contact-fade-out');
-                                    submitBtn.disabled = false;
-                                    contactForm.querySelectorAll('input, textarea').forEach(el => el.disabled = false);
-                                    submitBtn.innerHTML = originalBtnHTML;
-                                }, 50);
-                            }, 400);
-                        });
-                    }
-                }, 400);
+                                    thankYouCard.remove();
 
-            } else {
-                // Handle API error state
+                                    // Reset form values and UI states
+                                    contactForm.reset();
+                                    contactForm.style.display = 'block';
+
+                                    // Clean up states
+                                    setTimeout(() => {
+                                        contactForm.classList.remove('contact-fade-out');
+                                        submitBtn.disabled = false;
+                                        contactForm.querySelectorAll('input, textarea').forEach(el => el.disabled = false);
+                                        submitBtn.innerHTML = originalBtnHTML;
+                                    }, 50);
+                                }, 400);
+                            });
+                        }
+                    }, 400);
+
+                } else {
+                    // Handle API error state
+                    window.alert(t.error);
+                    resetSubmitButton();
+                }
+            })
+            .catch(error => {
+                console.error("Error submitting form:", error);
                 window.alert(t.error);
                 resetSubmitButton();
-            }
-        })
-        .catch(error => {
-            console.error("Error submitting form:", error);
-            window.alert(t.error);
-            resetSubmitButton();
-        });
+            });
     });
 
     function resetSubmitButton() {
@@ -1128,7 +1128,7 @@ async function initDynamicBlogFeed() {
             const dateStr = post.date[lang] || post.date.en;
             const titleStr = post.title[lang] || post.title.en;
             const descStr = post.description[lang] || post.description.en;
-            
+
             const catStr = post.category || 'General Topics';
             cardsHTML += `
                 <a href="posts/${post.id}" data-category="${escapeHTML(catStr)}" class="blog-card hover-target" onclick="event.preventDefault(); openPost('${post.id}')">
@@ -1188,15 +1188,15 @@ function initBlogSorting() {
     function applyFilters() {
         const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const cards = grid.querySelectorAll('.blog-card');
-        
+
         cards.forEach(card => {
             const dateText = (card.querySelector('.blog-date')?.textContent || '').toLowerCase();
             const titleText = (card.querySelector('h3')?.textContent || '').toLowerCase();
             const descText = (card.querySelector('p')?.textContent || '').toLowerCase();
             const categoryAttr = card.dataset.category || 'General Topics';
-            
+
             const matchesSearch = !query || dateText.includes(query) || titleText.includes(query) || descText.includes(query);
-            
+
             const matchesCategory = activeCategory === 'all' || categoryAttr === activeCategory;
 
             if (matchesSearch && matchesCategory) {
@@ -1225,15 +1225,15 @@ function initBlogSorting() {
         const dateSpan = card.querySelector('.blog-date');
         if (!dateSpan) return new Date(0);
         const dateStr = dateSpan.textContent.trim();
-        
+
         const months = {
             // English
-            jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11,
-            january:0, february:1, march:2, april:3, june:5, july:6, august:7, september:8, october:9, november:10, december:11,
+            jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+            january: 0, february: 1, march: 2, april: 3, june: 5, july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
             // German
-            januar:0, februar:1, märz:2, mai:4, juni:5, juli:6, oktober:9, dezember:11,
+            januar: 0, februar: 1, märz: 2, mai: 4, juni: 5, juli: 6, oktober: 9, dezember: 11,
             // Italian
-            gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
+            gennaio: 0, febbraio: 1, marzo: 2, aprile: 3, maggio: 4, giugno: 5, luglio: 6, agosto: 7, settembre: 8, ottobre: 9, novembre: 10, dicembre: 11
         };
 
         const clean = dateStr.toLowerCase().replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/[^a-z0-9\s]/g, ' ');
@@ -1352,7 +1352,7 @@ const runInitializations = () => {
     initMobileNav();
     initContactForm();
     initTypewriter();
-    
+
     // Check if we are on a blog page
     const isBlogPage = document.querySelector('.blog-grid') !== null;
     if (isBlogPage) {
