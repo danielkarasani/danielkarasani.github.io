@@ -525,16 +525,20 @@ if (cursorDot && cursorOutline) {
     let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
     let isCursorActive = false;
     let isLoopRunning = false;
-    let cursorIdleTimer = null;
 
     const animateCursor = function() {
-        if (!isLoopRunning) return;
         let distX = mouseX - outlineX;
         let distY = mouseY - outlineY;
         outlineX += distX * 0.15;
         outlineY += distY * 0.15;
         
         cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+        
+        if (Math.abs(distX) < 0.1 && Math.abs(distY) < 0.1) {
+            isLoopRunning = false;
+            return;
+        }
+        
         requestAnimationFrame(animateCursor);
     };
 
@@ -554,13 +558,8 @@ if (cursorDot && cursorOutline) {
             cursorOutline.style.opacity = '1';
         }
 
-        clearTimeout(cursorIdleTimer);
-        cursorIdleTimer = setTimeout(() => { isLoopRunning = false; }, 200);
-
         if (!isLoopRunning) {
             isLoopRunning = true;
-            outlineX = mouseX;
-            outlineY = mouseY;
             animateCursor();
         }
     }, { passive: true });
