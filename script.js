@@ -189,7 +189,9 @@ if (document.readyState === 'loading') {
 // 1. DYNAMIC TAB TITLE (UX Retention)
 // ==========================================
 let originalTitle = document.title;
+let titleBeforeBlur = document.title;
 window.addEventListener("blur", () => {
+    titleBeforeBlur = document.title;
     const pageLang = document.documentElement.lang || "en";
     if (pageLang === 'de') {
         document.title = "Komm zurück! 👀";
@@ -200,7 +202,7 @@ window.addEventListener("blur", () => {
     }
 });
 window.addEventListener("focus", () => {
-    document.title = originalTitle;
+    document.title = titleBeforeBlur;
 });
 
 
@@ -582,7 +584,10 @@ if (cursorDot && cursorOutline) {
     });
 
     document.addEventListener('mouseout', (e) => {
-        if (window.innerWidth > 990 && e.target.closest('.hover-target, a, button, input, textarea')) {
+        const target = e.target.closest('.hover-target, a, button, input, textarea');
+        if (window.innerWidth > 990 && target) {
+            // Prevent flicker when moving between a parent and its child
+            if (e.relatedTarget && target.contains(e.relatedTarget)) return;
             document.body.classList.remove('cursor-hover');
         }
     });
@@ -592,22 +597,13 @@ if (cursorDot && cursorOutline) {
 // 5. TYPEWRITER EFFECT (Multi-Language)
 // ==========================================
 const pageLang = document.documentElement.lang; // Detects 'en', 'de', or 'it'
-let words = [];
-
-// Load the correct words based on the HTML lang attribute
-if (pageLang === 'de') {
-    words = ["Realität optimieren.", "Prozesse automatisieren.", "Effizienz steigern.", "Daten transformieren."];
-} else if (pageLang === 'it') {
-    words = ["Ottimizzare la realtà.", "Automatizzare i processi.", "Guidare l'efficienza.", "Trasformare i dati."];
-} else {
-    words = ["Optimizing reality.", "Automating processes.", "Driving efficiency.", "Transforming data."]; // Default English
-}
-
 let wordIndex = 0; let charIndex = 0; let isDeleting = false;
 const typeTarget = document.getElementById("typewriter");
+let isTypewriterVisible = true;
+let typewriterTimeout = null;
 
 function type() {
-    if (!typeTarget) return; 
+    if (!typeTarget || !isTypewriterVisible) return; 
     const currentWord = words[wordIndex];
     if (isDeleting) { charIndex--; } else { charIndex++; }
     typeTarget.textContent = currentWord.substring(0, charIndex) || "\u200B";
@@ -618,9 +614,21 @@ function type() {
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; 
     }
-    setTimeout(type, typeSpeed);
+    typewriterTimeout = setTimeout(type, typeSpeed);
 }
-if (typeTarget) { setTimeout(type, 2500); }
+
+if (typeTarget) { 
+    const observer = new IntersectionObserver((entries) => {
+        isTypewriterVisible = entries[0].isIntersecting;
+        if (isTypewriterVisible) {
+            clearTimeout(typewriterTimeout);
+            type();
+        }
+    }, { threshold: 0.1 });
+    
+    const heroSection = typeTarget.closest('.hero');
+    if (heroSection) observer.observe(heroSection);
+}
 
 // ==========================================
 // 6. 3D TILT CARDS
@@ -690,11 +698,44 @@ if (themeToggleBtn) {
 // ==========================================
 // 8. DYNAMIC BLOG MARKDOWN READER
 // ==========================================
-window.openPost = async function(filename) {
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+    const url = new URL(window.location);
+    const postFile = url.searchParams.get('post');
+    const modal = document.getElementById('blog-modal');
+    
+    if (postFile) {
+        if (!modal || !modal.classList.contains('active')) {
+            window.openPost(postFile, false); 
+        }
+    } else {
+        if (modal && modal.classList.contains('active')) {
+            window.closePost(false); 
+        }
+    }
+});
+
+// Auto-open post if present in URL on load
+document.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location);
+    const postFile = url.searchParams.get('post');
+    if (postFile) {
+        setTimeout(() => window.openPost(postFile, false), 500);
+    }
+});
+
+window.openPost = async function(filename, pushHistory = true) {
     const modal = document.getElementById('blog-modal');
     const reader = document.getElementById('md-reader');
     
     if (!modal || !reader) return;
+    
+    // Path traversal protection
+    if (typeof filename !== 'string' || filename.includes('/') || filename.includes('\\') || filename.includes('..')) {
+        console.error("Invalid post filename");
+        return;
+    }
     
     const pageLang = document.documentElement.lang || "en";
     let loadingText = '<i>Fetching data from repository...</i>';
@@ -709,18 +750,20 @@ window.openPost = async function(filename) {
     }
     
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; 
+    document.body.classList.add('no-scroll'); 
     reader.innerHTML = loadingText;
 
     // Update URL query parameter
-    try {
-        const url = new URL(window.location);
-        if (url.searchParams.get('post') !== filename) {
-            url.searchParams.set('post', filename);
-            window.history.pushState({}, '', url);
+    if (pushHistory) {
+        try {
+            const url = new URL(window.location);
+            if (url.searchParams.get('post') !== filename) {
+                url.searchParams.set('post', filename);
+                window.history.pushState({}, '', url);
+            }
+        } catch (e) {
+            console.warn("Could not update state URL:", e);
         }
-    } catch (e) {
-        console.warn("Could not update state URL:", e);
     }
 
     try {
@@ -748,12 +791,12 @@ window.openPost = async function(filename) {
 };
 
 
-window.closePost = function() {
+window.closePost = function(pushHistory = true) {
     const modal = document.getElementById('blog-modal');
     const reader = document.getElementById('md-reader');
     if (!modal) return;
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto'; 
+    document.body.classList.remove('no-scroll'); 
     if (reader) {
         setTimeout(() => { reader.innerHTML = ''; }, 500);
     }
@@ -764,14 +807,16 @@ window.closePost = function() {
     }
 
     // Remove URL query parameter
-    try {
-        const url = new URL(window.location);
-        if (url.searchParams.has('post')) {
-            url.searchParams.delete('post');
-            window.history.pushState({}, '', url);
+    if (pushHistory) {
+        try {
+            const url = new URL(window.location);
+            if (url.searchParams.has('post')) {
+                url.searchParams.delete('post');
+                window.history.pushState({}, '', url);
+            }
+        } catch (e) {
+            console.warn("Could not update state URL:", e);
         }
-    } catch (e) {
-        console.warn("Could not update state URL:", e);
     }
 };
 
@@ -784,6 +829,7 @@ function initMobileNav() {
     const nav = document.querySelector('nav');
     
     if (!navContainer || !navLinks || !nav) return;
+    if (document.querySelector('.hamburger-menu')) return;
 
     // 1. Create Hamburger Button
     const hamburger = document.createElement('button');
@@ -1135,7 +1181,7 @@ function initBlogSorting() {
             gennaio:0, febbraio:1, marzo:2, aprile:3, maggio:4, giugno:5, luglio:6, agosto:7, settembre:8, ottobre:9, novembre:10, dicembre:11
         };
 
-        const clean = dateStr.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+        const clean = dateStr.toLowerCase().replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/[^a-z0-9\s]/g, ' ');
         const parts = clean.split(/\s+/).filter(Boolean);
 
         let day = 1;

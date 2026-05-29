@@ -65,7 +65,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
     top: 0; 
     left: 0; 
     transform: translate3d(0, 0, 0) translate(-50%, -50%); 
-    z-index: 10000; 
+    z-index: 9998; 
     pointer-events: none; 
     opacity: 0;
     transition: opacity 0.3s ease, width 0.2s, height 0.2s;
@@ -80,7 +80,7 @@ a { color: var(--accent); text-decoration: none; transition: var(--transition-fa
     top: 0; 
     left: 0; 
     transform: translate3d(0, 0, 0) translate(-50%, -50%); 
-    z-index: 9999; 
+    z-index: 9997; 
     pointer-events: none; 
     opacity: 0;
     transition: opacity 0.3s ease, width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s; 
@@ -558,7 +558,7 @@ body.dark-theme .keyword-tag:hover {
 #md-reader h2 { font-size: 2rem; margin: 40px 0 20px 0; border-bottom: 2px solid rgba(200,155,114,0.2); padding-bottom: 10px; text-align: left; color: var(--text-dark); }
 #md-reader h2::after { display: none; } 
 #md-reader p { font-size: 1.15rem; margin-bottom: 20px; line-height: 1.8; color: var(--text-muted); }
-#md-reader pre { background: #1a1512; color: #fcfaf8; padding: 20px; border-radius: 12px; overflow-x: auto; margin-bottom: 20px; border: 1px solid rgba(200,155,114,0.2); }
+#md-reader pre { background: var(--bg-hero); color: var(--text-dark); padding: 20px; border-radius: 12px; overflow-x: auto; margin-bottom: 20px; border: 1px solid rgba(200,155,114,0.2); }
 #md-reader code { font-family: monospace; }
 #md-reader blockquote { border-left: 4px solid var(--accent); padding-left: 20px; font-style: italic; color: var(--text-muted); margin: 20px 0; }
 #md-reader ul { padding-left: 20px; margin-bottom: 20px; font-size: 1.15rem; color: var(--text-muted); }
@@ -619,7 +619,7 @@ footer { background-color: #1a1512; color: #fcfaf8; text-align: center; padding:
     }
     
     body.dark-theme .hamburger-menu span {
-        background-color: var(--white);
+        background-color: var(--text-dark);
     }
     
     .hamburger-menu.active span:nth-child(1) {
@@ -871,31 +871,45 @@ body.no-scroll {
 
 /* --- AR MAINTENANCE AUTOMATED SLIDESHOW --- */
 .project-image-ar {
-    animation: arSlideshow 12s infinite ease-in-out;
+    background-image: url('images/ar-maintenance-concept.webp');
     background-size: cover;
     background-position: center;
-    /* transition: background-image 0.8s ease-in-out; - background-image isn't animatable without JS */
+    position: relative;
+    z-index: 1;
 }
 
-@keyframes arSlideshow {
-    0%, 100% {
-        background-image: url('images/ar-maintenance-concept.webp');
-    }
-    30% {
-        background-image: url('images/ar-maintenance-concept.webp');
-    }
-    33% {
-        background-image: url('images/ar-maintenance-concept-2.webp');
-    }
-    63% {
-        background-image: url('images/ar-maintenance-concept-2.webp');
-    }
-    66% {
-        background-image: url('images/ar-maintenance-concept-4.webp');
-    }
-    96% {
-        background-image: url('images/ar-maintenance-concept-4.webp');
-    }
+.project-image-ar::before,
+.project-image-ar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: inherit;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project-image-ar::before {
+    background-image: url('images/ar-maintenance-concept-2.webp');
+    animation: arFade1 12s infinite;
+}
+
+.project-image-ar::after {
+    background-image: url('images/ar-maintenance-concept-4.webp');
+    animation: arFade2 12s infinite;
+}
+
+@keyframes arFade1 {
+    0%, 25%, 100% { opacity: 0; }
+    33%, 58% { opacity: 1; }
+    66% { opacity: 0; }
+}
+
+@keyframes arFade2 {
+    0%, 58%, 100% { opacity: 0; }
+    66%, 91% { opacity: 1; }
 }
 
 /* Contact AJAX Submission Styles */
@@ -1016,9 +1030,7 @@ body.no-scroll {
 }
 
 
-
 /* Accessibility: Focus Visible Styles */
-.btn:focus-visible,
 .nav-links a:focus-visible,
 .project-link:focus-visible,
 .cert-tag:focus-visible,
@@ -1031,6 +1043,20 @@ body.no-scroll {
 .hover-target:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+}
+
+/* --- ACCESSIBILITY (Reduced Motion) --- */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    html.preloader-skipped #preloader, #preloader { display: none !important; }
+    .custom-cursor-active * { cursor: auto !important; }
+    .cursor-dot, .cursor-outline { display: none !important; }
+    .reveal { opacity: 1 !important; transform: translateY(0) !important; transition: none !important; }
 }
 .nav-links a:focus-visible::after {
     width: 100%;
